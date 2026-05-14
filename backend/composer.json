@@ -1,0 +1,10 @@
+{
+    "name": "kumbakonam-cafe-backend",
+    "description": "PHP backend dependencies for Kumbakonam Cafe",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}

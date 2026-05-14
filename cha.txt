@@ -1,0 +1,14 @@
+ {
+    id: "extras",
+    title: "Extras & Accompaniments",
+    timing: "All Day",
+    items: [
+      { name: "Coconut Chutney", price: "1/3" },
+      { name: "Peanut Chutney", price: "1/3" },
+      { name: "Mint Chutney", price: "1/3" },
+      { name: "Tomato Chutney", price: "1/3" },
+      { name: "Sambar", price: "2.5/5" },
+      { name: "Ghee / Podi", price: "2" },
+    ],
+  },
+This sectio shoulderemoved asperthecaferequiremets

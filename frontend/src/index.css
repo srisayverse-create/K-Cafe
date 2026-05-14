@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Satisfy&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-cursive: "Satisfy", cursive;
+  --font-brand: "Playfair Display", serif;
+
+  --color-brand: #1e9ab0;
+  --color-brand-light: #48b6c8;
+  --color-brand-dark: #000000;
+  --color-brand-lightest: #ffffff;
+  --color-gold-custom: #fff628;
+
+  --bg-brand-gradient: linear-gradient(135deg, #1e9ab0 0%, #000000 100%);
+  --bg-brand-dark-gradient: linear-gradient(135deg, #000000 0%, #1e9ab0 100%);
+  
+  --color-cafe-cream: #ffffff;
+  --color-cafe-sand: #f0f0f0;
+  --color-cafe-dark: #000000;
+  --color-cafe-muted: #333333;
+  --color-cafe-text-on-dark: #ffffff;
+
+  --color-dark-bg: #000000;
+  --color-dark-surface: #0a0a0a;
+  --color-dark-text: #ffffff;
+  --color-dark-muted: #a3a3a3;
+  --color-dark-border: #1a1a1a;
+  --color-gold: #fff628;
+  --color-copper: #1e9ab0;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased text-cafe-dark transition-colors duration-1000 overflow-x-hidden selection:bg-brand selection:text-white;
+  }
+  
+  body.dark {
+    @apply text-dark-text;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-cafe-dark transition-colors duration-700 font-bold;
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    @apply text-brand-lightest;
+  }
+
+  .font-cursive {
+    font-family: var(--font-cursive);
+  }
+
+  .noise-texture {
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    background-repeat: repeat;
+    pointer-events: none;
+    opacity: 0.05;
+  }
+
+  .dark .noise-texture {
+    opacity: 0.08;
+  }
+
+  .glass-card {
+    @apply bg-brand-lightest/70 dark:bg-dark-surface/60 backdrop-blur-xl border border-brand/10 dark:border-brand-lightest/5;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2 ring-offset-brand-lightest;
+  }
+
+  .dark :focus-visible {
+    @apply ring-offset-dark-bg;
+  }
+}
+
+.glass {
+  @apply bg-brand-lightest/80 dark:bg-dark-surface/80 backdrop-blur-md border border-brand/10 dark:border-brand-lightest/5;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-light;
+}
+
+.bg-brand-gradient {
+  background: var(--bg-brand-gradient);
+}
+
+.cafe-card {
+  @apply bg-brand-lightest border border-brand/10 rounded-[2rem] overflow-hidden hover:border-brand/30 transition-all duration-500 shadow-xl hover:shadow-2xl;
+}
+
+@keyframes slow-pan {
+  from { transform: scale(1.05) translateX(-2%); }
+  to { transform: scale(1.05) translateX(2%); }
+}
+
+.animate-slow-pan {
+  animation: slow-pan 15s ease-in-out infinite alternate;
+}
+
+@layer utilities {
+  .shadow-glow {
+    box-shadow: 0 20px 40px rgba(30, 154, 176, 0.25);
+  }
+  .shadow-huge {
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.15);
+  }
+  .neo-raised {
+    box-shadow: 8px 8px 16px #e0e0e0, -8px -8px 16px #ffffff;
+  }
+  .neo-inset {
+    box-shadow: inset 6px 6px 12px #e0e0e0, inset -6px -6px 12px #ffffff;
+  }
+  .dark .neo-raised {
+    box-shadow: 8px 8px 16px #030405, -8px -8px 16px #12181b;
+  }
+  .dark .neo-inset {
+    box-shadow: inset 6px 6px 12px #030405, inset -6px -6px 12px #12181b;
+  }
+  .card-hover {
+    @apply hover:bg-cafe-sand/50 transition-all duration-300;
+  }
+}

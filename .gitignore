@@ -1,0 +1,30 @@
+# Node
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+
+# PHP / Composer
+vendor/
+backend/api/config.php
+
+# Build artifacts
+frontend/dist/
+*.log
+*.tgz
+
+# OS
+.DS_Store
+desktop.ini
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Large media files (exceed GitHub 100MB limit)
+public/Testimonials/*.mp4
+public/about/*.mp4
+*.mp4
