@@ -63,6 +63,7 @@ export const MENU_DATA: MenuCategory[] = [
       { name: "Mini Perattal Idly (From 3pm)", price: "14", image: "/Assets/K Cafe Specials/mini-perttal-idly.bak.png" },
       { name: "Rava Pongal (Dinner)", price: "13.5", image: "/Assets/K Cafe Specials/rava-pongal(dinner).png" },
       { name: "Kuzhi Paniyaram (From 3pm)", price: "12", image: "/Assets/K Cafe Specials/Kuzhi Paniyaram.JPG" },
+      { name: "Veg Meals", price: "14", description: "Exclusively at Shabiya branch", image: "/Assets/Lunch Varieties/Veg Meals.jpeg" },
     ],
   },
   {

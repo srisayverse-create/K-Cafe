@@ -3,7 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+
+// Utility: Convert a string to Title Case (first letter of each word uppercase)
+const toTitleCase = (str: string): string =>
+  str.replace(/\b\w/g, (char) => char.toUpperCase());
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform, useScroll } from 'motion/react';
 import { 
   Utensils, 
@@ -627,7 +631,7 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 rounded-full border border-[#1e9ab0]/30 overflow-hidden">
-                      <img src={`https://i.pravatar.cc/100?img=${idx + 15}`} alt={testimonial.author} className="w-full h-full object-cover" />
+                      <img src={['/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png', '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg', '/Assets/Sweets/ashoka-halwa.png'][idx % 3]} alt={testimonial.author} className="w-full h-full object-cover" />
                     </div>
                     <div>
                       <h4 className="text-lg font-display font-bold text-black uppercase tracking-widest">{testimonial.author}</h4>
@@ -688,11 +692,14 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
           {/* Left Brand */}
           <div className="flex items-center z-50 shrink-0">
              <a href="#home" className="flex items-center gap-2 sm:gap-3 group" aria-label="Kumbakonam Cafe Home">
-               <img src="/brand/logo-removebg-preview (1).png" alt="Kumbakonam Cafe Logo" className="w-10 h-10 md:w-16 md:h-16 object-contain drop-shadow-md" />
+               <div className="flex flex-col items-center">
+                 <img src="/brand/logo-removebg-preview (1).png" alt="Kumbakonam Cafe Logo" className="w-10 h-10 md:w-16 md:h-16 object-contain drop-shadow-md" />
+                 <span className="text-[7px] md:text-[9px] font-bold text-[#1e9ab0] leading-none mt-0.5">®</span>
+               </div>
                <div className="text-left flex flex-col justify-center">
-                 <div className="font-bold text-[12px] sm:text-[14px] md:text-[18px] leading-tight text-[#002B49] font-brand">KUMBAKONAM</div>
-                 <div className="text-[10px] sm:text-[12px] md:text-[15px] leading-[1.1] font-semibold text-[#002B49] font-brand">CAFE - L.L.C</div>
-                 <div className="hidden sm:block text-[8px] md:text-[13px] leading-tight text-[#002B49] font-brand mt-0.5">Authentic Veg Eatery</div>
+                 <div className="font-bold text-[12px] sm:text-[14px] md:text-[18px] leading-tight text-[#1e9ab0] font-brand">KUMBAKONAM</div>
+                 <div className="text-[10px] sm:text-[12px] md:text-[15px] leading-[1.1] font-semibold text-[#1e9ab0] font-brand">CAFE - L.L.C</div>
+                 <div className="hidden sm:block text-[8px] md:text-[13px] leading-tight text-[#1e9ab0] font-brand mt-0.5">Authentic Veg Eatery</div>
                </div>
              </a>
           </div>
@@ -738,9 +745,9 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-white/98 dark:bg-dark-bg/98 backdrop-blur-2xl z-[90] flex items-center justify-center lg:hidden"
+              className="fixed inset-0 bg-[#1e9ab0] z-[90] flex items-center justify-center lg:hidden"
             >
-               <button onClick={() => setMobileMenuOpen(false)} className="absolute top-10 right-10 text-black/50 dark:text-dark-text/50 hover:text-[#1e9ab0] transition-colors"><X size={40} /></button>
+               <button onClick={() => setMobileMenuOpen(false)} className="absolute top-10 right-10 text-white/70 hover:text-white transition-colors"><X size={40} /></button>
                        <div className="flex flex-col gap-12 text-center">
                 {['HOME', 'MENU', 'ABOUT', 'BRANCHES', 'CONTACT'].map((item, i) => (
                   <motion.a 
@@ -749,7 +756,7 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                     href={`#${item.toLowerCase()}`}
-                    className="text-6xl font-display font-bold italic text-black dark:text-white/80 hover:text-[#1e9ab0] transition-all hover:scale-110"
+                    className="text-6xl font-display font-bold italic text-white hover:text-[#fff628] transition-all hover:scale-110"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}
@@ -1200,9 +1207,13 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                 className="flex flex-col gap-6"
                >
                 <div className="flex -space-x-4 items-center">
-                  {[1, 2, 3].map(i => (
+                  {[
+                    '/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png',
+                    '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg',
+                    '/Assets/Lunch Varieties/Combo-1-4-variety-sadham-.png'
+                  ].map((imgSrc, i) => (
                     <div key={i} className="w-16 h-16 rounded-full border-4 border-cafe-cream dark:border-dark-bg overflow-hidden bg-cafe-sand shadow-huge hover:scale-110 transition-transform group">
-                      <img src={`https://i.pravatar.cc/100?img=${i+20}`} alt="Customer" className="w-full h-full object-cover group-hover:scale-110 transition-all" />
+                      <img src={imgSrc} alt="Our Food" className="w-full h-full object-cover group-hover:scale-110 transition-all" />
                     </div>
                   ))}
                   <div className="pl-6 flex flex-col">
@@ -1428,7 +1439,7 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery }: {
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Previous</span>
             <span className="text-sm font-display font-light italic truncate max-w-[150px] text-white group-hover/prev:-translate-x-2 transition-transform duration-500">
-              {MENU_DATA[(activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length].id.replace('-', ' ')}
+              {toTitleCase(MENU_DATA[(activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length].id.replace(/-/g, ' '))}
             </span>
           </button>
 
@@ -1459,7 +1470,7 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery }: {
                        {activeCategory?.timing || 'All Day'}
                      </div>
                      <h3 className="text-2xl lg:text-5xl font-display italic text-[#fff628] hover:text-white transition-colors duration-500 cursor-default whitespace-nowrap leading-tight">
-                       {activeTab.replace('-', ' ')}
+                       {toTitleCase(activeTab.replace(/-/g, ' '))}
                      </h3>
                   </motion.div>
                </AnimatePresence>
@@ -1501,7 +1512,7 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery }: {
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Coming Next</span>
             <span className="text-sm font-display font-light italic truncate max-w-[150px] text-white group-hover/next:translate-x-2 transition-transform duration-500">
-              {MENU_DATA[(activeIndex + 1) % MENU_DATA.length].id.replace('-', ' ')}
+              {toTitleCase(MENU_DATA[(activeIndex + 1) % MENU_DATA.length].id.replace(/-/g, ' '))}
             </span>
           </button>
         </div>
