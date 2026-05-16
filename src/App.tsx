@@ -692,10 +692,7 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
           {/* Left Brand */}
           <div className="flex items-center z-50 shrink-0">
              <a href="#home" className="flex items-center gap-2 sm:gap-3 group" aria-label="Kumbakonam Cafe Home">
-               <div className="flex flex-col items-center">
-                 <img src="/brand/logo-removebg-preview (1).png" alt="Kumbakonam Cafe Logo" className="w-10 h-10 md:w-16 md:h-16 object-contain drop-shadow-md" />
-                 <span className="text-[7px] md:text-[9px] font-bold text-[#1e9ab0] leading-none mt-0.5">®</span>
-               </div>
+                 <img src="/brand/LOGO.png" alt="Kumbakonam Cafe Logo" className="w-10 h-10 md:w-16 md:h-16 object-contain drop-shadow-md" />
                <div className="text-left flex flex-col justify-center">
                  <div className="font-bold text-[12px] sm:text-[14px] md:text-[18px] leading-tight text-[#1e9ab0] font-brand">KUMBAKONAM</div>
                  <div className="text-[10px] sm:text-[12px] md:text-[15px] leading-[1.1] font-semibold text-[#1e9ab0] font-brand">CAFE - L.L.C</div>
@@ -2093,12 +2090,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
           {/* Brand Column */}
           <div className="flex flex-col items-center md:items-start">
             <div className="relative mb-8">
-               <div className="relative">
-                  <CafeLogo size="md" className="text-white bg-[#1e9ab0] rounded-full p-6 shadow-massive overflow-hidden transition-transform duration-500 hover:rotate-6 w-32 h-32" />
-                  <div className="absolute bottom-4 -right-1 bg-white rounded-full w-6 h-6 flex items-center justify-center border border-[#1e9ab0] text-[#1e9ab0] font-bold text-[10px] shadow-sm">
-                    R
-                  </div>
-               </div>
+               <CafeLogo size="lg" className="w-40 h-40 object-contain drop-shadow-md" />
             </div>
             
             <div className="text-center md:text-left space-y-4 mb-10">
