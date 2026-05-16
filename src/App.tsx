@@ -1438,8 +1438,8 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery }: {
             className="hidden xl:flex flex-1 flex-col items-end opacity-20 hover:opacity-100 hover:text-brand transition-all duration-500 cursor-pointer group/prev text-right outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand/30 rounded-xl p-4"
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Previous</span>
-            <span className="text-sm font-display font-light italic truncate max-w-[150px] text-white group-hover/prev:-translate-x-2 transition-transform duration-500">
-              {toTitleCase(MENU_DATA[(activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length].id.replace(/-/g, ' '))}
+            <span className="text-sm font-display font-light italic truncate max-w-[200px] text-white group-hover/prev:-translate-x-2 transition-transform duration-500">
+              {MENU_DATA[(activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length].title}
             </span>
           </button>
 
@@ -1469,8 +1469,8 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery }: {
                      <div className="text-[9px] lg:text-[10px] text-black uppercase tracking-[0.4em] lg:tracking-[0.6em] mb-2 lg:mb-3 font-black">
                        {activeCategory?.timing || 'All Day'}
                      </div>
-                     <h3 className="text-2xl lg:text-5xl font-display italic text-[#fff628] hover:text-white transition-colors duration-500 cursor-default whitespace-nowrap leading-tight">
-                       {toTitleCase(activeTab.replace(/-/g, ' '))}
+                     <h3 className="text-xl lg:text-4xl font-display italic text-[#fff628] hover:text-white transition-colors duration-500 cursor-default leading-tight">
+                       {activeCategory?.title}
                      </h3>
                   </motion.div>
                </AnimatePresence>
@@ -1511,8 +1511,8 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery }: {
             className="hidden xl:flex flex-1 flex-col items-start opacity-20 hover:opacity-100 hover:text-brand transition-all duration-500 cursor-pointer group/next text-left outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand/30 rounded-xl p-4"
           >
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Coming Next</span>
-            <span className="text-sm font-display font-light italic truncate max-w-[150px] text-white group-hover/next:translate-x-2 transition-transform duration-500">
-              {toTitleCase(MENU_DATA[(activeIndex + 1) % MENU_DATA.length].id.replace(/-/g, ' '))}
+            <span className="text-sm font-display font-light italic truncate max-w-[200px] text-white group-hover/next:translate-x-2 transition-transform duration-500">
+              {MENU_DATA[(activeIndex + 1) % MENU_DATA.length].title}
             </span>
           </button>
         </div>
