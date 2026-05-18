@@ -1933,28 +1933,12 @@ const ContactForm = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('loading');
-    setErrorMsg('');
-    try {
-      const res = await fetch('/api/contact.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setStatus('success');
-        setFormData({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
-      } else {
-        setStatus('error');
-        setErrorMsg(data.message || 'Something went wrong. Please try again.');
-      }
-    } catch {
-      setStatus('error');
-      setErrorMsg('Network error. Please call us directly at 050 171 5991.');
-    }
+    const text = `*New Enquiry*%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.serviceType}%0A*Message:* ${formData.message}`;
+    window.open(`https://wa.me/971501715991?text=${text}`, '_blank');
+    setStatus('success');
+    setFormData({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
   };
 
   const inputClass = "w-full bg-brand-lightest dark:bg-brand/10 border border-brand/20 dark:border-brand-lightest/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all placeholder:text-brand-dark/30 dark:placeholder:text-brand-lightest/30 text-brand-dark dark:text-brand-lightest";
@@ -2058,7 +2042,7 @@ const ContactSection = ({ theme }: { theme: string }) => {
               <div className="w-16 h-16 bg-brand-lightest dark:bg-dark-surface shadow-xl rounded-[1.5rem] flex items-center justify-center text-brand shrink-0 group-hover:bg-brand group-hover:text-brand-lightest transition-all duration-500 border border-brand/10 dark:border-brand-lightest/10"><Phone size={28} /></div>
               <div>
                 <span className="block text-[10px] uppercase tracking-[0.4em] text-cafe-muted/40 dark:text-dark-muted/40 font-black mb-2">Enquiries &amp; Orders</span>
-                <span className="text-3xl font-display font-medium text-cafe-dark dark:text-dark-text italic">050 171 5991</span>
+                <span className="text-3xl font-display font-medium text-cafe-dark dark:text-dark-text italic">+971 501715991</span>
               </div>
             </div>
             <div className="flex gap-8 items-start group">
@@ -2151,10 +2135,6 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
                   <a href="tel:025175464" className="flex items-center justify-center md:justify-start gap-4 text-black/80 hover:text-[#1e9ab0] transition-colors text-lg italic group">
                     <Phone size={18} className="text-[#2c8496]" /> 
                     <span>02-5175464</span>
-                  </a>
-                  <a href="tel:0501680792" className="flex items-center justify-center md:justify-start gap-4 text-black/80 hover:text-[#1e9ab0] transition-colors text-lg italic group">
-                    <Smartphone size={18} className="text-[#2c8496]" /> 
-                    <span>050-1680792</span>
                   </a>
                 </div>
               </div>
