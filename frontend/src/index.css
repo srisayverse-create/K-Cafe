@@ -124,3 +124,16 @@
     @apply hover:bg-cafe-sand/50 transition-all duration-300;
   }
 }
+.cta-button {
+  @apply px-8 py-3 text-sm font-black uppercase tracking-wider rounded-full transition-all duration-300 bg-brand-gradient text-white shadow-glow hover:scale-105 hover:shadow-2xl;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.delivery-icon {
+  @apply relative w-12 h-12 flex items-center justify-center bg-brand/10 rounded-full transition-all duration-300 hover:scale-110 hover:bg-brand/20 cursor-pointer;
+  animation: bob 3s ease-in-out infinite;
+}

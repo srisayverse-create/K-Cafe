@@ -1,0 +1,780 @@
+﻿diff --git a/src/App.tsx b/src/App.tsx
+index 866ea98..07c89cd 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -415,6 +415,27 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
+   );
+ };
+ 
++const FloatingDeliveryButton = ({ onClick }: { onClick: () => void }) => {
++  return (
++    <motion.button
++      initial={{ opacity: 0, scale: 0.8 }}
++      animate={{ opacity: 1, scale: 1 }}
++      whileHover={{ scale: 1.1 }}
++      whileTap={{ scale: 0.9 }}
++      onClick={onClick}
++      className="fixed bottom-28 right-10 z-50 w-16 h-16 bg-[#1e9ab0] text-white rounded-2xl flex items-center justify-center neo-raised shadow-glow transition-all"
++      title="Order Delivery"
++    >
++      <motion.div
++        animate={{ scale: [1, 1.1, 1] }}
++        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
++      >
++        <Truck size={28} />
++      </motion.div>
++    </motion.button>
++  );
++};
++
+ const ScrollToTop = () => {
+   const [isVisible, setIsVisible] = useState(false);
+ 
+@@ -457,68 +478,176 @@ const ScrollToTop = () => {
+   );
+ };
+ 
+-const QuickViewModal = ({ item, isOpen, onClose }: { item: MenuItem | null, isOpen: boolean, onClose: () => void }) => {
+-  if (!item) return null;
++const CategoryModal = ({ 
++  category, 
++  initialIndex = 0, 
++  isOpen, 
++  onClose 
++}: { 
++  category: MenuCategory | null, 
++  initialIndex: number, 
++  isOpen: boolean, 
++  onClose: () => void 
++}) => {
++  const [activeIndex, setActiveIndex] = useState(initialIndex);
++
++  useEffect(() => {
++    if (isOpen) {
++      setActiveIndex(initialIndex);
++    }
++  }, [isOpen, initialIndex, category]);
++
++  if (!category) return null;
++
++  const currentItem = category.items[activeIndex];
++
++  const nextDish = () => {
++    setActiveIndex((prev) => (prev + 1) % category.items.length);
++  };
++
++  const prevDish = () => {
++    setActiveIndex((prev) => (prev - 1 + category.items.length) % category.items.length);
++  };
+ 
+   return (
+     <AnimatePresence>
+       {isOpen && (
+-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+-          <motion.div 
+-            initial={{ opacity: 0 }}
+-            animate={{ opacity: 1 }}
+-            exit={{ opacity: 0 }}
+-            onClick={onClose}
+-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+-          />
+-          <motion.div 
+-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+-            animate={{ opacity: 1, scale: 1, y: 0 }}
+-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+-            className="relative w-full max-w-2xl bg-brand-lightest dark:bg-dark-surface rounded-[2.5rem] overflow-hidden shadow-huge border border-brand/5 dark:border-brand/5"
++        <motion.div
++          initial={{ opacity: 0 }}
++          animate={{ opacity: 1 }}
++          exit={{ opacity: 0 }}
++          className="fixed inset-0 z-[500] flex items-center justify-center p-4 lg:p-10 bg-black/85 backdrop-blur-md"
++          onClick={onClose}
++        >
++          {/* Prev Arrow */}
++          <motion.button
++            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
++            onClick={(e) => { e.stopPropagation(); prevDish(); }}
++            className="absolute left-4 lg:left-8 z-10 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white backdrop-blur-md transition-all"
++            aria-label="Previous Dish"
+           >
+-            <button 
+-              onClick={onClose}
+-              className="absolute top-6 right-6 w-10 h-10 bg-brand/5 dark:bg-brand-lightest/5 rounded-full flex items-center justify-center text-cafe-dark dark:text-dark-text hover:text-brand z-10 transition-colors"
+-              aria-label="Close modal"
+-            >
+-              <X size={20} />
+-            </button>
+-            <div className="flex flex-col md:flex-row">
+-              <div className="md:w-1/2 aspect-square md:aspect-auto overflow-hidden">
+-                <motion.img 
+-                  initial={{ scale: 1.4, opacity: 0, filter: 'blur(10px)' }}
+-                  animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+-                  src={item.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop"} 
+-                  alt={item.name} 
+-                  className="w-full h-full object-cover"
+-                />
++            <ChevronLeft size={28} />
++          </motion.button>
++
++          <motion.div
++            initial={{ scale: 0.95, opacity: 0 }}
++            animate={{ scale: 1, opacity: 1 }}
++            exit={{ scale: 0.95, opacity: 0 }}
++            className="w-full max-w-6xl bg-brand-lightest dark:bg-dark-surface rounded-[3rem] overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col lg:flex-row border border-brand/5 dark:border-brand-lightest/5"
++            onClick={(e) => e.stopPropagation()}
++          >
++            {/* Left Column: Image Area */}
++            <div className="w-full lg:w-[45%] bg-[#0c0c0c]/10 dark:bg-black/20 p-8 lg:p-12 flex flex-col gap-6 items-center justify-center min-h-[300px] lg:min-h-0 relative">
++              <div className="w-full h-full aspect-square rounded-[2rem] overflow-hidden relative shadow-inner">
++                {currentItem?.image ? (
++                  <AnimatePresence mode="wait">
++                    <motion.img
++                      key={activeIndex}
++                      src={currentItem.image}
++                      initial={{ scale: 1.1, opacity: 0, filter: 'blur(5px)' }}
++                      animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
++                      exit={{ scale: 0.9, opacity: 0, filter: 'blur(5px)' }}
++                      transition={{ duration: 0.5 }}
++                      className="w-full h-full object-cover"
++                      alt={currentItem.name}
++                    />
++                  </AnimatePresence>
++                ) : (
++                  <div className="w-full h-full bg-[#1e9ab0]/10 flex flex-col items-center justify-center text-center p-8 gap-4 border border-[#1e9ab0]/20 rounded-[2rem]">
++                    <Coffee size={64} className="text-[#1e9ab0] animate-pulse" />
++                    <span className="text-xl font-brand font-bold text-[#1e9ab0] uppercase tracking-widest">Kumbakonam Cafe</span>
++                    <span className="text-[10px] font-sans font-medium text-cafe-dark/40 dark:text-white/40 uppercase tracking-widest">Live Kitchen Fresh</span>
++                  </div>
++                )}
+               </div>
+-              <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center bg-brand-lightest dark:bg-dark-surface transition-colors">
+-                <motion.div 
+-                  initial={{ opacity: 0, x: -10 }}
+-                  animate={{ opacity: 1, x: 0 }}
+-                  className="inline-flex items-center gap-4 py-2 px-6 rounded-full bg-brand-gradient text-brand-lightest w-fit mb-6 shadow-glow"
+-                >
+-                  <Sparkles size={14} className="animate-pulse" />
+-                  <span className="text-[10px] font-black uppercase tracking-[0.4em]">Dish Details</span>
+-                </motion.div>
+-                <h2 className="text-4xl font-display font-medium mb-4 italic text-cafe-dark dark:text-dark-text">{item.name}</h2>
+-                <div className="text-4xl font-display font-bold text-[#1e9ab0] mb-6 leading-none">AED {item.price}</div>
+-                <p className="text-cafe-muted dark:text-dark-muted font-light leading-relaxed mb-8">
+-                  {item.description || "Our signature recipe made with authentic ingredients sourced directly from the heart of Tamil Nadu. A pure vegetarian delight."}
++
++              {/* Progress text indicator */}
++              <div className="text-xs uppercase font-black tracking-widest text-cafe-dark/40 dark:text-white/40">
++                Item {activeIndex + 1} of {category.items.length}
++              </div>
++            </div>
++
++            {/* Right Column: Info & Navigation List */}
++            <div className="w-full lg:w-[55%] p-8 lg:p-12 flex flex-col bg-brand-lightest dark:bg-dark-surface transition-colors relative overflow-y-auto">
++              {/* Top Banner details */}
++              <div className="mb-6">
++                <div className="flex items-center gap-3 mb-2">
++                  <Sparkles size={16} className="text-[#1e9ab0] animate-pulse" />
++                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1e9ab0]">
++                    {category.title}
++                  </span>
++                </div>
++                <h3 className="text-4xl font-display font-medium text-cafe-dark dark:text-dark-text italic leading-tight mb-4">
++                  {currentItem?.name}
++                </h3>
++                <p className="text-cafe-muted dark:text-dark-muted font-light leading-relaxed mb-6 italic">
++                  {currentItem?.description || "Our signature dish made with authentic South Indian recipes and pure ingredients."}
+                 </p>
+-                <div className="flex items-center gap-4 py-6 border-t border-brand/5 dark:border-brand-lightest/5">
++                <div className="flex items-center gap-4 py-4 border-t border-brand/5 dark:border-brand-lightest/5">
+                   <div className="w-10 h-10 bg-brand/5 rounded-full flex items-center justify-center text-brand">
+                     <Clock size={16} />
+                   </div>
+-                  <span className="text-cafe-muted/60 dark:text-dark-muted/60 text-sm italic font-light">Freshly prepared on order</span>
++                  <span className="text-cafe-muted/60 dark:text-dark-muted/60 text-[13px] italic font-light">Freshly prepared on order</span>
++                </div>
++              </div>
++
++              {/* Grid / List of other dishes in category */}
++              <div className="mt-auto border-t border-brand/5 dark:border-brand-lightest/5 pt-6">
++                <h4 className="text-[10px] font-black uppercase tracking-widest text-cafe-dark/40 dark:text-white/40 mb-4 block">
++                  Other Dishes in Category
++                </h4>
++                <div className="flex gap-4 overflow-x-auto pb-4 max-h-44 scrollbar-thin">
++                  {category.items.map((item, idx) => {
++                    const isActive = idx === activeIndex;
++                    return (
++                      <button
++                        key={idx}
++                        onClick={() => setActiveIndex(idx)}
++                        className={`flex-shrink-0 flex items-center gap-3 p-3 rounded-2xl border transition-all text-left outline-none ${
++                          isActive 
++                            ? 'border-[#1e9ab0] bg-[#1e9ab0]/5 text-brand font-medium' 
++                            : 'border-brand/10 dark:border-brand-lightest/10 bg-white/5 hover:bg-[#1e9ab0]/5'
++                        }`}
++                      >
++                        {item.image ? (
++                          <img src={item.image} className="w-12 h-12 rounded-xl object-cover" alt={item.name} />
++                        ) : (
++                          <div className="w-12 h-12 rounded-xl bg-brand/5 flex items-center justify-center text-brand">
++                            <Coffee size={18} />
++                          </div>
++                        )}
++                        <div className="max-w-[120px]">
++                          <p className="text-[11px] uppercase tracking-wide truncate font-bold text-cafe-dark dark:text-dark-text">
++                            {item.name}
++                          </p>
++                        </div>
++                      </button>
++                    );
++                  })}
+                 </div>
+               </div>
+             </div>
++
++            {/* Close Button */}
++            <button
++              onClick={onClose}
++              className="absolute top-6 right-6 text-cafe-dark/30 hover:text-[#1e9ab0] dark:text-white/30 dark:hover:text-[#1e9ab0] transition-colors p-2"
++              aria-label="Close modal"
++            >
++              <X size={32} />
++            </button>
+           </motion.div>
+-        </div>
++
++          {/* Next Arrow */}
++          <motion.button
++            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
++            onClick={(e) => { e.stopPropagation(); nextDish(); }}
++            className="absolute right-4 lg:right-8 z-10 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white backdrop-blur-md transition-all"
++            aria-label="Next Dish"
++          >
++            <ChevronRight size={28} />
++          </motion.button>
++        </motion.div>
+       )}
+     </AnimatePresence>
+   );
+@@ -716,15 +845,6 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
+ 
+           {/* Right Tools */}
+           <div className="flex items-center gap-2 sm:gap-4 z-50 shrink-0">
+-            <div className="flex items-center gap-4">
+-                <button 
+-                  onClick={onDeliveryPartnersClick}
+-                  className="px-3 py-1.5 sm:px-6 sm:py-2.5 bg-[#1e9ab0] text-white text-[10px] sm:text-[13px] font-bold tracking-wide flex items-center gap-1 sm:gap-2 rounded-full hover:bg-[#167d90] transition-all active:scale-95 shadow-glow font-brand"
+-                >
+-                  ORDER <span className="hidden sm:inline">NOW</span> <ArrowRight size={14} className="sm:w-[18px] sm:h-[18px]" />
+-                </button>
+-            </div>
+-
+             <button 
+               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+               className="lg:hidden text-cafe-dark dark:text-dark-text w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-brand/5 dark:bg-brand-lightest/5 rounded-full shrink-0"
+@@ -772,12 +892,6 @@ const DELIVERY_CONFIG = {
+         uae: {
+             name: "United Arab Emirates",
+             partners: [
+-                {
+-                    name: "Order Direct (TMBill)",
+-                    description: "Order directly from our cafe",
+-                    iconColor: "tmbill",
+-                    url: "https://menu.tmbill.com/brand/KCafe"
+-                },
+                 {
+                     name: "Talabat",
+                     description: "Fast delivery via Talabat",
+@@ -1252,15 +1366,12 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
+                    <h3 className="text-4xl font-display font-medium text-cafe-dark dark:text-dark-text italic transition-colors">
+                      {currentSlideItem?.name}
+                    </h3>
+-                   <div className="flex items-center justify-between mt-4">
+-                      <span className="text-3xl font-display font-bold text-brand">
+-                        AED {currentSlideItem?.price}
+-                      </span>
++                   <div className="flex items-center justify-end mt-4">
+                       <div className="flex items-center gap-3">
+                         <div className="w-10 h-px bg-brand/20" />
+                         <ArrowRight size={20} className="text-brand group-hover:translate-x-2 transition-transform" />
+                       </div>
+-                   </div>
++                    </div>
+                 </div>
+                 
+                 <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand text-brand-lightest rounded-full flex flex-col items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
+@@ -1333,7 +1444,6 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
+       <div className="p-8">
+         <div className="flex justify-between items-start mb-3">
+           <h3 className="text-xl font-display font-medium text-cafe-dark dark:text-dark-text italic group-hover:text-brand transition-colors leading-tight">{item.name}</h3>
+-          <span className="font-display font-bold text-[#1e9ab0] leading-none text-2xl tracking-tight">AED {item.price}</span>
+         </div>
+         {item.description && (
+           <p className="text-cafe-muted dark:text-dark-muted text-[13px] italic font-light line-clamp-2 leading-relaxed opacity-80">{item.description}</p>
+@@ -1348,7 +1458,7 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
+             className="text-[10px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2 group-hover:gap-4 transition-all"
+             aria-label={`Quick view ${item.name}`}
+           >
+-            Quick View <ArrowRight size={14} />
++            Quick View <ArrowRight size={18} />
+           </button>
+         </div>
+       </div>
+@@ -1356,292 +1466,151 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
+   );
+ };
+ 
+-const MenuSection = ({ theme, searchQuery, setSearchQuery }: { 
++const MenuSection = ({ theme, searchQuery, setSearchQuery, onCategorySelect }: { 
+   theme: string,
+   searchQuery: string,
+-  setSearchQuery: (val: string) => void
++  setSearchQuery: (val: string) => void,
++  onCategorySelect: (category: any, initialIndex: number) => void
+ }) => {
+-  const [activeTab, setActiveTab] = useState(MENU_DATA[0].id);
+-  const [selectedItem, setSelectedItem] = useState<any>(null);
+-
+-  const activeCategory = MENU_DATA.find(c => c.id === activeTab);
+-  const activeIndex = MENU_DATA.findIndex(c => c.id === activeTab);
+-
+-  // Search logic: If search query exists, look across all categories
+-  const filteredItems = searchQuery.trim() === '' 
+-    ? (activeCategory?.items || [])
+-    : MENU_DATA.flatMap(cat => cat.items).filter(item => 
+-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+-        (item.description?.toLowerCase() ?? '').includes(searchQuery.toLowerCase())
+-      );
+-
+-  const handleTabChange = (id: string) => {
+-    setActiveTab(id);
+-    // Silent state change, no jump scroll
+-  };
++  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
++  const sectionRef = useRef<HTMLElement>(null);
++  const { scrollYProgress } = useScroll({
++    target: sectionRef,
++    offset: ["start end", "end start"]
++  });
+ 
+-  const nextCategory = () => {
+-    const nextIdx = (activeIndex + 1) % MENU_DATA.length;
+-    handleTabChange(MENU_DATA[nextIdx].id);
+-  };
++  const backgroundTextX = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+ 
+-  const prevCategory = () => {
+-    const prevIdx = (activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length;
+-    handleTabChange(MENU_DATA[prevIdx].id);
+-  };
++  return (
++    <section id="menu" ref={sectionRef} className="py-24 lg:py-40 px-6 relative overflow-hidden bg-black text-white">
++      {/* Immersive Background Text */}
++      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.03] overflow-hidden whitespace-nowrap select-none">
++        <motion.h2 
++          style={{ x: backgroundTextX }}
++          className="text-[40vw] font-black uppercase font-display"
++        >
++          OUR MENU
++        </motion.h2>
++      </div>
+ 
+-  useEffect(() => {
+-    const handleKeyDown = (e: KeyboardEvent) => {
+-      if (e.key === 'ArrowRight') nextCategory();
+-      if (e.key === 'ArrowLeft') prevCategory();
+-    };
+-    window.addEventListener('keydown', handleKeyDown);
+-    return () => window.removeEventListener('keydown', handleKeyDown);
+-  }, [activeIndex]);
++      <div className="max-w-7xl mx-auto relative z-10">
++        <div className="text-center mb-16 lg:mb-24">
++          <motion.div 
++             initial={{ opacity: 0, y: 20 }}
++             whileInView={{ opacity: 1, y: 0 }}
++             className="inline-flex items-center gap-3 py-2 px-6 rounded-full bg-white/5 border border-white/10 mb-6"
++          >
++            <Sparkles size={14} className="text-[#1e9ab0]" />
++            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Our Craft Selection</span>
++          </motion.div>
++          <motion.h2 
++            initial={{ opacity: 0, y: 20 }}
++            whileInView={{ opacity: 1, y: 0 }}
++            transition={{ delay: 0.1 }}
++            className="text-4xl md:text-6xl lg:text-8xl font-display font-medium italic leading-[1.1] mb-6"
++          >
++            Experience Our <span className="text-[#fff628]">Menu</span>
++          </motion.h2>
++          <motion.p 
++            initial={{ opacity: 0 }}
++            whileInView={{ opacity: 1 }}
++            transition={{ delay: 0.2 }}
++            className="text-lg lg:text-xl font-light italic text-white/40 max-w-2xl mx-auto"
++          >
++            Discover our authentic South Indian culinary creations. Click any category to explore the full range of fresh, hand-crafted dishes.
++          </motion.p>
++        </div>
+ 
+-  return (
+-    <section id="menu" className={`py-20 lg:py-32 px-4 lg:px-6 relative min-h-screen transition-colors duration-1000 overflow-hidden ${theme === 'dark' ? 'bg-[#1e9ab0] bg-gradient-to-b from-[#1e9ab0] to-black' : 'bg-[#1e9ab0] bg-gradient-to-b from-[#1e9ab0] to-black'}`}>
+-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
+-      <QuickViewModal 
+-        item={selectedItem!} 
+-        isOpen={!!selectedItem} 
+-        onClose={() => setSelectedItem(null)} 
+-      />
+-      <div className="max-w-7xl mx-auto relative px-4 text-center mb-16">
+-        <span className="text-[12px] font-black uppercase tracking-[0.8em] text-brand-lightest mb-10 block opacity-100 drop-shadow-sm">OUR CRAFT</span>
+-        <h2 className="text-5xl md:text-8xl font-display font-bold mb-16 italic text-black dark:text-brand-lightest transition-colors tracking-tight underline decoration-brand/20 underline-offset-12">Our <span className="text-white">Menu</span></h2>
+-        
+         {/* Search Bar for Menu */}
+-        <div className="max-w-xl mx-auto relative group">
+-          <div className="absolute inset-y-0 left-6 flex items-center text-cafe-muted/40 dark:text-dark-muted/40 pointer-events-none group-focus-within:text-brand transition-colors">
++        <div className="max-w-xl mx-auto relative group mb-20 z-30">
++          <div className="absolute inset-y-0 left-6 flex items-center text-white/45 pointer-events-none group-focus-within:text-[#1e9ab0] transition-colors">
+             <Search size={20} />
+           </div>
+           <input 
+             type="text" 
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
+-            className="w-full bg-brand-lightest dark:bg-dark-surface border border-brand/10 dark:border-brand-lightest/10 rounded-full py-6 pl-16 pr-8 outline-none focus:border-brand shadow-huge text-sm italic transition-all text-cafe-dark dark:text-dark-text"
++            className="w-full bg-white/5 border border-white/10 focus:border-[#1e9ab0] rounded-full py-6 pl-16 pr-8 outline-none shadow-huge text-sm italic transition-all text-white placeholder:text-white/30"
+             placeholder="Search for your favorite dosa, coffee, or tiffin..."
+           />
+         </div>
+-      </div>
+-
+-      <div className="max-w-7xl mx-auto relative px-4">
+-        {/* Horizontal Navigation Redesign - Now Sticky */}
+-        <div className="sticky top-20 lg:top-24 z-40 flex items-center justify-center w-full gap-4 lg:gap-12 mb-12 lg:mb-20 px-4 py-6 lg:py-8 bg-[#1e9ab0]/90 dark:bg-black/90 backdrop-blur-xl rounded-[2.5rem] lg:rounded-[3rem] border border-white/10 relative shadow-massive transition-all">
+-          {/* Previous Label (Desktop) */}
+-          <button 
+-            onClick={prevCategory}
+-            className="hidden xl:flex flex-1 flex-col items-end opacity-20 hover:opacity-100 hover:text-brand transition-all duration-500 cursor-pointer group/prev text-right outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand/30 rounded-xl p-4"
+-          >
+-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Previous</span>
+-            <span className="text-sm font-display font-light italic truncate max-w-[200px] text-white group-hover/prev:-translate-x-2 transition-transform duration-500">
+-              {MENU_DATA[(activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length].title}
+-            </span>
+-          </button>
+ 
+-          {/* Navigation Controls */}
+-          <div className="flex items-center gap-4 lg:gap-10">
+-              <motion.button 
+-              whileHover={{ scale: 1.1, rotate: -5 }}
+-              whileTap={{ scale: 0.9 }}
+-              onClick={prevCategory}
+-              className="w-14 h-14 lg:w-20 lg:h-20 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-brand transition-all bg-white/5 backdrop-blur-sm shadow-xl group"
+-              aria-label="Previous Category"
+-            >
+-              <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform lg:hidden" />
+-              <ChevronLeft size={28} className="group-hover:-translate-x-1 transition-transform hidden lg:block" />
+-            </motion.button>
++        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 min-h-[500px]">
++          {MENU_DATA.map((category, idx) => {
++            const isActive = idx === activeCategoryIndex;
++            const coverImage = category.items.find(item => item.image)?.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop";
+             
+-            <div className="flex flex-col items-center min-w-[140px] md:min-w-[400px]">
+-               <AnimatePresence mode="wait">
+-                  <motion.div
+-                    key={activeTab}
+-                    initial={{ opacity: 0, scale: 0.9, y: 15, filter: 'blur(10px)' }}
+-                    animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+-                    exit={{ opacity: 0, scale: 1.1, y: -15, filter: 'blur(10px)' }}
+-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+-                    className="text-center"
+-                  >
+-                     <div className="text-[9px] lg:text-[10px] text-black uppercase tracking-[0.4em] lg:tracking-[0.6em] mb-2 lg:mb-3 font-black">
+-                       {activeCategory?.timing || 'All Day'}
+-                     </div>
+-                     <h3 className="text-xl lg:text-4xl font-display italic text-[#fff628] hover:text-white transition-colors duration-500 cursor-default leading-tight">
+-                       {activeCategory?.title}
+-                     </h3>
+-                  </motion.div>
+-               </AnimatePresence>
+-                
+-                {/* Visual indicator of active tab */}
+-                <div className="flex gap-2 mt-4 lg:mt-6">
+-                  {MENU_DATA.map((_, i) => (
+-                    <motion.button 
+-                      key={i}
+-                      onClick={() => handleTabChange(MENU_DATA[i].id)}
+-                      animate={{ 
+-                        width: i === activeIndex ? (window.innerWidth < 1024 ? 16 : 24) : 6,
+-                        backgroundColor: i === activeIndex ? '#fff628' : 'rgba(255,255,255,0.2)'
+-                      }}
+-                      whileHover={{ scale: 1.2, backgroundColor: '#fff628' }}
+-                      className="h-1.5 rounded-full transition-colors cursor-pointer"
+-                      aria-label={`Go to category ${MENU_DATA[i].id}`}
+-                    />
+-                  ))}
++            return (
++              <motion.div
++                key={category.id}
++                initial={{ opacity: 0, y: 30 }}
++                whileInView={{ opacity: 1, y: 0 }}
++                animate={{ scale: isActive ? 1.03 : 1 }}
++                transition={{ delay: idx * 0.05, scale: { duration: 0.4, ease: [0.22,1,0.36,1] } }}
++                viewport={{ once: true }}
++                onClick={() => { 
++                  setActiveCategoryIndex(idx); 
++                  onCategorySelect(category, 0); 
++                }}
++                className={`relative group h-[500px] rounded-[3.5rem] overflow-hidden cursor-pointer transition-all outline-none ${isActive ? 'border-2 border-[#1e9ab0] shadow-glow z-10' : 'border border-white/5 bg-white/5'}`}
++              >
++                {/* Background Image with Overlay */}
++                <div className="absolute inset-0 z-0">
++                  <motion.img 
++                    src={coverImage} 
++                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
++                    alt={category.title} 
++                  />
++                  {/* Default Overlay */}
++                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 z-10 opacity-80" />
+                 </div>
+-            </div>
+ 
+-            <motion.button 
+-              whileHover={{ scale: 1.1, rotate: 5 }}
+-              whileTap={{ scale: 0.9 }}
+-              onClick={nextCategory}
+-              className="w-14 h-14 lg:w-20 lg:h-20 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-brand transition-all bg-white/5 backdrop-blur-sm shadow-xl group"
+-              aria-label="Next Category"
+-            >
+-              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform lg:hidden" />
+-              <ChevronRight size={28} className="group-hover:translate-x-1 transition-transform hidden lg:block" />
+-            </motion.button>
+-          </div>
++                {/* Light Transparent Overlay on Hover */}
++                <div className="absolute inset-0 z-15 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-white/10 backdrop-blur-[2px]" />
+ 
+-          {/* Next Label (Desktop) */}
+-          <button 
+-            onClick={nextCategory}
+-            className="hidden xl:flex flex-1 flex-col items-start opacity-20 hover:opacity-100 hover:text-brand transition-all duration-500 cursor-pointer group/next text-left outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand/30 rounded-xl p-4"
+-          >
+-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Coming Next</span>
+-            <span className="text-sm font-display font-light italic truncate max-w-[200px] text-white group-hover/next:translate-x-2 transition-transform duration-500">
+-              {MENU_DATA[(activeIndex + 1) % MENU_DATA.length].title}
+-            </span>
+-          </button>
+-        </div>
++                {/* Content Holder */}
++                <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end">
++                  <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
+ 
+-        {/* Content Area */}
+-        <div className="flex-1">
+-          <AnimatePresence mode="wait">
+-            <motion.div
+-              key={activeTab}
+-              initial={{ opacity: 0, x: 40, filter: 'blur(10px)' }}
+-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+-              exit={{ opacity: 0, x: -40, filter: 'blur(10px)' }}
+-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+-            >
+-              {/* Central Featured centerpiece */}
+-              <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+-                <div className="relative aspect-square max-w-[500px] mx-auto lg:ml-0">
+-                  <div className="absolute inset-0 bg-brand/10 blur-[100px] rounded-full" />
+-                  <motion.div 
+-                    animate={{ rotate: 360 }}
+-                    transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+-                    className="absolute -inset-8 border border-black/10 rounded-full border-dashed"
+-                  />
+-                  <div className="w-full h-full rounded-full border border-brand/5 bg-brand-lightest p-8 relative overflow-hidden group shadow-2xl">
+-                    <img 
+-                      src={activeCategory?.items[0]?.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=2670&auto=format&fit=crop"} 
+-                      alt={activeCategory?.title}
+-                      className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-all duration-1000"
+-                    />
+-                  </div>
+-                  <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-brand-lightest rounded-full flex items-center justify-center p-2 shadow-xl border border-brand/5">
+-                     <div className="w-full h-full rounded-full bg-brand flex items-center justify-center">
+-                        <Coffee size={24} className="text-brand-lightest" />
+-                     </div>
+-                  </div>
+-                </div>
+-                
+-                <div className="flex flex-col justify-center">
+-                   <div className="relative">
+-                      <span className="text-[12rem] md:text-[15rem] font-display font-black text-white/[0.05] absolute -top-32 -left-12 select-none pointer-events-none">
+-                        {activeIndex + 1}
++                  <div className="relative z-30 transition-transform duration-500 group-hover:-translate-y-4">
++                    {/* Timing subtitle */}
++                    <div className="mb-4">
++                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1e9ab0] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
++                        {category.timing || 'All Day'}
+                       </span>
+-                      <div className="relative z-10 space-y-8">
+-                         <div className="text-5xl md:text-7xl font-display font-medium text-black"><span className="text-[#fff628]">AED {activeCategory?.items[0].price}</span> <span className="text-base md:text-xl text-white uppercase tracking-[0.2em] font-light italic opacity-95">starting</span></div>
+-                         <p className="text-black text-sm md:text-lg font-medium uppercase tracking-[0.2em] leading-relaxed max-w-lg italic">
+-                           {activeCategory?.title}. Available daily across all our live kitchens.
+-                         </p>
+-                         <button 
+-                           onClick={() => document.getElementById('menu-grid')?.scrollIntoView({ behavior: 'smooth' })}
+-                           className="px-12 py-6 bg-[#fff628] text-black rounded-full font-bold uppercase tracking-[0.3em] text-[10px] shadow-massive hover:bg-white transition-all active:scale-95"
+-                         >
+-                           Explore Selection
+-                         </button>
++                    </div>
++                    
++                    {/* Title */}
++                    <h3 className="text-2xl lg:text-3xl font-display italic font-bold mb-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] text-white group-hover:text-[#1e9ab0] transition-colors leading-[1.1]">
++                      {category.title}
++                    </h3>
++
++                    {/* Preview list of dishes */}
++                    <p className="text-white/60 text-[13px] italic font-light mb-6 transition-all group-hover:text-white/90 line-clamp-2">
++                      {category.items.slice(0, 4).map(i => i.name).join(', ')}...
++                    </p>
++
++                    {/* Quick Detail Hint */}
++                    <motion.div 
++                      className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.4em] text-white/40 group-hover:text-white transition-all"
++                    >
++                      <div className="w-6 h-6 rounded-full bg-[#1e9ab0] flex items-center justify-center text-white scale-75">
++                        <Plus size={12} />
+                       </div>
+-                   </div>
++                       Explore Category
++                    </motion.div>
++                  </div>
+                 </div>
+-              </div>
+ 
+-              {/* Items Grid */}
+-              <AnimatePresence mode="wait">
+-                {searchQuery.trim() !== '' ? (
+-                  <motion.div 
+-                    key="search-results"
+-                    initial={{ opacity: 0 }}
+-                    animate={{ opacity: 1 }}
+-                    exit={{ opacity: 0 }}
+-                    className="space-y-12"
+-                  >
+-                    <div className="flex items-center justify-between border-b border-black/5 pb-8">
+-                       <h3 className="text-2xl font-display italic text-cafe-dark dark:text-dark-text">
+-                         Found <span className="text-brand font-medium">{filteredItems.length}</span> results for "<span className="text-brand">{searchQuery}</span>"
+-                       </h3>
+-                       <button 
+-                         onClick={() => setSearchQuery('')}
+-                         className="text-sm font-black uppercase tracking-widest text-brand hover:underline"
+-                       >
+-                         Clear Search
+-                       </button>
+-                    </div>
+-                    {filteredItems.length > 0 ? (
+-                      <div id="menu-grid" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+-                        {filteredItems.map((item, idx) => (
+-                          <MenuCard key={`${item.name}-${idx}`} item={item} onQuickView={setSelectedItem} index={idx} />
+-                        ))}
+-                      </div>
+-                    ) : (
+-                      <motion.div 
+-                        initial={{ opacity: 0, scale: 0.95 }}
+-                        animate={{ opacity: 1, scale: 1 }}
+-                        className="py-32 text-center flex flex-col items-center justify-center space-y-10"
+-                      >
+-                        <div className="relative">
+-                          <div className="w-32 h-32 rounded-full bg-brand/10 flex items-center justify-center text-brand animate-pulse">
+-                            <Search size={48} />
+-                          </div>
+-                          <div className="absolute -top-2 -right-2 w-10 h-10 bg-brand-lightest dark:bg-dark-surface rounded-full flex items-center justify-center shadow-lg border border-brand/5">
+-                            <Sparkles size={20} className="text-brand" />
+-                          </div>
+-                        </div>
+-                        <div className="space-y-6 max-w-md">
+-                          <h3 className="text-4xl font-display font-medium italic text-cafe-dark dark:text-dark-text leading-tight">Mmm, nothing found</h3>
+-                          <p className="text-xl text-cafe-muted dark:text-dark-muted font-light italic">
+-                            We couldn't find "<span className="text-brand font-medium">{searchQuery}</span>" on today's list. Maybe it's a secret item?
+-                          </p>
+-                          <button 
+-                            onClick={() => setSearchQuery('')}
+-                            className="px-10 py-4 bg-brand text-brand-lightest rounded-full font-bold shadow-huge hover:scale-105 transition-transform flex items-center gap-3 mx-auto"
+-                          >
+-                            Reset Search <ArrowRight size={18} />
+-                          </button>
+-                        </div>
+-                      </motion.div>
+-                    )}
+-                  </motion.div>
+-                ) : (
+-                  <motion.div 
+-                    key={activeTab}
+-                    initial={{ opacity: 0, y: 20 }}
+-                    animate={{ opacity: 1, y: 0 }}
+-                    exit={{ opacity: 0, y: -20 }}
+-                    transition={{ duration: 0.5 }}
+-                    id="menu-grid" 
+-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 pt-12 border-t border-black/5"
+-                  >
+-                    {filteredItems.map((item, idx) => (
+-                      <MenuCard key={`${activeTab}-${idx}`} item={item} onQuickView={setSelectedItem} index={idx} />
+-                    ))}
+-                  </motion.div>
+-                )}
+-              </AnimatePresence>
+-            </motion.div>
+-          </AnimatePresence>
++                {/* Hover Interaction Arrow Decor */}
++                <div className="absolute top-8 right-8 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
++                  <div className="w-12 h-12 rounded-full border border-white/20 backdrop-blur-md flex items-center justify-center text-white">
++                    <ArrowRight size={18} />
++                  </div>
++                </div>
++              </motion.div>
++            );
++          })}
+         </div>
+       </div>
+     </section>
+@@ -2190,9 +2159,16 @@ export default function App() {
+   const [isBulkOrderOpen, setIsBulkOrderOpen] = useState(false);
+   const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+   const [selectedBranch, setSelectedBranch] = useState<any>(null);
++  const [selectedCategory, setSelectedCategory] = useState<MenuCategory | null>(null);
++  const [initialDishIndex, setInitialDishIndex] = useState(0);
+   const [theme] = useState<'light' | 'dark'>('dark');
+   const [searchQuery, setSearchQuery] = useState('');
+ 
++  const handleCategorySelect = (category: MenuCategory, index: number) => {
++    setSelectedCategory(category);
++    setInitialDishIndex(index);
++  };
++
+   const selectedBranchIndex = selectedBranch
+     ? BRANCHES.findIndex(b => b.name === selectedBranch.name)
+     : -1;
+@@ -2240,6 +2216,13 @@ export default function App() {
+         onPrev={() => navigateBranch(-1)}
+         onNext={() => navigateBranch(1)}
+       />
++      <CategoryModal
++        category={selectedCategory}
++        initialIndex={initialDishIndex}
++        isOpen={!!selectedCategory}
++        onClose={() => setSelectedCategory(null)}
++      />
++      <FloatingDeliveryButton onClick={() => setIsDeliveryModalOpen(true)} />
+       
+       <AnimatePresence>
+         {searchQuery && (
+@@ -2293,6 +2276,7 @@ export default function App() {
+           theme={theme} 
+           searchQuery={searchQuery}
+           setSearchQuery={setSearchQuery}
++          onCategorySelect={handleCategorySelect}
+         />
+         
+         <BranchesSection theme={theme} onBranchSelect={setSelectedBranch} />
+@@ -2300,8 +2284,6 @@ export default function App() {
+         <AboutTimeline theme={theme} />
+         
+         <TestimonialsSection theme={theme} />
+-
+-        <ContactSection theme={theme} />
+       </main>
+       <Footer theme={theme} onBranchSelect={setSelectedBranch} />
+     </div>

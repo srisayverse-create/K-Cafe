@@ -1,0 +1,31 @@
+- [ ] Mobile responsiveness for Home screen (order Nav → Slider → CTAs for screens <768px)
+- [ ] Update navigation bar: center name/logo, three-line branding text (Kumbakonam Cafe LLC, Authentic Veg Eatery, Experience the Goodness)
+- [ ] Add signature dishes to the homepage slideshow:
+  - Madras Mixture
+  - Kumbakonam Filter Kappi
+  - Ghee Podi Thatte Idly
+  - Medhu Vada
+  - K‑Special Dosa
+  - Ghee Garlic Podi Dosa
+  - Mini Tiffin
+  - Ashoka Halwa
+  - Sweet Bun
+- [ ] Replace "Order Now" CTA with a delivery‑icon button that links to the order page, remove "Order Directly From Cafe" option, and set partner name text color to black
+- [ ] Add Party/Bulk Order CTA and Download Menu CTA on the Home page
+- [ ] Add delivery‑icon SVG asset and reference it in the Navbar component
+- [ ] Menu page:
+  - Mirror the Branch section layout
+  - Remove price display and weekend‑specials UI
+  - Implement a quick‑view modal that shows timing and branch information
+- [ ] About section: delete the visual‑journey image gallery
+- [ ] Branch section:
+  - Add a "Location" button in each branch modal linking to the provided URLs
+  - Rename all occurrences of "Shabiya" to "Shabiya11"
+- [ ] Testimonials: change all yellow text to black
+- [ ] Contact page:
+  - Remove the footer
+  - Redesign as a two‑column layout (contact details on left, enquiry form on right)
+  - Add social‑media icons
+  - Configure the form to use a simple `mailto:` link for enquiries
+- [ ] Verify all changes by running the development server and testing on desktop and mobile viewports
+- [ ] Final walkthrough documentation and asset generation

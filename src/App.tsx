@@ -104,7 +104,13 @@ const CafeLogo = ({ size = "lg", className = "" }: { size?: "sm" | "md" | "lg", 
   
   return (
     <div className={`relative flex items-center justify-center ${dimensions} ${className}`}>
-      <img src="/brand/LOGO.png" alt="Kumbakonam Cafe Logo" className="w-full h-full object-contain" />
+      <img 
+        src="/brand/LOGO.png" 
+        alt="Kumbakonam Cafe Logo" 
+        className="w-full h-full object-contain" 
+        loading="eager"
+        decoding="sync"
+      />
     </div>
   );
 };
@@ -233,6 +239,8 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
                 src={galleryImages[activeGalleryIndex].url} 
                 alt={galleryImages[activeGalleryIndex].alt} 
                 className="w-full h-full object-cover" 
+                loading="lazy"
+                decoding="async"
               />
               <button 
                 onClick={() => setActiveGalleryIndex(null)}
@@ -286,10 +294,10 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
                 <div className="relative z-10 flex flex-col lg:flex-row gap-12">
                   <div className="lg:w-2/3">
                     <div className="flex items-center gap-3 py-1.5 px-5 rounded-full bg-black/5 border border-black/10 w-fit mb-6 shadow-sm">
-                      <Sun size={18} className="text-[#fff628] fill-[#fff628]/30" />
+                      <Sun size={18} className="text-black fill-black/30" />
                       <span className="text-[9px] font-black uppercase tracking-[0.4em] text-black/60">OUR STORY</span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-6 leading-[1.1] italic tracking-tight underline decoration-[#fff628]/40 underline-offset-8 text-[#fff628]">The Story Behind K Café</h2>
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-6 leading-[1.1] italic tracking-tight underline decoration-black/40 underline-offset-8 text-black">The Story Behind K Café</h2>
                     <div className="space-y-4 text-sm md:text-base lg:text-lg font-medium leading-relaxed italic text-black opacity-100">
                       <p>Kumbakonam Café was founded in 2024 by three friends with a shared dream: to bring authentic, homely vegetarian food to Abu Dhabi in a way that feels both comforting and memorable.</p>
                       <p>From day one, our vision has been simple yet powerful, to create a place where customers always come first, employees are family, and society benefits from the values we uphold.</p>
@@ -363,55 +371,30 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-[#1e9ab0] rounded-full z-20 hidden lg:block shadow-glow" 
             />
           </div>
-
-          {/* Chapter 3: The Gallery (4 Images) */}
-          <div className="flex flex-col items-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, margin: "-5%" }}
-              transition={{ duration: 1.5 }}
-              className="w-full bg-brand-gradient rounded-[2.5rem] overflow-hidden text-brand-lightest p-6 md:p-10 lg:p-12 shadow-huge border border-white/10"
-            >
-              <div className="text-center mb-10">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-medium italic mb-4 leading-tight">Visual Journey at K Café</h2>
-                <div className="w-20 h-px bg-white/20 mx-auto"></div>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {galleryImages.map((img, idx) => (
-                  <motion.div 
-                    key={idx}
-                    initial={{ y: 20, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    transition={{ delay: idx * 0.1 }}
-                    viewport={{ once: true }}
-                    onClick={() => setActiveGalleryIndex(idx)}
-                    className={`aspect-[3/4] rounded-xl overflow-hidden shadow-massive bg-white/5 border border-white/5 cursor-pointer group ${idx % 2 === 1 ? 'mt-6' : ''}`}
-                  >
-                    <img 
-                      src={img.url} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                      alt={img.alt} 
-                    />
-                    <div className="absolute inset-0 bg-[#1e9ab0]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                       <Eye size={32} className="text-white drop-shadow-lg" />
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-            {/* Final Node */}
-            <motion.div 
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              className="w-2.5 h-2.5 bg-[#1e9ab0] rounded-full mt-10 relative z-20 hidden lg:block shadow-glow" 
-            />
-          </div>
         </div>
       </div>
     </section>
+  );
+};
+
+const FloatingDeliveryButton = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={onClick}
+      className="fixed bottom-10 left-10 z-50 w-20 h-20 bg-[#fff628] text-black rounded-full flex items-center justify-center shadow-2xl transition-all"
+      title="Order Delivery"
+    >
+      <motion.div
+        animate={{ y: [0, -10, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+      >
+        <Truck size={32} />
+      </motion.div>
+    </motion.button>
   );
 };
 
@@ -457,68 +440,204 @@ const ScrollToTop = () => {
   );
 };
 
-const QuickViewModal = ({ item, isOpen, onClose }: { item: MenuItem | null, isOpen: boolean, onClose: () => void }) => {
-  if (!item) return null;
+const CategoryModal = ({ 
+  category, 
+  initialIndex = 0, 
+  isOpen, 
+  onClose 
+}: { 
+  category: MenuCategory | null, 
+  initialIndex: number, 
+  isOpen: boolean, 
+  onClose: () => void 
+}) => {
+  const [activeIndex, setActiveIndex] = useState(initialIndex);
+
+  useEffect(() => {
+    if (isOpen) {
+      setActiveIndex(initialIndex);
+    }
+  }, [isOpen, initialIndex, category]);
+
+  if (!category) return null;
+
+  const currentItem = category.items[activeIndex];
+
+  const nextDish = () => {
+    setActiveIndex((prev) => (prev + 1) % category.items.length);
+  };
+
+  const prevDish = () => {
+    setActiveIndex((prev) => (prev - 1 + category.items.length) % category.items.length);
+  };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-          />
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-2xl bg-brand-lightest dark:bg-dark-surface rounded-[2.5rem] overflow-hidden shadow-huge border border-brand/5 dark:border-brand/5"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[500] flex items-center justify-center p-4 lg:p-10 bg-black/85 backdrop-blur-md"
+          onClick={onClose}
+        >
+          {/* Prev Arrow */}
+          <motion.button
+            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+            onClick={(e) => { e.stopPropagation(); prevDish(); }}
+            className="absolute left-4 lg:left-8 z-10 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white backdrop-blur-md transition-all"
+            aria-label="Previous Dish"
           >
-            <button 
-              onClick={onClose}
-              className="absolute top-6 right-6 w-10 h-10 bg-brand/5 dark:bg-brand-lightest/5 rounded-full flex items-center justify-center text-cafe-dark dark:text-dark-text hover:text-brand z-10 transition-colors"
-              aria-label="Close modal"
-            >
-              <X size={20} />
-            </button>
-            <div className="flex flex-col md:flex-row">
-              <div className="md:w-1/2 aspect-square md:aspect-auto overflow-hidden">
-                <motion.img 
-                  initial={{ scale: 1.4, opacity: 0, filter: 'blur(10px)' }}
-                  animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                  src={item.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop"} 
-                  alt={item.name} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="md:w-1/2 p-8 md:p-10 flex flex-col justify-center bg-brand-lightest dark:bg-dark-surface transition-colors">
-                <motion.div 
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="inline-flex items-center gap-4 py-2 px-6 rounded-full bg-brand-gradient text-brand-lightest w-fit mb-6 shadow-glow"
-                >
-                  <Sparkles size={14} className="animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em]">Dish Details</span>
-                </motion.div>
-                <h2 className="text-4xl font-display font-medium mb-4 italic text-cafe-dark dark:text-dark-text">{item.name}</h2>
-                <div className="text-4xl font-display font-bold text-[#1e9ab0] mb-6 leading-none">AED {item.price}</div>
-                <p className="text-cafe-muted dark:text-dark-muted font-light leading-relaxed mb-8">
-                  {item.description || "Our signature recipe made with authentic ingredients sourced directly from the heart of Tamil Nadu. A pure vegetarian delight."}
-                </p>
-                <div className="flex items-center gap-4 py-6 border-t border-brand/5 dark:border-brand-lightest/5">
-                  <div className="w-10 h-10 bg-brand/5 rounded-full flex items-center justify-center text-brand">
-                    <Clock size={16} />
+            <ChevronLeft size={28} />
+          </motion.button>
+
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            className="w-full max-w-6xl bg-brand-lightest dark:bg-dark-surface rounded-[3rem] overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col lg:flex-row border border-brand/5 dark:border-brand-lightest/5"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Left Column: Image Area */}
+            <div className="w-full lg:w-[45%] bg-[#0c0c0c]/10 dark:bg-black/20 p-8 lg:p-12 flex flex-col gap-6 items-center justify-center min-h-[300px] lg:min-h-0 relative">
+              <div className="w-full h-full aspect-square rounded-[2rem] overflow-hidden relative shadow-inner">
+                {currentItem?.image ? (
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeIndex}
+                      src={currentItem.image}
+                      initial={{ scale: 1.1, opacity: 0, filter: 'blur(5px)' }}
+                      animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+                      exit={{ scale: 0.9, opacity: 0, filter: 'blur(5px)' }}
+                      transition={{ duration: 0.5 }}
+                      className="w-full h-full object-cover"
+                      alt={currentItem.name}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </AnimatePresence>
+                ) : (
+                  <div className="w-full h-full bg-[#1e9ab0]/10 flex flex-col items-center justify-center text-center p-8 gap-4 border border-[#1e9ab0]/20 rounded-[2rem]">
+                    <Coffee size={64} className="text-[#1e9ab0] animate-pulse" />
+                    <span className="text-xl font-brand font-bold text-[#1e9ab0] uppercase tracking-widest">Kumbakonam Cafe</span>
+                    <span className="text-[10px] font-sans font-medium text-cafe-dark/40 dark:text-white/40 uppercase tracking-widest">Live Kitchen Fresh</span>
                   </div>
-                  <span className="text-cafe-muted/60 dark:text-dark-muted/60 text-sm italic font-light">Freshly prepared on order</span>
+                )}
+              </div>
+
+              {/* Progress text indicator */}
+              <div className="text-xs uppercase font-black tracking-widest text-cafe-dark/40 dark:text-white/40">
+                Item {activeIndex + 1} of {category.items.length}
+              </div>
+            </div>
+
+            {/* Right Column: Info & Navigation List */}
+            <div className="w-full lg:w-[55%] p-8 lg:p-12 flex flex-col bg-brand-lightest dark:bg-dark-surface transition-colors relative overflow-y-auto">
+              {/* Top Banner details */}
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <Sparkles size={16} className="text-[#1e9ab0] animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1e9ab0]">
+                    {category.title}
+                  </span>
+                </div>
+                <h3 className="text-4xl font-display font-medium text-cafe-dark dark:text-dark-text italic leading-tight mb-4">
+                  {currentItem?.name}
+                </h3>
+                <p className="text-cafe-muted dark:text-dark-muted font-light leading-relaxed mb-6 italic">
+                  {currentItem?.description || "Our signature dish made with authentic South Indian recipes and pure ingredients."}
+                </p>
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-t border-brand/5 dark:border-brand-lightest/5">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-brand/5 rounded-full flex items-center justify-center text-brand">
+                      <Clock size={16} />
+                    </div>
+                    <div className="flex flex-col">
+                       <span className="text-[10px] font-black uppercase text-cafe-dark/40">Timing</span>
+                       <span className="text-cafe-muted dark:text-dark-muted text-[13px] italic font-light">{category.timing || "All Day"}</span>
+                    </div>
+                  </div>
+
+                  {currentItem?.description?.toLowerCase().includes('branch') && (
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-brand/5 rounded-full flex items-center justify-center text-brand">
+                        <MapPin size={16} />
+                      </div>
+                      <div className="flex flex-col">
+                         <span className="text-[10px] font-black uppercase text-cafe-dark/40">Branch</span>
+                         <span className="text-cafe-muted dark:text-dark-muted text-[13px] italic font-light">
+                           {currentItem.description.split('at ').pop()?.split(' branch')[0] || "All Branches"}
+                         </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Grid / List of other dishes in category */}
+              <div className="mt-auto border-t border-brand/5 dark:border-brand-lightest/5 pt-6">
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-cafe-dark/40 dark:text-white/40 mb-4 block">
+                  Other Dishes in Category
+                </h4>
+                <div className="flex gap-4 overflow-x-auto pb-4 max-h-44 scrollbar-thin">
+                  {category.items.map((item, idx) => {
+                    const isActive = idx === activeIndex;
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => setActiveIndex(idx)}
+                        className={`flex-shrink-0 flex items-center gap-3 p-3 rounded-2xl border transition-all text-left outline-none ${
+                          isActive 
+                            ? 'border-[#1e9ab0] bg-[#1e9ab0]/5 text-brand font-medium' 
+                            : 'border-brand/10 dark:border-brand-lightest/10 bg-white/5 hover:bg-[#1e9ab0]/5'
+                        }`}
+                      >
+                        {item.image ? (
+                          <img 
+                            src={item.image} 
+                            className="w-12 h-12 rounded-xl object-cover" 
+                            alt={item.name} 
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl bg-brand/5 flex items-center justify-center text-brand">
+                            <Coffee size={18} />
+                          </div>
+                        )}
+                        <div className="max-w-[120px]">
+                          <p className="text-[11px] uppercase tracking-wide truncate font-bold text-cafe-dark dark:text-dark-text">
+                            {item.name}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="absolute top-6 right-6 text-cafe-dark/30 hover:text-[#1e9ab0] dark:text-white/30 dark:hover:text-[#1e9ab0] transition-colors p-2"
+              aria-label="Close modal"
+            >
+              <X size={32} />
+            </button>
           </motion.div>
-        </div>
+
+          {/* Next Arrow */}
+          <motion.button
+            whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+            onClick={(e) => { e.stopPropagation(); nextDish(); }}
+            className="absolute right-4 lg:right-8 z-10 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 flex items-center justify-center text-white backdrop-blur-md transition-all"
+            aria-label="Next Dish"
+          >
+            <ChevronRight size={28} />
+          </motion.button>
+        </motion.div>
       )}
     </AnimatePresence>
   );
@@ -554,7 +673,7 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[12px] font-black uppercase tracking-[0.6em] text-[#fff628] mb-4 block"
+            className="text-[12px] font-black uppercase tracking-[0.6em] text-black mb-4 block"
           >
             OUR COMMUNITY
           </motion.span>
@@ -562,7 +681,7 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold italic text-[#fff628] tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold italic text-black tracking-tight"
           >
             Real Stories, <span className="text-brand">Real Flavors</span>
           </motion.h2>
@@ -631,7 +750,13 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 rounded-full border border-[#1e9ab0]/30 overflow-hidden">
-                      <img src={['/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png', '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg', '/Assets/Sweets/ashoka-halwa.png'][idx % 3]} alt={testimonial.author} className="w-full h-full object-cover" />
+                      <img 
+                        src={['/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png', '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg', '/Assets/Sweets/ashoka-halwa.png'][idx % 3]} 
+                        alt={testimonial.author} 
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover" 
+                      />
                     </div>
                     <div>
                       <h4 className="text-lg font-display font-bold text-black uppercase tracking-widest">{testimonial.author}</h4>
@@ -685,52 +810,39 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${isScrolled ? 'top-0' : 'top-4 lg:top-8'}`} role="navigation">
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${isScrolled ? 'top-0' : 'top-2 lg:top-4'}`} role="navigation">
       <div className="max-w-[1600px] mx-auto px-4 lg:px-6 relative">
-          <div className={`flex items-center justify-between px-6 lg:px-8 py-2 lg:py-3 rounded-[3rem] border transition-all duration-700 bg-white dark:bg-dark-surface/95 border-[#1e9ab0] shadow-xl border-[3px] ${isScrolled ? 'rounded-none border-t-0 border-x-0 border-b-[3px]' : ''}`}>
+          <div className={`flex items-center justify-between px-6 lg:px-8 py-2 lg:py-4 rounded-[2rem] border transition-all duration-700 bg-white dark:bg-dark-surface/95 border-[#1e9ab0] shadow-xl border-[2px] ${isScrolled ? 'rounded-none border-t-0 border-x-0 border-b-[2px]' : ''}`}>
           
-          {/* Left Brand */}
-          <div className="flex items-center z-50 shrink-0">
-             <a href="#home" className="flex items-center gap-2 sm:gap-3 group" aria-label="Kumbakonam Cafe Home">
-                 <img src="/brand/LOGO.png" alt="Kumbakonam Cafe Logo" className="w-10 h-10 md:w-16 md:h-16 object-contain drop-shadow-md" />
-               <div className="text-left flex flex-col justify-center">
-                 <div className="font-bold text-[12px] sm:text-[14px] md:text-[18px] leading-tight text-[#1e9ab0] font-brand">KUMBAKONAM</div>
-                 <div className="text-[10px] sm:text-[12px] md:text-[15px] leading-[1.1] font-semibold text-[#1e9ab0] font-brand">CAFE - L.L.C</div>
-                 <div className="hidden sm:block text-[8px] md:text-[13px] leading-tight text-[#1e9ab0] font-brand mt-0.5">Authentic Veg Eatery</div>
+          {/* Left Spacer (To balance the hamburger button on the right) */}
+          <div className="flex-1" />
+
+          {/* Center Brand */}
+          <div className="flex items-center justify-center z-50 shrink-0 mx-4 absolute left-1/2 -translate-x-1/2">
+             <a href="#home" className="flex items-center gap-2 sm:gap-4 group" aria-label="Kumbakonam Cafe Home">
+                 <img 
+                   src="/brand/LOGO.png" 
+                   alt="Kumbakonam Cafe Logo" 
+                   className="w-12 h-12 md:w-20 md:h-20 object-contain drop-shadow-md" 
+                   loading="eager"
+                   decoding="sync"
+                 />
+               <div className="text-left flex flex-col justify-center gap-1.5">
+                 <div className="font-bold text-[14px] sm:text-[16px] md:text-[22px] leading-none text-[#1e9ab0] font-brand uppercase">Kumbakonam Cafe LLC</div>
+                 <div className="text-[12px] sm:text-[14px] md:text-[18px] leading-none font-semibold text-[#1e9ab0] font-brand">Authentic Veg Eatery</div>
+                 <div className="text-[11px] md:text-[16px] leading-none text-[#1e9ab0] font-brand">Experience the Goodness</div>
                </div>
              </a>
           </div>
 
-          {/* Center Navigation */}
-          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="text-[14px] font-bold uppercase tracking-wide text-[#1e9ab0] hover:text-[#002B49] transition-all relative group font-brand"
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-
-          {/* Right Tools */}
-          <div className="flex items-center gap-2 sm:gap-4 z-50 shrink-0">
-            <div className="flex items-center gap-4">
-                <button 
-                  onClick={onDeliveryPartnersClick}
-                  className="px-3 py-1.5 sm:px-6 sm:py-2.5 bg-[#1e9ab0] text-white text-[10px] sm:text-[13px] font-bold tracking-wide flex items-center gap-1 sm:gap-2 rounded-full hover:bg-[#167d90] transition-all active:scale-95 shadow-glow font-brand"
-                >
-                  ORDER <span className="hidden sm:inline">NOW</span> <ArrowRight size={14} className="sm:w-[18px] sm:h-[18px]" />
-                </button>
-            </div>
-
+          {/* Right Tools (Hamburger Menu) */}
+          <div className="flex items-center gap-2 sm:gap-4 z-50 shrink-0 ml-auto flex-1 justify-end">
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="lg:hidden text-cafe-dark dark:text-dark-text w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-brand/5 dark:bg-brand-lightest/5 rounded-full shrink-0"
+              className="text-cafe-dark dark:text-dark-text w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-brand/5 dark:bg-brand-lightest/5 rounded-full shrink-0 hover:bg-[#1e9ab0] hover:text-white transition-all shadow-md"
               aria-label="Toggle Menu"
             >
-              <MenuIcon size={20} className="sm:w-[24px] sm:h-[24px]" />
+              <MenuIcon size={24} className="sm:w-[28px] sm:h-[28px]" />
             </button>
           </div>
         </div>
@@ -742,7 +854,7 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-[#1e9ab0] z-[90] flex items-center justify-center lg:hidden"
+              className="fixed inset-0 bg-[#1e9ab0] z-[90] flex items-center justify-center"
             >
                <button onClick={() => setMobileMenuOpen(false)} className="absolute top-10 right-10 text-white/70 hover:text-white transition-colors"><X size={40} /></button>
                        <div className="flex flex-col gap-12 text-center">
@@ -753,7 +865,7 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                     href={`#${item.toLowerCase()}`}
-                    className="text-6xl font-display font-bold italic text-white hover:text-[#fff628] transition-all hover:scale-110"
+                    className="text-6xl font-display font-bold italic text-white hover:text-black transition-all hover:scale-110"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}
@@ -772,12 +884,6 @@ const DELIVERY_CONFIG = {
         uae: {
             name: "United Arab Emirates",
             partners: [
-                {
-                    name: "Order Direct (TMBill)",
-                    description: "Order directly from our cafe",
-                    iconColor: "tmbill",
-                    url: "https://menu.tmbill.com/brand/KCafe"
-                },
                 {
                     name: "Talabat",
                     description: "Fast delivery via Talabat",
@@ -853,17 +959,17 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className={`flex items-center gap-4 p-5 rounded-xl border-2 transition-all hover:-translate-y-1 shadow-sm hover:shadow-md
-                                  ${partner.iconColor === 'talabat' ? 'border-[#FF5A00] bg-[#FF5A00]/5 hover:bg-[#FF5A00]/10 text-[#FF5A00]' : 
-                                    partner.iconColor === 'noon' ? 'border-[#FEE000] bg-[#FEE000]/10 hover:bg-[#FEE000]/20 text-[#000000]' : 
-                                    partner.iconColor === 'smiles' ? 'border-[#E94359] bg-[#E94359]/5 hover:bg-[#E94359]/10 text-[#E94359]' : 
-                                    partner.iconColor === 'tmbill' ? 'border-[#1e9ab0] bg-[#1e9ab0]/5 hover:bg-[#1e9ab0]/10 text-[#1e9ab0]' : 
-                                    'border-[#47B749] bg-[#47B749]/5 hover:bg-[#47B749]/10 text-[#47B749]'}`}
+                                  ${partner.iconColor === 'talabat' ? 'border-[#FF5A00] bg-[#FF5A00]/5 hover:bg-[#FF5A00]/10 text-black' : 
+                                    partner.iconColor === 'noon' ? 'border-[#FEE000] bg-[#FEE000]/10 hover:bg-[#FEE000]/20 text-black' : 
+                                    partner.iconColor === 'smiles' ? 'border-[#E94359] bg-[#E94359]/5 hover:bg-[#E94359]/10 text-black' : 
+                                    partner.iconColor === 'tmbill' ? 'border-[#1e9ab0] bg-[#1e9ab0]/5 hover:bg-[#1e9ab0]/10 text-black' : 
+                                    'border-[#47B749] bg-[#47B749]/5 hover:bg-[#47B749]/10 text-black'}`}
                               >
                                 <div className="flex-1">
-                                  <h4 className="font-bold text-xl leading-tight font-brand mb-1">{partner.name}</h4>
-                                  <p className="text-sm opacity-80 font-sans">{partner.description}</p>
+                                  <h4 className="font-bold text-xl leading-tight font-brand mb-1 text-black">{partner.name}</h4>
+                                  <p className="text-sm text-gray-500 font-sans">{partner.description}</p>
                                 </div>
-                                <ArrowRight size={24} />
+                                <ArrowRight size={24} className="text-black" />
                               </a>
                             ))}
                           </div>
@@ -1044,17 +1150,26 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
   const [slideIndex, setSlideIndex] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
+  const signatureDishes = [
+    "Madras Mixture",
+    "Kumbakonam Filter Kaapi",
+    "Ghee Podi Thatte Idly",
+    "Medhu Vada",
+    "K Special Dosa",
+    "Ghee Garlic Podi Dosa",
+    "Signature (Mini Tiffin)",
+    "Ashoka Halwa",
+    "Sweet Bun"
+  ];
+
   const allItems = useMemo(() => {
-    const items = MENU_DATA.flatMap(cat => cat.items).filter(item => item.image);
-    // Fisher-Yates Shuffle
-    for (let i = items.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [items[i], items[j]] = [items[j], items[i]];
-    }
-    return items;
+    return MENU_DATA.flatMap(cat => cat.items)
+      .filter(item => signatureDishes.includes(item.name))
+      .filter(item => item.image);
   }, []);
 
   useEffect(() => {
+    if (allItems.length === 0) return;
     const timer = setInterval(() => {
       setSlideIndex(prev => (prev + 1) % allItems.length);
     }, 4000);
@@ -1076,7 +1191,7 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
   const currentSlideItem = allItems[slideIndex];
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-32 lg:pt-20 overflow-hidden transition-colors duration-1000 bg-[rgb(41,128,155)]">
+    <section id="home" className="relative min-h-screen flex items-center pt-24 lg:pt-16 overflow-hidden transition-colors duration-1000 bg-[rgb(41,128,155)]">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
@@ -1110,165 +1225,129 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
           </motion.h2>
         </div>
       </div>
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent rounded-[4rem] lg:my-12 overflow-hidden grid grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent rounded-[4rem] overflow-hidden flex flex-col items-center py-10 lg:py-16">
         
-        {/* Left Content: Text + CTAs + Metadata */}
-        <div className="col-span-12 xl:col-span-7 flex flex-col items-start order-1 p-10 lg:p-20 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-[40]"
-            >
-              <div className="flex items-center gap-3 py-2.5 px-8 rounded-full border-2 border-[#1e9ab0]/30 w-fit mb-8 lg:mb-12 mx-auto lg:mx-0 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <Heart size={16} className="text-[#fff628] fill-[#fff628]" />
-                    <span className="text-[11px] font-brand font-black uppercase tracking-[0.5em] text-[#1e9ab0] bg-white px-3 py-2 rounded-full">WELCOME TO KUMBAKONAM CAFE</span>
-                  </div>
-              </div>
-              
-                           <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] leading-[1.1] font-display tracking-tighter text-brand-lightest mb-10 lg:mb-12 text-center lg:text-left transition-colors flex flex-col lg:items-start gap-6 lg:gap-10 justify-center lg:justify-start">
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="shrink-0 flex items-center justify-center lg:justify-start opacity-100 mb-4"
-                >
-                  <div className="text-center lg:text-left flex flex-col items-center lg:items-start text-white">
-                    <div className="font-bold text-[32px] md:text-[56px] lg:text-[72px] leading-tight font-brand">KUMBAKONAM</div>
-                    <div className="text-[20px] md:text-[32px] lg:text-[40px] font-semibold font-brand">CAFE - L.L.C</div>
-                    <div className="text-[16px] md:text-[24px] lg:text-[28px] italic text-[#fff628] font-brand mt-2">Authentic Veg Eatery</div>
-                  </div>
-                </motion.div>
-                <motion.img 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  src="/brand/homescreen-removebg-preview.png"
-                  alt="Homescreen visual"
-                  className="w-full max-w-[400px] lg:max-w-[700px] xl:max-w-[850px] object-contain drop-shadow-2xl mt-4"
-                />
-               </h1>
-              
-              <div className="flex flex-col gap-8 mb-12 lg:mb-16 max-w-2xl text-center lg:text-left">
-                <p className="text-[20px] md:text-[24px] font-medium leading-[1.6] text-white drop-shadow-md">
-                   Enjoy a unique dining experience with live kitchens, authentic vegetarian flavors, and warm service that keeps you coming back.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Main Action CTAs */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 mb-8"
-            >
-              <motion.a 
-                href="#menu"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-12 py-5 bg-[#fff628] text-black font-black text-[13px] uppercase tracking-[0.3em] rounded-full shadow-2xl flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 border-none"
-              >
-                VIEW MENU <Utensils size={18} />
-              </motion.a>
-              <motion.a 
-                href="#branches"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-12 py-5 bg-[#fff628] text-black font-black text-[13px] uppercase tracking-[0.3em] rounded-full flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 shadow-2xl border-none"
-              >
-                VISIT BRANCHES <MapPin size={18} />
-              </motion.a>
-            </motion.div>
-
-               <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start"
-             >
-                <motion.button 
-                  onClick={onBulkOrderClick}
-                  whileHover={{ scale: 1.05 }}
-                  className="flex-1 sm:flex-none px-12 py-7 lg:py-8 bg-[#fff628] text-black font-black text-[11px] lg:text-[12px] uppercase tracking-[0.4em] flex items-center justify-center gap-4 rounded-full shadow-2xl active:scale-95 border border-black/5 hover:bg-white transition-all"
-                >
-                  <ArrowLeft size={18} strokeWidth={2.5} /> PARTY & BULK ORDERS
-                </motion.button>
-             </motion.div>
-
-            <div className="flex flex-col md:flex-row items-center gap-12 mt-20 lg:mt-24">
-               <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="flex flex-col gap-6"
-               >
-                <div className="flex -space-x-4 items-center">
-                  {[
-                    '/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png',
-                    '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg',
-                    '/Assets/Lunch Varieties/Combo-1-4-variety-sadham-.png'
-                  ].map((imgSrc, i) => (
-                    <div key={i} className="w-16 h-16 rounded-full border-4 border-cafe-cream dark:border-dark-bg overflow-hidden bg-cafe-sand shadow-huge hover:scale-110 transition-transform group">
-                      <img src={imgSrc} alt="Our Food" className="w-full h-full object-cover group-hover:scale-110 transition-all" />
-                    </div>
-                  ))}
-                  <div className="pl-6 flex flex-col">
-                    <span className="text-[14px] font-black tracking-widest text-cafe-dark dark:text-dark-text transition-colors">5,000+</span>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand">Happy Visitors</span>
-                  </div>
-                </div>
-                <p className="text-[11px] font-bold uppercase tracking-[0.5em] text-cafe-muted dark:text-dark-muted leading-relaxed max-w-[350px] italic transition-colors">
-                   We’re here to serve you fresh and authentic delicacies every day.
-                </p>
-               </motion.div>
+        {/* 1. Welcome Badge at the Top */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="flex items-center gap-3 py-2.5 px-8 rounded-full border-2 border-[#1e9ab0]/30 w-fit mb-10 shadow-sm z-40"
+        >
+            <div className="flex items-center gap-3">
+              <Heart size={16} className="text-black fill-black" />
+              <span className="text-[11px] font-brand font-black uppercase tracking-[0.5em] text-[#1e9ab0] bg-white px-3 py-2 rounded-full">WELCOME TO KUMBAKONAM CAFE</span>
             </div>
-        </div>
+        </motion.div>
 
-        {/* Right Feature Slide Card */}
-        <div className="col-span-12 xl:col-span-5 flex justify-center xl:justify-end order-2 py-10 lg:py-20 lg:pr-12">
+        {/* 2. Slideshow below Welcome Badge */}
+        <div className="w-full max-w-5xl flex justify-center mb-12">
            <AnimatePresence mode="wait">
              <motion.div
                key={slideIndex}
                style={{ y: mousePosition.y * 1.5, x: mousePosition.x * 1.5 }}
-               initial={{ opacity: 0, x: 40, rotate: 5, filter: 'blur(10px)' }}
-               animate={{ opacity: 1, x: 0, rotate: 0, filter: 'blur(0px)' }}
-               exit={{ opacity: 0, x: -40, rotate: -5, filter: 'blur(10px)' }}
+               initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+               exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-               className="w-full max-w-[400px] glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
+               className="w-full max-w-[500px] glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
              >
                 <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8">
                    <img 
                      src={currentSlideItem?.image || 'https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop'} 
                      alt={currentSlideItem?.name} 
+                     loading="eager"
+                     decoding="sync"
                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                    />
                    <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
                 </div>
                 <div className="flex flex-col gap-4">
-                   <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-brand leading-none">
+                   <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-black leading-none">
                      Featured Item
                    </h4>
-                   <h3 className="text-4xl font-display font-medium text-cafe-dark dark:text-dark-text italic transition-colors">
+                   <h3 className="text-4xl font-display font-medium text-white italic transition-colors">
                      {currentSlideItem?.name}
                    </h3>
-                   <div className="flex items-center justify-between mt-4">
-                      <span className="text-3xl font-display font-bold text-brand">
-                        AED {currentSlideItem?.price}
-                      </span>
+                   <div className="flex items-center justify-end mt-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-px bg-brand/20" />
-                        <ArrowRight size={20} className="text-brand group-hover:translate-x-2 transition-transform" />
+                        <div className="w-10 h-px bg-white/20" />
+                        <ArrowRight size={20} className="text-white group-hover:translate-x-2 transition-transform" />
                       </div>
-                   </div>
+                    </div>
                 </div>
                 
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand text-brand-lightest rounded-full flex flex-col items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
+                <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#fff628] text-black rounded-full flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
                    <span className="text-[9px] font-black uppercase tracking-widest mb-1">Authentic</span>
                    <Heart size={24} fill="currentColor" />
                 </div>
              </motion.div>
            </AnimatePresence>
+        </div>
+
+        {/* 3. CTAs and Description below Slideshow */}
+        <div className="flex flex-col items-center max-w-3xl text-center z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+            >
+              {/* Main Action CTAs */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-6 mb-10">
+                <motion.button 
+                  onClick={onBulkOrderClick}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-12 py-5 bg-[#fff628] text-black font-black text-[14px] uppercase tracking-[0.3em] rounded-full shadow-2xl flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 border-none"
+                >
+                  PARTY / BULK ORDER <Utensils size={20} />
+                </motion.button>
+                <motion.a 
+                  href="/Assets/MAZYAD MENU MAy 26.pdf"
+                  target="_blank"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-12 py-5 bg-[#fff628] text-black font-black text-[14px] uppercase tracking-[0.3em] rounded-full flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 shadow-2xl border-none"
+                >
+                  DOWNLOAD MENU <Download size={20} />
+                </motion.a>
+              </div>
+
+              <div className="mb-16">
+                <p className="text-[20px] md:text-[24px] font-medium leading-[1.6] text-white drop-shadow-md italic">
+                   Enjoy a unique dining experience with live kitchens, authentic vegetarian flavors, and warm service that keeps you coming back.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 1 }}
+              className="flex flex-col md:flex-row items-center gap-12"
+            >
+              <div className="flex -space-x-4 items-center">
+                {[
+                  '/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png',
+                  '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg',
+                  '/Assets/Lunch Varieties/Combo-1-4-variety-sadham-.png'
+                ].map((imgSrc, i) => (
+                  <div key={i} className="w-16 h-16 rounded-full border-4 border-white/20 overflow-hidden bg-white/10 shadow-huge hover:scale-110 transition-transform group">
+                    <img 
+                      src={imgSrc} 
+                      alt="Our Food" 
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-all" 
+                    />
+                  </div>
+                ))}
+                <div className="pl-6 flex flex-col items-start">
+                  <span className="text-[16px] font-black tracking-widest text-white">5,000+</span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black bg-[#fff628] px-2 py-0.5 rounded">Happy Visitors</span>
+                </div>
+              </div>
+            </motion.div>
         </div>
       </div>
 
@@ -1316,6 +1395,8 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
           src={item.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop"} 
           alt={item.name} 
           onLoad={() => setImageLoaded(true)}
+          loading="lazy"
+          decoding="async"
           className={`w-full h-full object-cover transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'} group-hover:scale-110`}
         />
         <div className="absolute inset-0 bg-brand/5 dark:bg-brand-lightest/5 group-hover:bg-transparent transition-colors duration-500" />
@@ -1333,7 +1414,6 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
       <div className="p-8">
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-xl font-display font-medium text-cafe-dark dark:text-dark-text italic group-hover:text-brand transition-colors leading-tight">{item.name}</h3>
-          <span className="font-display font-bold text-[#1e9ab0] leading-none text-2xl tracking-tight">AED {item.price}</span>
         </div>
         {item.description && (
           <p className="text-cafe-muted dark:text-dark-muted text-[13px] italic font-light line-clamp-2 leading-relaxed opacity-80">{item.description}</p>
@@ -1348,7 +1428,7 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
             className="text-[10px] font-black uppercase tracking-[0.2em] text-black flex items-center gap-2 group-hover:gap-4 transition-all"
             aria-label={`Quick view ${item.name}`}
           >
-            Quick View <ArrowRight size={14} />
+            Quick View <ArrowRight size={18} />
           </button>
         </div>
       </div>
@@ -1356,292 +1436,153 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
   );
 };
 
-const MenuSection = ({ theme, searchQuery, setSearchQuery }: { 
+const MenuSection = ({ theme, searchQuery, setSearchQuery, onCategorySelect }: { 
   theme: string,
   searchQuery: string,
-  setSearchQuery: (val: string) => void
+  setSearchQuery: (val: string) => void,
+  onCategorySelect: (category: any, initialIndex: number) => void
 }) => {
-  const [activeTab, setActiveTab] = useState(MENU_DATA[0].id);
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
 
-  const activeCategory = MENU_DATA.find(c => c.id === activeTab);
-  const activeIndex = MENU_DATA.findIndex(c => c.id === activeTab);
-
-  // Search logic: If search query exists, look across all categories
-  const filteredItems = searchQuery.trim() === '' 
-    ? (activeCategory?.items || [])
-    : MENU_DATA.flatMap(cat => cat.items).filter(item => 
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        (item.description?.toLowerCase() ?? '').includes(searchQuery.toLowerCase())
-      );
-
-  const handleTabChange = (id: string) => {
-    setActiveTab(id);
-    // Silent state change, no jump scroll
-  };
-
-  const nextCategory = () => {
-    const nextIdx = (activeIndex + 1) % MENU_DATA.length;
-    handleTabChange(MENU_DATA[nextIdx].id);
-  };
-
-  const prevCategory = () => {
-    const prevIdx = (activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length;
-    handleTabChange(MENU_DATA[prevIdx].id);
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') nextCategory();
-      if (e.key === 'ArrowLeft') prevCategory();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeIndex]);
+  const backgroundTextX = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section id="menu" className={`py-20 lg:py-32 px-4 lg:px-6 relative min-h-screen transition-colors duration-1000 overflow-hidden ${theme === 'dark' ? 'bg-[#1e9ab0] bg-gradient-to-b from-[#1e9ab0] to-black' : 'bg-[#1e9ab0] bg-gradient-to-b from-[#1e9ab0] to-black'}`}>
-      <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
-      <QuickViewModal 
-        item={selectedItem!} 
-        isOpen={!!selectedItem} 
-        onClose={() => setSelectedItem(null)} 
-      />
-      <div className="max-w-7xl mx-auto relative px-4 text-center mb-16">
-        <span className="text-[12px] font-black uppercase tracking-[0.8em] text-brand-lightest mb-10 block opacity-100 drop-shadow-sm">OUR CRAFT</span>
-        <h2 className="text-5xl md:text-8xl font-display font-bold mb-16 italic text-black dark:text-brand-lightest transition-colors tracking-tight underline decoration-brand/20 underline-offset-12">Our <span className="text-white">Menu</span></h2>
-        
+    <section id="menu" ref={sectionRef} className="py-24 lg:py-40 px-6 relative overflow-hidden bg-black text-white">
+      {/* Immersive Background Text */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.03] overflow-hidden whitespace-nowrap select-none">
+        <motion.h2 
+          style={{ x: backgroundTextX }}
+          className="text-[40vw] font-black uppercase font-display"
+        >
+          OUR MENU
+        </motion.h2>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16 lg:mb-24">
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             className="inline-flex items-center gap-3 py-2 px-6 rounded-full bg-white/5 border border-white/10 mb-6"
+          >
+            <Sparkles size={14} className="text-[#1e9ab0]" />
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Our Craft Selection</span>
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl lg:text-8xl font-display font-medium italic leading-[1.1] mb-6"
+          >
+            Experience Our <span className="text-white">Menu</span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg lg:text-xl font-light italic text-white/40 max-w-2xl mx-auto"
+          >
+            Discover our authentic South Indian culinary creations. Click any category to explore the full range of fresh, hand-crafted dishes.
+          </motion.p>
+        </div>
+
         {/* Search Bar for Menu */}
-        <div className="max-w-xl mx-auto relative group">
-          <div className="absolute inset-y-0 left-6 flex items-center text-cafe-muted/40 dark:text-dark-muted/40 pointer-events-none group-focus-within:text-brand transition-colors">
+        <div className="max-w-xl mx-auto relative group mb-20 z-30">
+          <div className="absolute inset-y-0 left-6 flex items-center text-white/45 pointer-events-none group-focus-within:text-[#1e9ab0] transition-colors">
             <Search size={20} />
           </div>
           <input 
             type="text" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-brand-lightest dark:bg-dark-surface border border-brand/10 dark:border-brand-lightest/10 rounded-full py-6 pl-16 pr-8 outline-none focus:border-brand shadow-huge text-sm italic transition-all text-cafe-dark dark:text-dark-text"
+            className="w-full bg-white/5 border border-white/10 focus:border-[#1e9ab0] rounded-full py-6 pl-16 pr-8 outline-none shadow-huge text-sm italic transition-all text-white placeholder:text-white/30"
             placeholder="Search for your favorite dosa, coffee, or tiffin..."
           />
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto relative px-4">
-        {/* Horizontal Navigation Redesign - Now Sticky */}
-        <div className="sticky top-20 lg:top-24 z-40 flex items-center justify-center w-full gap-4 lg:gap-12 mb-12 lg:mb-20 px-4 py-6 lg:py-8 bg-[#1e9ab0]/90 dark:bg-black/90 backdrop-blur-xl rounded-[2.5rem] lg:rounded-[3rem] border border-white/10 relative shadow-massive transition-all">
-          {/* Previous Label (Desktop) */}
-          <button 
-            onClick={prevCategory}
-            className="hidden xl:flex flex-1 flex-col items-end opacity-20 hover:opacity-100 hover:text-brand transition-all duration-500 cursor-pointer group/prev text-right outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand/30 rounded-xl p-4"
-          >
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Previous</span>
-            <span className="text-sm font-display font-light italic truncate max-w-[200px] text-white group-hover/prev:-translate-x-2 transition-transform duration-500">
-              {MENU_DATA[(activeIndex - 1 + MENU_DATA.length) % MENU_DATA.length].title}
-            </span>
-          </button>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center gap-4 lg:gap-10">
-              <motion.button 
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={prevCategory}
-              className="w-14 h-14 lg:w-20 lg:h-20 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-brand transition-all bg-white/5 backdrop-blur-sm shadow-xl group"
-              aria-label="Previous Category"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform lg:hidden" />
-              <ChevronLeft size={28} className="group-hover:-translate-x-1 transition-transform hidden lg:block" />
-            </motion.button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 min-h-[500px]">
+          {MENU_DATA.map((category, idx) => {
+            const isActive = idx === activeCategoryIndex;
+            const coverImage = category.items.find(item => item.image)?.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop";
             
-            <div className="flex flex-col items-center min-w-[140px] md:min-w-[400px]">
-               <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, scale: 0.9, y: 15, filter: 'blur(10px)' }}
-                    animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, scale: 1.1, y: -15, filter: 'blur(10px)' }}
-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-center"
-                  >
-                     <div className="text-[9px] lg:text-[10px] text-black uppercase tracking-[0.4em] lg:tracking-[0.6em] mb-2 lg:mb-3 font-black">
-                       {activeCategory?.timing || 'All Day'}
-                     </div>
-                     <h3 className="text-xl lg:text-4xl font-display italic text-[#fff628] hover:text-white transition-colors duration-500 cursor-default leading-tight">
-                       {activeCategory?.title}
-                     </h3>
-                  </motion.div>
-               </AnimatePresence>
-                
-                {/* Visual indicator of active tab */}
-                <div className="flex gap-2 mt-4 lg:mt-6">
-                  {MENU_DATA.map((_, i) => (
-                    <motion.button 
-                      key={i}
-                      onClick={() => handleTabChange(MENU_DATA[i].id)}
-                      animate={{ 
-                        width: i === activeIndex ? (window.innerWidth < 1024 ? 16 : 24) : 6,
-                        backgroundColor: i === activeIndex ? '#fff628' : 'rgba(255,255,255,0.2)'
-                      }}
-                      whileHover={{ scale: 1.2, backgroundColor: '#fff628' }}
-                      className="h-1.5 rounded-full transition-colors cursor-pointer"
-                      aria-label={`Go to category ${MENU_DATA[i].id}`}
-                    />
-                  ))}
-                </div>
-            </div>
-
-            <motion.button 
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={nextCategory}
-              className="w-14 h-14 lg:w-20 lg:h-20 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-brand transition-all bg-white/5 backdrop-blur-sm shadow-xl group"
-              aria-label="Next Category"
-            >
-              <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform lg:hidden" />
-              <ChevronRight size={28} className="group-hover:translate-x-1 transition-transform hidden lg:block" />
-            </motion.button>
-          </div>
-
-          {/* Next Label (Desktop) */}
-          <button 
-            onClick={nextCategory}
-            className="hidden xl:flex flex-1 flex-col items-start opacity-20 hover:opacity-100 hover:text-brand transition-all duration-500 cursor-pointer group/next text-left outline-none focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-brand/30 rounded-xl p-4"
-          >
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] mb-1 text-white/50">Coming Next</span>
-            <span className="text-sm font-display font-light italic truncate max-w-[200px] text-white group-hover/next:translate-x-2 transition-transform duration-500">
-              {MENU_DATA[(activeIndex + 1) % MENU_DATA.length].title}
-            </span>
-          </button>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, x: 40, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, x: -40, filter: 'blur(10px)' }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Central Featured centerpiece */}
-              <div className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div className="relative aspect-square max-w-[500px] mx-auto lg:ml-0">
-                  <div className="absolute inset-0 bg-brand/10 blur-[100px] rounded-full" />
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-                    className="absolute -inset-8 border border-black/10 rounded-full border-dashed"
+            return (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ scale: isActive ? 1.03 : 1 }}
+                transition={{ delay: idx * 0.05, scale: { duration: 0.4, ease: [0.22,1,0.36,1] } }}
+                viewport={{ once: true }}
+                onClick={() => { 
+                  setActiveCategoryIndex(idx); 
+                  onCategorySelect(category, 0); 
+                }}
+                className={`relative group h-[500px] rounded-[3.5rem] overflow-hidden cursor-pointer transition-all outline-none ${isActive ? 'border-2 border-[#1e9ab0] shadow-glow z-10' : 'border border-white/5 bg-white/5'}`}
+              >
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0 z-0">
+                  <motion.img 
+                    src={coverImage} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    alt={category.title} 
+                    loading="lazy"
+                    decoding="async"
                   />
-                  <div className="w-full h-full rounded-full border border-brand/5 bg-brand-lightest p-8 relative overflow-hidden group shadow-2xl">
-                    <img 
-                      src={activeCategory?.items[0]?.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=2670&auto=format&fit=crop"} 
-                      alt={activeCategory?.title}
-                      className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-all duration-1000"
-                    />
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-brand-lightest rounded-full flex items-center justify-center p-2 shadow-xl border border-brand/5">
-                     <div className="w-full h-full rounded-full bg-brand flex items-center justify-center">
-                        <Coffee size={24} className="text-brand-lightest" />
-                     </div>
-                  </div>
+                  {/* Default Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 z-10 opacity-80" />
                 </div>
-                
-                <div className="flex flex-col justify-center">
-                   <div className="relative">
-                      <span className="text-[12rem] md:text-[15rem] font-display font-black text-white/[0.05] absolute -top-32 -left-12 select-none pointer-events-none">
-                        {activeIndex + 1}
-                      </span>
-                      <div className="relative z-10 space-y-8">
-                         <div className="text-5xl md:text-7xl font-display font-medium text-black"><span className="text-[#fff628]">AED {activeCategory?.items[0].price}</span> <span className="text-base md:text-xl text-white uppercase tracking-[0.2em] font-light italic opacity-95">starting</span></div>
-                         <p className="text-black text-sm md:text-lg font-medium uppercase tracking-[0.2em] leading-relaxed max-w-lg italic">
-                           {activeCategory?.title}. Available daily across all our live kitchens.
-                         </p>
-                         <button 
-                           onClick={() => document.getElementById('menu-grid')?.scrollIntoView({ behavior: 'smooth' })}
-                           className="px-12 py-6 bg-[#fff628] text-black rounded-full font-bold uppercase tracking-[0.3em] text-[10px] shadow-massive hover:bg-white transition-all active:scale-95"
-                         >
-                           Explore Selection
-                         </button>
-                      </div>
-                   </div>
-                </div>
-              </div>
 
-              {/* Items Grid */}
-              <AnimatePresence mode="wait">
-                {searchQuery.trim() !== '' ? (
-                  <motion.div 
-                    key="search-results"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="space-y-12"
-                  >
-                    <div className="flex items-center justify-between border-b border-black/5 pb-8">
-                       <h3 className="text-2xl font-display italic text-cafe-dark dark:text-dark-text">
-                         Found <span className="text-brand font-medium">{filteredItems.length}</span> results for "<span className="text-brand">{searchQuery}</span>"
-                       </h3>
-                       <button 
-                         onClick={() => setSearchQuery('')}
-                         className="text-sm font-black uppercase tracking-widest text-brand hover:underline"
-                       >
-                         Clear Search
-                       </button>
+                {/* Light Transparent Overlay on Hover */}
+                <div className="absolute inset-0 z-15 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-white/10 backdrop-blur-[2px]" />
+
+                {/* Content Holder */}
+                <div className="absolute inset-0 z-20 p-8 flex flex-col justify-end">
+                  <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
+
+                  <div className="relative z-30 transition-transform duration-500 group-hover:-translate-y-4">
+                    {/* Timing subtitle */}
+                    <div className="mb-4">
+                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#1e9ab0] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                        {category.timing || 'All Day'}
+                      </span>
                     </div>
-                    {filteredItems.length > 0 ? (
-                      <div id="menu-grid" className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-                        {filteredItems.map((item, idx) => (
-                          <MenuCard key={`${item.name}-${idx}`} item={item} onQuickView={setSelectedItem} index={idx} />
-                        ))}
+                    
+                    {/* Title */}
+                    <h3 className="text-2xl lg:text-3xl font-display italic font-bold mb-3 drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)] text-white group-hover:text-[#1e9ab0] transition-colors leading-[1.1]">
+                      {category.title}
+                    </h3>
+
+                    {/* Preview list of dishes */}
+                    <p className="text-white/60 text-[13px] italic font-light mb-6 transition-all group-hover:text-white/90 line-clamp-2">
+                      {category.items.slice(0, 4).map(i => i.name).join(', ')}...
+                    </p>
+
+                    {/* Quick Detail Hint */}
+                    <motion.div 
+                      className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.4em] text-white/40 group-hover:text-white transition-all"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-[#1e9ab0] flex items-center justify-center text-white scale-75">
+                        <Plus size={12} />
                       </div>
-                    ) : (
-                      <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="py-32 text-center flex flex-col items-center justify-center space-y-10"
-                      >
-                        <div className="relative">
-                          <div className="w-32 h-32 rounded-full bg-brand/10 flex items-center justify-center text-brand animate-pulse">
-                            <Search size={48} />
-                          </div>
-                          <div className="absolute -top-2 -right-2 w-10 h-10 bg-brand-lightest dark:bg-dark-surface rounded-full flex items-center justify-center shadow-lg border border-brand/5">
-                            <Sparkles size={20} className="text-brand" />
-                          </div>
-                        </div>
-                        <div className="space-y-6 max-w-md">
-                          <h3 className="text-4xl font-display font-medium italic text-cafe-dark dark:text-dark-text leading-tight">Mmm, nothing found</h3>
-                          <p className="text-xl text-cafe-muted dark:text-dark-muted font-light italic">
-                            We couldn't find "<span className="text-brand font-medium">{searchQuery}</span>" on today's list. Maybe it's a secret item?
-                          </p>
-                          <button 
-                            onClick={() => setSearchQuery('')}
-                            className="px-10 py-4 bg-brand text-brand-lightest rounded-full font-bold shadow-huge hover:scale-105 transition-transform flex items-center gap-3 mx-auto"
-                          >
-                            Reset Search <ArrowRight size={18} />
-                          </button>
-                        </div>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                ) : (
-                  <motion.div 
-                    key={activeTab}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5 }}
-                    id="menu-grid" 
-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 pt-12 border-t border-black/5"
-                  >
-                    {filteredItems.map((item, idx) => (
-                      <MenuCard key={`${activeTab}-${idx}`} item={item} onQuickView={setSelectedItem} index={idx} />
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          </AnimatePresence>
+                       Explore Category
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Hover Interaction Arrow Decor */}
+                <div className="absolute top-8 right-8 z-30 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-12 h-12 rounded-full border border-white/20 backdrop-blur-md flex items-center justify-center text-white">
+                    <ArrowRight size={18} />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1717,7 +1658,13 @@ const BranchModal = ({ branch, isOpen, onClose, onPrev, onNext }: {
                 <div className="grid grid-cols-2 gap-6 h-28 lg:h-32 shrink-0">
                    {branch.outletImages.slice(1, 3).map((img: string, i: number) => (
                       <div key={i} className="bg-[#d1d1d1] rounded-2xl overflow-hidden shadow-sm">
-                        <img src={img} className="w-full h-full object-cover opacity-60" alt="Preview" />
+                        <img 
+                          src={img} 
+                          className="w-full h-full object-cover opacity-60" 
+                          alt="Preview" 
+                          loading="lazy"
+                          decoding="async"
+                        />
                       </div>
                    ))}
                 </div>
@@ -1741,13 +1688,20 @@ const BranchModal = ({ branch, isOpen, onClose, onPrev, onNext }: {
                  </div>
                </div>
 
-               <div className="mt-auto flex flex-col sm:flex-row gap-8 lg:gap-12">
+               <div className="mt-auto flex flex-col sm:flex-row gap-8 lg:gap-12 items-center">
                   <div className="flex flex-col items-center gap-3">
                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">SCAN FOR LOCATION</span>
                      <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-xl border-4 border-[#1e9ab0] p-1.5 flex items-center justify-center relative overflow-hidden bg-[#1e9ab0] shadow-lg transition-transform hover:scale-105">
                         <img src={branch.qrImage} className="w-full h-full object-contain filter invert bg-white rounded-sm p-1" alt="Location" />
                      </div>
-                     <span className="text-xl lg:text-2xl font-sans uppercase text-black font-medium">REACH US</span>
+                     <a 
+                       href={branch.locationUrl} 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="px-8 py-3 bg-[#1e9ab0] text-white rounded-full font-bold uppercase tracking-widest text-[12px] hover:bg-black transition-all shadow-md flex items-center gap-2 mt-2"
+                     >
+                       <MapPin size={16} /> Location
+                     </a>
                   </div>
 
                   <div className="flex flex-col items-center gap-3 relative">
@@ -1865,6 +1819,8 @@ const BranchesSection = ({ theme, onBranchSelect }: { theme: string, onBranchSel
                     src={branch.coverImage || branch.outletImages?.[0] || "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2674&auto=format&fit=crop"} 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
                     alt={branch.name} 
+                    loading="lazy"
+                    decoding="async"
                   />
                 </AnimatePresence>
                 {/* Default Overlay */}
@@ -1935,8 +1891,19 @@ const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `*New Enquiry*%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.serviceType}%0A*Message:* ${formData.message}`;
-    window.open(`https://wa.me/971501715991?text=${text}`, '_blank');
+    let destinationEmail = 'info@kumbakonam-cafe.com';
+    if (formData.serviceType === 'Bulk/Party Order') {
+      destinationEmail = 'support@kumbakonam-cafe.com';
+    } else if (formData.serviceType === 'Experience Feedback') {
+      // Complaints/Feedback go to both (handled by backend or CC)
+      destinationEmail = 'info@kumbakonam-cafe.com, support@kumbakonam-cafe.com';
+    }
+
+    const subject = encodeURIComponent(`New ${formData.serviceType} from ${formData.name}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nPhone: ${formData.phone}\nService: ${formData.serviceType}\n\nMessage:\n${formData.message}`);
+    
+    window.location.href = `mailto:${destinationEmail}?subject=${subject}&body=${body}`;
+    
     setStatus('success');
     setFormData({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
   };
@@ -2029,32 +1996,86 @@ const ContactForm = () => {
 
 const ContactSection = ({ theme }: { theme: string }) => {
   return (
-    <section id="contact" className={`py-24 lg:py-40 px-4 lg:px-6 relative transition-colors duration-1000 ${theme === 'dark' ? 'bg-transparent' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-        <div>
-          <span className="text-[10px] font-black uppercase tracking-[0.6em] text-brand/60 mb-8 block font-bold">Connect With Us</span>
-          <h2 className="text-4xl md:text-[5.5rem] font-display font-medium mb-10 italic text-cafe-dark dark:text-dark-text leading-[0.9] transition-colors">Get in <span className="text-brand">Touch</span></h2>
-          <p className="text-cafe-muted dark:text-dark-muted text-lg mb-16 font-light leading-relaxed italic transition-colors">
-            Planning a private party or a corporate event? Our team delivers authentic Kumbakonam flavors and impeccable service to make your event unforgettable.
-          </p>
-          <div className="space-y-10">
-            <div className="flex gap-8 items-start group">
-              <div className="w-16 h-16 bg-brand-lightest dark:bg-dark-surface shadow-xl rounded-[1.5rem] flex items-center justify-center text-brand shrink-0 group-hover:bg-brand group-hover:text-brand-lightest transition-all duration-500 border border-brand/10 dark:border-brand-lightest/10"><Phone size={28} /></div>
-              <div>
-                <span className="block text-[10px] uppercase tracking-[0.4em] text-cafe-muted/40 dark:text-dark-muted/40 font-black mb-2">Enquiries &amp; Orders</span>
-                <span className="text-3xl font-display font-medium text-cafe-dark dark:text-dark-text italic">+971 501715991</span>
+    <section id="contact" className="py-24 lg:py-40 px-4 lg:px-6 relative bg-white text-black border-t-4 border-[#1e9ab0]">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start mb-20">
+          {/* Left: Details */}
+          <div>
+            <span className="text-[10px] font-black uppercase tracking-[0.6em] text-[#1e9ab0] mb-8 block">Connect With Us</span>
+            <h2 className="text-4xl md:text-[5.5rem] font-display font-medium mb-10 italic text-black leading-[0.9]">Get in <span className="text-[#1e9ab0]">Touch</span></h2>
+            <p className="text-gray-600 text-lg mb-16 font-light leading-relaxed italic">
+              Planning a private party or a corporate event? Our team delivers authentic Kumbakonam flavors and impeccable service to make your event unforgettable.
+            </p>
+            
+            <div className="space-y-12">
+              <div className="flex gap-8 items-start group">
+                <div className="w-16 h-16 bg-[#1e9ab0]/5 rounded-[1.5rem] flex items-center justify-center text-[#1e9ab0] shrink-0 border border-[#1e9ab0]/10">
+                  <Phone size={28} />
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Phone Number</span>
+                  <span className="text-3xl font-display font-medium text-black italic">+971 501715991</span>
+                </div>
               </div>
-            </div>
-            <div className="flex gap-8 items-start group">
-              <div className="w-16 h-16 bg-brand-lightest dark:bg-dark-surface shadow-xl rounded-[1.5rem] flex items-center justify-center text-brand shrink-0 group-hover:bg-brand group-hover:text-brand-lightest transition-all duration-500 border border-brand/10 dark:border-brand-lightest/10"><Utensils size={28} /></div>
-              <div>
-                <span className="block text-[10px] uppercase tracking-[0.4em] text-cafe-muted/40 dark:text-dark-muted/40 font-black mb-2">Special Requests</span>
-                <span className="text-xl font-light text-cafe-muted dark:text-dark-muted italic">Customised No Onion &amp; Garlic bulk orders available.</span>
+
+              <div className="flex gap-8 items-start group">
+                <div className="w-16 h-16 bg-[#1e9ab0]/5 rounded-[1.5rem] flex items-center justify-center text-[#1e9ab0] shrink-0 border border-[#1e9ab0]/10">
+                  <Mail size={28} />
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Support Email</span>
+                  <span className="text-2xl font-display font-medium text-black italic">support@kumbakonam-cafe.com</span>
+                </div>
+              </div>
+
+              <div className="flex gap-8 items-start group">
+                <div className="w-16 h-16 bg-[#1e9ab0]/5 rounded-[1.5rem] flex items-center justify-center text-[#1e9ab0] shrink-0 border border-[#1e9ab0]/10">
+                  <Mail size={28} />
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">General Email</span>
+                  <span className="text-2xl font-display font-medium text-black italic">info@kumbakonam-cafe.com</span>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Right: Form */}
+          <ContactForm />
         </div>
-        <ContactForm />
+
+        {/* Bottom: Social Media Links */}
+         <div className="pt-12 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8">
+           <div className="flex items-center gap-4">
+              <img 
+                src="/brand/LOGO.png" 
+                alt="Logo" 
+                className="w-12 h-12 object-contain" 
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="flex flex-col">
+                 <span className="text-[12px] font-bold text-[#1e9ab0] font-brand">Kumbakonam Cafe LLC</span>
+                 <span className="text-[10px] text-gray-400 font-brand uppercase tracking-widest">Experience the Goodness</span>
+              </div>
+           </div>
+
+          <div className="flex gap-6">
+            <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+              <Instagram size={22} />
+            </a>
+            <a href="https://www.tiktok.com/@kumbakonam.cafe.uae" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+              <TikTokIcon size={20} />
+            </a>
+            <a href="https://wa.me/971501715991" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+              <WhatsAppIcon size={22} />
+            </a>
+          </div>
+
+          <div className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-300">
+            &copy; 2024 Kumbakonam Cafe LLC. All Rights Reserved.
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -2099,11 +2120,11 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
 
           {/* Menu Column */}
           <div className="text-center md:text-left">
-            <h4 className="text-2xl font-display font-medium text-black mb-8">Menu</h4>
+            <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Menu</h4>
             <a href="/Assets/MAZYAD MENU MAy 26.pdf" download="Kumbakonam Cafe Menu.pdf" className="px-10 py-3.5 bg-[#2c8496] text-white font-display font-bold uppercase tracking-widest text-[13px] rounded-md mb-12 inline-flex items-center justify-center hover:bg-black transition-colors shadow-md">
                DOWNLOAD MENU
             </a>
-            <h4 className="text-2xl font-display font-medium text-black mb-8">Branches</h4>
+            <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Branches</h4>
             <ul className="space-y-6">
               {BRANCHES.map((branch) => {
                 const branchShortName = branch.name.split(' (')[0];
@@ -2123,7 +2144,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
 
           {/* Contact Us Column */}
           <div className="text-center md:text-left">
-            <h4 className="text-2xl font-display font-medium text-black mb-8">Contact Us</h4>
+            <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Contact Us</h4>
             <div className="space-y-12">
               <div>
                 <p className="text-lg font-display italic mb-6 text-black/80">For Queries:</p>
@@ -2170,7 +2191,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
         </div>
 
         {/* Floating Scroll To Top */}
-        <div className="fixed bottom-6 right-6 z-[100]">
+        <div className="fixed bottom-6 left-6 z-[100]">
            <button 
             onClick={scrollToTop}
             className="w-12 h-12 bg-[#1e9ab0] text-white rounded-full flex items-center justify-center shadow-massive hover:scale-110 transition-transform active:scale-95"
@@ -2190,8 +2211,15 @@ export default function App() {
   const [isBulkOrderOpen, setIsBulkOrderOpen] = useState(false);
   const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState<any>(null);
+  const [selectedCategory, setSelectedCategory] = useState<MenuCategory | null>(null);
+  const [initialDishIndex, setInitialDishIndex] = useState(0);
   const [theme] = useState<'light' | 'dark'>('dark');
   const [searchQuery, setSearchQuery] = useState('');
+
+  const handleCategorySelect = (category: MenuCategory, index: number) => {
+    setSelectedCategory(category);
+    setInitialDishIndex(index);
+  };
 
   const selectedBranchIndex = selectedBranch
     ? BRANCHES.findIndex(b => b.name === selectedBranch.name)
@@ -2240,6 +2268,13 @@ export default function App() {
         onPrev={() => navigateBranch(-1)}
         onNext={() => navigateBranch(1)}
       />
+      <CategoryModal
+        category={selectedCategory}
+        initialIndex={initialDishIndex}
+        isOpen={!!selectedCategory}
+        onClose={() => setSelectedCategory(null)}
+      />
+      <FloatingDeliveryButton onClick={() => setIsDeliveryModalOpen(true)} />
       
       <AnimatePresence>
         {searchQuery && (
@@ -2293,6 +2328,7 @@ export default function App() {
           theme={theme} 
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          onCategorySelect={handleCategorySelect}
         />
         
         <BranchesSection theme={theme} onBranchSelect={setSelectedBranch} />
@@ -2303,7 +2339,6 @@ export default function App() {
 
         <ContactSection theme={theme} />
       </main>
-      <Footer theme={theme} onBranchSelect={setSelectedBranch} />
     </div>
   );
 }
