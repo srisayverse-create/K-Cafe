@@ -812,37 +812,51 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ${isScrolled ? 'top-0' : 'top-2 lg:top-4'}`} role="navigation">
       <div className="max-w-[1600px] mx-auto px-4 lg:px-6 relative">
-          <div className={`flex items-center justify-between px-6 lg:px-8 py-2 lg:py-4 rounded-[2rem] border transition-all duration-700 bg-white dark:bg-dark-surface/95 border-[#1e9ab0] shadow-xl border-[2px] ${isScrolled ? 'rounded-none border-t-0 border-x-0 border-b-[2px]' : ''}`}>
+          <div className={`flex items-center justify-between px-3 md:px-6 lg:px-8 py-2 lg:py-5 rounded-[2rem] border transition-all duration-700 bg-white dark:bg-dark-surface/95 border-[#1e9ab0] shadow-xl border-[2px] ${isScrolled ? 'rounded-none border-t-0 border-x-0 border-b-[2px]' : ''}`}>
           
-          {/* Left Spacer (To balance the hamburger button on the right) */}
-          <div className="flex-1" />
-
-          {/* Center Brand */}
-          <div className="flex items-center justify-center z-50 shrink-0 mx-4 absolute left-1/2 -translate-x-1/2">
-             <a href="#home" className="flex items-center gap-2 sm:gap-4 group" aria-label="Kumbakonam Cafe Home">
+          {/* Left Brand */}
+          <div className="flex items-center justify-start z-50 shrink-0">
+             <a href="#home" className="flex items-center gap-3 md:gap-4 group" aria-label="Kumbakonam Cafe Home">
                  <img 
                    src="/brand/LOGO.png" 
                    alt="Kumbakonam Cafe Logo" 
-                   className="w-12 h-12 md:w-20 md:h-20 object-contain drop-shadow-md" 
+                   className="w-9 h-9 sm:w-11 sm:h-11 md:w-20 md:h-20 object-contain drop-shadow-md" 
                    loading="eager"
                    decoding="sync"
                  />
-               <div className="text-left flex flex-col justify-center gap-1.5">
-                 <div className="font-bold text-[14px] sm:text-[16px] md:text-[22px] leading-none text-[#1e9ab0] font-brand uppercase">Kumbakonam Cafe LLC</div>
-                 <div className="text-[12px] sm:text-[14px] md:text-[18px] leading-none font-semibold text-[#1e9ab0] font-brand">Authentic Veg Eatery</div>
-                 <div className="text-[11px] md:text-[16px] leading-none text-[#1e9ab0] font-brand">Experience the Goodness</div>
+               <div className="text-left flex flex-col justify-center gap-0.5 md:gap-1">
+                 <div className="font-bold text-[10px] sm:text-[12px] md:text-[24px] leading-none text-[#1e9ab0] font-brand uppercase">Kumbakonam Cafe LLC</div>
+                 <div className="text-[8px] sm:text-[10px] md:text-[20px] leading-none font-semibold text-[#1e9ab0] font-brand">Authentic Veg Eatery</div>
+                 <div className="text-[7px] sm:text-[9px] md:text-[16px] leading-none text-[#1e9ab0] font-brand">Experience the Goodness</div>
                </div>
              </a>
           </div>
 
           {/* Right Tools (Hamburger Menu) */}
-          <div className="flex items-center gap-2 sm:gap-4 z-50 shrink-0 ml-auto flex-1 justify-end">
+          <div className="flex items-center gap-2 z-50 shrink-0 ml-auto flex-1 justify-end">
+            {/* DOWNLOAD MENU Button */}
+            <a 
+              href="/Assets/Mazyad May-2-6.pdf" 
+              target="_blank" 
+              className="hidden md:flex px-6 py-2.5 bg-[#fff628] text-black font-black text-[12px] uppercase tracking-[0.2em] rounded-full items-center justify-center gap-2 transition-all hover:bg-white active:scale-95 shadow-md border-none"
+            >
+              DOWNLOAD MENU <Download size={18} />
+            </a>
+
+            {/* PARTY / BULK ORDER Button */}
+            <button 
+              onClick={onBulkOrderClick}
+              className="hidden md:flex px-6 py-2.5 bg-[#fff628] text-black font-black text-[12px] uppercase tracking-[0.2em] rounded-full shadow-md items-center justify-center gap-2 transition-all hover:bg-white active:scale-95 border-none"
+            >
+              PARTY / BULK ORDER <Utensils size={18} />
+            </button>
+
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
-              className="text-cafe-dark dark:text-dark-text w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-brand/5 dark:bg-brand-lightest/5 rounded-full shrink-0 hover:bg-[#1e9ab0] hover:text-white transition-all shadow-md"
+              className="text-cafe-dark dark:text-dark-text w-9 h-9 md:w-11 md:h-11 flex items-center justify-center bg-brand/5 dark:bg-brand-lightest/5 rounded-full shrink-0 hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm"
               aria-label="Toggle Menu"
             >
-              <MenuIcon size={24} className="sm:w-[28px] sm:h-[28px]" />
+              <MenuIcon size={20} className="md:w-[24px] md:h-[24px]" />
             </button>
           </div>
         </div>
@@ -1303,7 +1317,7 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                   PARTY / BULK ORDER <Utensils size={20} />
                 </motion.button>
                 <motion.a 
-                  href="/Assets/MAZYAD MENU MAy 26.pdf"
+                  href="/Assets/Mazyad May-2-6.pdf"
                   target="_blank"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -2121,7 +2135,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
           {/* Menu Column */}
           <div className="text-center md:text-left">
             <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Menu</h4>
-            <a href="/Assets/MAZYAD MENU MAy 26.pdf" download="Kumbakonam Cafe Menu.pdf" className="px-10 py-3.5 bg-[#2c8496] text-white font-display font-bold uppercase tracking-widest text-[13px] rounded-md mb-12 inline-flex items-center justify-center hover:bg-black transition-colors shadow-md">
+            <a href="/Assets/Mazyad May-2-6.pdf" download="Kumbakonam Cafe Menu.pdf" className="px-10 py-3.5 bg-[#2c8496] text-white font-display font-bold uppercase tracking-widest text-[13px] rounded-md mb-12 inline-flex items-center justify-center hover:bg-black transition-colors shadow-md">
                DOWNLOAD MENU
             </a>
             <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Branches</h4>
