@@ -815,7 +815,7 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
           <div className={`flex items-center justify-between px-3 md:px-6 lg:px-8 py-2 lg:py-5 rounded-[2rem] border transition-all duration-700 bg-white dark:bg-dark-surface/95 border-[#1e9ab0] shadow-xl border-[2px] ${isScrolled ? 'rounded-none border-t-0 border-x-0 border-b-[2px]' : ''}`}>
           
           {/* Left Brand */}
-          <div className="flex items-center justify-start z-50 shrink-0">
+          <div className="flex items-center justify-start z-50 shrink-0 md:flex-1">
              <a href="#home" className="flex items-center gap-3 md:gap-4 group" aria-label="Kumbakonam Cafe Home">
                  <img 
                    src="/brand/LOGO.png" 
@@ -824,16 +824,18 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                    loading="eager"
                    decoding="sync"
                  />
-               <div className="text-left flex flex-col justify-center gap-0.5 md:gap-1">
-                 <div className="font-bold text-[10px] sm:text-[12px] md:text-[24px] leading-none text-[#1e9ab0] font-brand uppercase">Kumbakonam Cafe LLC</div>
-                 <div className="text-[8px] sm:text-[10px] md:text-[20px] leading-none font-semibold text-[#1e9ab0] font-brand">Authentic Veg Eatery</div>
-                 <div className="text-[7px] sm:text-[9px] md:text-[16px] leading-none text-[#1e9ab0] font-brand">Experience the Goodness</div>
-               </div>
              </a>
           </div>
 
+          {/* Center Brand Text */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-50 pointer-events-none">
+            <div className="font-bold text-[10px] sm:text-[12px] md:text-[24px] leading-none text-[#1e9ab0] font-brand uppercase">Kumbakonam Cafe LLC</div>
+            <div className="text-[8px] sm:text-[10px] md:text-[20px] leading-none font-semibold text-[#1e9ab0] font-brand mt-0.5 md:mt-1">Authentic Veg Eatery</div>
+            <div className="text-[7px] sm:text-[9px] md:text-[16px] leading-none text-[#1e9ab0] font-brand mt-0.5 md:mt-1">Experience the Goodness</div>
+          </div>
+
           {/* Right Tools (Hamburger Menu) */}
-          <div className="flex items-center gap-2 z-50 shrink-0 ml-auto flex-1 justify-end">
+          <div className="flex items-center gap-2 z-50 shrink-0 ml-auto md:flex-1 justify-end">
             {/* DOWNLOAD MENU Button */}
             <a 
               href="/Assets/Mazyad May-2-6.pdf" 
@@ -1110,32 +1112,27 @@ const BulkOrderModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                 </motion.div>
 
                 {/* Footer Enquiry Bar */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="bg-[#fff628] px-8 py-5 rounded-2xl flex flex-wrap items-center justify-center gap-5 shadow-massive overflow-hidden"
-                >
+                <div className="bg-[#fff628] px-8 py-5 rounded-2xl flex flex-col items-center justify-center gap-5 shadow-massive overflow-hidden">
                   <span className="text-black font-display font-black text-lg md:text-xl uppercase tracking-widest relative z-10">
                     For enquiries and order
                   </span>
                   <div className="flex items-center gap-3 text-black text-xl font-black relative z-10">
-                    <Phone size={24} className="fill-black" />
+                    <WhatsAppIcon size={24} />
                     <span>/</span>
                     <div className="bg-white rounded-full p-1 shadow-sm">
-                      <MessageSquare size={18} className="text-[#1e9ab0] fill-[#1e9ab0]" />
+                      <WhatsAppIcon size={18} className="text-[#1e9ab0]" />
                     </div>
                     <span>0501715991</span>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
               {/* Free Delivery Stamp */}
               <motion.div 
-                initial={{ opacity: 0, scale: 0.5, rotate: 45 }}
-                animate={{ opacity: 1, scale: 1, rotate: -25 }}
-                transition={{ delay: 0.6, type: "spring" }}
-                className="absolute bottom-6 right-6 md:right-14 pointer-events-none"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-8 flex justify-center w-full pointer-events-none"
               >
                 <div className="relative group">
                    <div className="absolute inset-0 bg-[#fff628] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
@@ -1277,8 +1274,8 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                    <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
                 </div>
                 <div className="flex flex-col gap-4">
-                   <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-black leading-none">
-                     Featured Item
+                   <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-white leading-none">
+                     Signatures
                    </h4>
                    <h3 className="text-4xl font-display font-medium text-white italic transition-colors">
                      {currentSlideItem?.name}
@@ -1450,10 +1447,8 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
   );
 };
 
-const MenuSection = ({ theme, searchQuery, setSearchQuery, onCategorySelect }: { 
+const MenuSection = ({ theme, onCategorySelect }: { 
   theme: string,
-  searchQuery: string,
-  setSearchQuery: (val: string) => void,
   onCategorySelect: (category: any, initialIndex: number) => void
 }) => {
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
@@ -1501,22 +1496,8 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery, onCategorySelect }: {
             transition={{ delay: 0.2 }}
             className="text-lg lg:text-xl font-light italic text-white/40 max-w-2xl mx-auto"
           >
-            Discover our authentic South Indian culinary creations. Click any category to explore the full range of fresh, hand-crafted dishes.
+            Discover our authentic veg culinary creations. Click any category to explore the full range of fresh, hand-crafted dishes.
           </motion.p>
-        </div>
-
-        {/* Search Bar for Menu */}
-        <div className="max-w-xl mx-auto relative group mb-20 z-30">
-          <div className="absolute inset-y-0 left-6 flex items-center text-white/45 pointer-events-none group-focus-within:text-[#1e9ab0] transition-colors">
-            <Search size={20} />
-          </div>
-          <input 
-            type="text" 
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white/5 border border-white/10 focus:border-[#1e9ab0] rounded-full py-6 pl-16 pr-8 outline-none shadow-huge text-sm italic transition-all text-white placeholder:text-white/30"
-            placeholder="Search for your favorite dosa, coffee, or tiffin..."
-          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 min-h-[500px]">
@@ -1575,16 +1556,6 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery, onCategorySelect }: {
                     <p className="text-white/60 text-[13px] italic font-light mb-6 transition-all group-hover:text-white/90 line-clamp-2">
                       {category.items.slice(0, 4).map(i => i.name).join(', ')}...
                     </p>
-
-                    {/* Quick Detail Hint */}
-                    <motion.div 
-                      className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.4em] text-white/40 group-hover:text-white transition-all"
-                    >
-                      <div className="w-6 h-6 rounded-full bg-[#1e9ab0] flex items-center justify-center text-white scale-75">
-                        <Plus size={12} />
-                      </div>
-                       Explore Category
-                    </motion.div>
                   </div>
                 </div>
 
@@ -1689,7 +1660,7 @@ const BranchModal = ({ branch, isOpen, onClose, onPrev, onNext }: {
                <div className="mb-8">
                  <div className="flex items-center gap-3 mb-2">
                     <CafeLogo size="sm" className="text-[#1e9ab0]" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1e9ab0]">Authentic Heritage</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1e9ab0]">Authentic veg Heritage</span>
                  </div>
                  <h3 className="text-3xl lg:text-4xl font-brand font-black text-black leading-tight mb-4 tracking-tight">
                    {branch.name}
@@ -2068,16 +2039,23 @@ const ContactSection = ({ theme }: { theme: string }) => {
                 loading="lazy"
                 decoding="async"
               />
-              <div className="flex flex-col">
-                 <span className="text-[12px] font-bold text-[#1e9ab0] font-brand">Kumbakonam Cafe LLC</span>
-                 <span className="text-[10px] text-gray-400 font-brand uppercase tracking-widest">Experience the Goodness</span>
-              </div>
+              <div className="flex flex-col text-center items-center">
+                  <span className="text-[12px] font-bold text-[#1e9ab0] font-brand">Kumbakonam Cafe LLC</span>
+                  <span className="text-[10px] text-[#1e9ab0] font-brand uppercase tracking-widest">Authentic Veg Eatery</span>
+                  <span className="text-[10px] text-gray-400 font-brand uppercase tracking-widest">Experience the Goodness</span>
+               </div>
            </div>
 
           <div className="flex gap-6">
-            <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-              <Instagram size={22} />
-            </a>
+              <a href="tel:+9710502872787" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+                <Phone size={22} />
+              </a>
+              <a href="mailto:kcafe.uae@gmail.com" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+                <Mail size={22} />
+              </a>
+              <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+                <Instagram size={22} />
+              </a>
             <a href="https://www.tiktok.com/@kumbakonam.cafe.uae" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
               <TikTokIcon size={20} />
             </a>
@@ -2163,6 +2141,10 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
               <div>
                 <p className="text-lg font-display italic mb-6 text-black/80">For Queries:</p>
                 <div className="space-y-6">
+                  <a href="tel:+9710502872787" className="flex items-center justify-center md:justify-start gap-4 text-black/80 hover:text-[#1e9ab0] transition-colors text-lg italic group">
+                    <Phone size={18} className="text-[#2c8496]" /> 
+                    <span>+971 050 287 2787</span>
+                  </a>
                   <a href="mailto:info@kumbakonam-cafe.com" className="flex items-center justify-center md:justify-start gap-4 text-black/80 hover:text-[#1e9ab0] transition-colors text-lg italic group">
                     <Mail size={18} className="text-[#2c8496]" /> 
                     <span className="group-hover:underline">info@kumbakonam-cafe.com</span>
@@ -2228,7 +2210,6 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory | null>(null);
   const [initialDishIndex, setInitialDishIndex] = useState(0);
   const [theme] = useState<'light' | 'dark'>('dark');
-  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCategorySelect = (category: MenuCategory, index: number) => {
     setSelectedCategory(category);
@@ -2252,16 +2233,6 @@ export default function App() {
   const allItems = useMemo(() => {
     return MENU_DATA.flatMap(cat => cat.items.map(item => ({ ...item, category: cat.title })));
   }, []);
-
-  const searchResults = useMemo(() => {
-    if (!searchQuery.trim()) return [];
-    const query = searchQuery.toLowerCase();
-    return allItems.filter(item => 
-      item.name.toLowerCase().includes(query) || 
-      (item.description && item.description.toLowerCase().includes(query)) ||
-      item.category.toLowerCase().includes(query)
-    );
-  }, [searchQuery, allItems]);
 
   return (
     <div className={`relative transition-all duration-1000 ${theme === 'dark' ? 'text-dark-text' : 'text-cafe-dark'}`}>
@@ -2290,47 +2261,6 @@ export default function App() {
       />
       <FloatingDeliveryButton onClick={() => setIsDeliveryModalOpen(true)} />
       
-      <AnimatePresence>
-        {searchQuery && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed inset-0 z-[110] bg-brand-lightest/98 dark:bg-dark-bg/98 backdrop-blur-2xl px-6 py-32 overflow-y-auto"
-          >
-            <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-                <div>
-                  <h2 className="text-5xl md:text-7xl font-display font-medium italic text-brand mb-4">Search Results</h2>
-                  <p className="text-cafe-muted dark:text-dark-muted italic text-lg">Found {searchResults.length} items matching "{searchQuery}"</p>
-                </div>
-                <button 
-                  onClick={() => setSearchQuery('')}
-                  className="px-10 py-5 bg-brand-dark dark:bg-brand-lightest dark:text-brand-dark text-brand-lightest rounded-full font-bold uppercase tracking-widest text-[10px] shadow-2xl transition-all active:scale-95"
-                >
-                  Close Results
-                </button>
-              </div>
-              
-              {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                  {searchResults.map((item, idx) => (
-                    <MenuCard key={`search-${idx}`} item={item as any} onQuickView={() => {}} index={idx} />
-                  ))}
-                </div>
-              ) : (
-                <div className="py-32 text-center">
-                  <div className="w-20 h-20 bg-brand/10 rounded-full flex items-center justify-center mx-auto mb-8 text-brand animate-bounce">
-                    <X size={40} />
-                  </div>
-                  <h3 className="text-2xl font-display italic text-cafe-muted dark:text-dark-muted">No items found. Let's try another flavor!</h3>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       <ScrollToTop />
       <main>
         <Hero 
@@ -2340,8 +2270,6 @@ export default function App() {
         />
         <MenuSection 
           theme={theme} 
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
           onCategorySelect={handleCategorySelect}
         />
         
@@ -2350,7 +2278,7 @@ export default function App() {
         <AboutTimeline theme={theme} />
         
         <TestimonialsSection theme={theme} />
-
+        
         <ContactSection theme={theme} />
       </main>
     </div>
