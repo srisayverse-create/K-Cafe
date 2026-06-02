@@ -255,11 +255,10 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
                 <div className="noise-texture absolute inset-0 opacity-[0.05]" />
                 <div className="relative z-10 flex flex-col lg:flex-row gap-12">
                   <div className="lg:w-2/3">
-                    <div className="flex items-center gap-3 py-1.5 px-5 rounded-full bg-black/5 border border-black/10 w-fit mb-6 shadow-sm">
-                      <Sun size={18} className="text-black fill-black/30" />
-                      <span className="text-[9px] font-black uppercase tracking-[0.4em] text-black/60">OUR STORY</span>
+                    <div className="flex items-center gap-4 py-3 px-8 rounded-full bg-black/5 border border-black/10 w-fit mb-8 shadow-sm">
+                      <Sun size={28} className="text-black fill-black/30" />
+                      <span className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-[0.4em] text-black/60">OUR STORY</span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-6 leading-[1.1] italic tracking-tight underline decoration-black/40 underline-offset-8 text-black">The Story Behind K Café</h2>
                     <div className="space-y-4 text-sm md:text-base lg:text-lg font-medium leading-relaxed italic text-black opacity-100">
                       <p>Kumbakonam Café was founded in 2024 by three friends with a shared dream: to bring authentic, homely vegetarian food to Abu Dhabi in a way that feels both comforting and memorable.</p>
                       <p>From day one, our vision has been simple yet powerful, to create a place where customers always come first, employees are family, and society benefits from the values we uphold.</p>
@@ -301,12 +300,12 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
               transition={{ duration: 1.2, delay: 0.2 }}
               className="space-y-4 bg-white dark:bg-dark-surface p-6 lg:p-8 rounded-[2rem] shadow-massive border border-[#1e9ab0]/10 dark:border-white/10"
             >
-              <div className="flex items-center gap-3 py-1 px-4 rounded-full border border-[#1e9ab0]/20 dark:border-white/10 w-fit bg-[#1e9ab0]/5 dark:bg-[#1e9ab0]/20 shadow-sm transition-colors">
-                <Sun size={14} className="text-[#1e9ab0]" />
-                <span className="text-[8px] font-black uppercase tracking-widest text-black dark:text-white">VISION</span>
+              <div className="flex items-center gap-4 py-2 px-6 rounded-full border border-[#1e9ab0]/20 dark:border-white/10 w-fit bg-[#1e9ab0]/5 dark:bg-[#1e9ab0]/20 shadow-sm transition-colors">
+                <Sun size={20} className="text-[#1e9ab0]" />
+                <span className="text-sm font-black uppercase tracking-widest text-black dark:text-white">VISION</span>
               </div>
               <p className="text-lg md:text-xl lg:text-2xl font-display italic text-[#1e9ab0] transition-colors font-bold">
-                To make our Cafe a place that honors tradition and bridges generations through authentic flavors.
+                To make our cafe a place that honors tradition and bridges generations through authentic flavors.
               </p>
             </motion.div>
 
@@ -317,12 +316,12 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
               transition={{ duration: 1.2, delay: 0.4 }}
               className="space-y-4 bg-white dark:bg-dark-surface p-6 lg:p-8 rounded-[2rem] shadow-massive border border-[#1e9ab0]/10 dark:border-white/10"
             >
-              <div className="flex items-center gap-3 py-1 px-4 rounded-full border border-[#1e9ab0]/20 dark:border-white/10 w-fit bg-[#1e9ab0]/5 dark:bg-[#1e9ab0]/20 shadow-sm transition-colors">
-                <Sparkles size={14} className="text-[#1e9ab0]" />
-                <span className="text-[8px] font-black uppercase tracking-widest text-black dark:text-white">MISSION</span>
+              <div className="flex items-center gap-4 py-2 px-6 rounded-full border border-[#1e9ab0]/20 dark:border-white/10 w-fit bg-[#1e9ab0]/5 dark:bg-[#1e9ab0]/20 shadow-sm transition-colors">
+                <Sparkles size={20} className="text-[#1e9ab0]" />
+                <span className="text-sm font-black uppercase tracking-widest text-black dark:text-white">MISSION</span>
               </div>
               <p className="text-lg md:text-xl lg:text-2xl font-display italic text-[#1e9ab0] transition-colors font-bold">
-                ENSURING every guest experiences the goodness of authentic vegetarian food in every single bite.
+                Ensuring every guest experiences the goodness of authentic vegetarian food in every single bite.
               </p>
             </motion.div>
             {/* Node */}
