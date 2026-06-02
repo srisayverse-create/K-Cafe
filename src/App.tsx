@@ -1622,7 +1622,7 @@ const BranchModal = ({ branch, isOpen, onClose, onPrev, onNext }: {
                <div className="mb-8">
                  <div className="flex items-center gap-3 mb-2">
                     <CafeLogo size="sm" className="text-[#1e9ab0]" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1e9ab0]">Authentic veg Heritage</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1e9ab0]">Authentic Veg Eatery</span>
                  </div>
                  <h3 className="text-3xl lg:text-4xl font-brand font-black text-black leading-tight mb-4 tracking-tight">
                    {branch.name}
