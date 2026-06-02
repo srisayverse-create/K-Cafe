@@ -48,7 +48,7 @@ export const MENU_DATA: MenuCategory[] = [
       { name: "Kichidi (Tue/Fri)", image: "/Assets/Breakfast/kichidi-e1758644845534.png" },
       { name: "Semiya Upma (Wed/Sat)", image: "/Assets/Breakfast/semiya-upma-150x150.png" },
       { name: "Rava Upma (Sun)", image: "/Assets/Breakfast/rava-upma-300x300.png" },
-      { name: "Sevai Variety" },
+      { name: "Sevai Variety", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop" },
     ],
   },
   {
