@@ -61,44 +61,6 @@ const WhatsAppIcon = ({ size = 18 }: { size?: number }) => (
 
 // --- Components ---
 
-const ExperienceGoodness = ({ className = "" }: { className?: string }) => (
-  <div className={`flex items-center justify-center gap-6 ${className}`}>
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      className="shrink-0"
-    >
-      <div className="relative w-12 h-12 flex items-center justify-center">
-        {/* Simplified Cup Icon matching screenshot */}
-        <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
-          <path d="M20 40 L80 40 L70 90 L30 90 Z" />
-          <path d="M80 45 Q90 45 90 55 Q90 65 80 65" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-          <path d="M40 30 Q45 20 50 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M55 30 Q60 20 65 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </div>
-    </motion.div>
-    <span className="font-cursive text-3xl md:text-5xl lg:text-7xl whitespace-nowrap text-current tracking-wide pt-2 drop-shadow-2xl">
-      Experience The Goodness
-    </span>
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      className="shrink-0"
-    >
-      <div className="relative w-12 h-12 flex items-center justify-center">
-        {/* Reversed Cup Icon */}
-        <svg viewBox="0 0 100 100" className="w-full h-full fill-current scale-x-[-1]">
-          <path d="M20 40 L80 40 L70 90 L30 90 Z" />
-          <path d="M80 45 Q90 45 90 55 Q90 65 80 65" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-          <path d="M40 30 Q45 20 50 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M55 30 Q60 20 65 30" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      </div>
-    </motion.div>
-  </div>
-);
-
 const CafeLogo = ({ size = "lg", className = "" }: { size?: "sm" | "md" | "lg", className?: string }) => {
   const dimensions = size === "lg" ? "w-32 h-32 md:w-44 md:h-44" : size === "md" ? "w-20 h-20" : "w-12 h-12";
   
@@ -510,7 +472,7 @@ const CategoryModal = ({
                       animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
                       exit={{ scale: 0.9, opacity: 0, filter: 'blur(5px)' }}
                       transition={{ duration: 0.5 }}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain p-4"
                       alt={currentItem.name}
                       loading="lazy"
                       decoding="async"
@@ -1241,22 +1203,19 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
         
         {/* LEFT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Top (Mobile) */}
         <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-1">
-            {/* Logo from SS */}
+            {/* Logo and Slogan from SS */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
               className="mb-8 lg:mb-12"
             >
               <img 
-                src="/brand/LOGO.png" 
-                alt="Kumbakonam Cafe Logo" 
-                className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 object-contain drop-shadow-2xl" 
+                src="/brand/hero-branding.png" 
+                alt="Kumbakonam Cafe" 
+                className="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] object-contain drop-shadow-2xl" 
               />
             </motion.div>
-
-            {/* Experience The Goodness from SS */}
-            <ExperienceGoodness className="text-white mb-8 lg:mb-12 !justify-center lg:!justify-start" />
 
             {/* Description and CTAs */}
             <motion.div
@@ -1330,13 +1289,13 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                  transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                  className="w-full glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
                >
-                  <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8">
+                  <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8 bg-black/20">
                      <img 
                        src={currentSlideItem?.image || 'https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop'} 
                        alt={currentSlideItem?.name} 
                        loading="eager"
                        decoding="sync"
-                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                       className="w-full h-full object-contain transition-all duration-1000 p-4"
                      />
                      <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
                   </div>
