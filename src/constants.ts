@@ -252,6 +252,7 @@ export const BRANCHES = [
     lng: 54.364,
     description: "Our flagship outlet offering the full heritage experience in the heart of the city.",
     locationUrl: "https://www.google.com/maps/place/KUMBAKONAM+CAFE+-+Hamdan+(Opposite+to+Hamdan+Center)+-+Hamdan+5+Al+Ghatfah+St+-+Al+Danah+-+Zone+1+-+Abu+Dhabi+-+United+Arab+Emirates/data=!4m2!3m1!1s0x3e5e67b639d8f90f:0xadada0b089b67995!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjIwLjEYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsMTAwNzk2NDk4LDEwMDgxNTAzNCw5NDI4MDU3Niw5NDIwNzM5NCw5NDIwNzUwNiw5NDIwODUwNiw5NDIxODY1Myw5NDIyOTgzOSw5NDI3NTE2OCw5NDI3OTYxOSwxMDA4MTU2MzUsMTAwNzkyNTY4QklO&skid=f1d37264-012a-4697-8f6a-4d9f67d4d8d1&g_st=aw",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJD_nYObZnXj4RlXm2ibCgra0&source=g.page.m.nr._&laa=nmx-review-solicitation-recommendation-card",
     qrImage: "/Branches/Hamdan/QR-Hamdan-location.png",
     feedbackQrImage: "/Branches/Hamdan/QR-Hamdan-Review.png",
     outletImages: [
@@ -269,6 +270,7 @@ export const BRANCHES = [
     lng: 54.344,
     description: "A cozy spot perfect for family dinners and quick traditional snacks.",
     locationUrl: "https://www.google.com/maps/place/KUMBAKONAM+CAFE+-+Khalidiyah+(Khaldiya+Mall),+Mall+-+Food+Court,+2nd+Floor+-+Mubarak+Bin+Mohammed+St+-+Al+Khalidiyah+-+Abu+Dhabi+-+United+Arab+Emirates/data=!4m2!3m1!1s0x3e5e67c396c915ed:0xe82c4038a13a04dc!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjIwLjEYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsMTAwNzk2NDk4LDEwMDgxNTAzNCw5NDI4MDU3Niw5NDIwNzM5NCw5NDIwNzUwNiw5NDIwODUwNiw5NDIxODY1Myw5NDIyOTgzOSw5NDI3NTE2OCw5NDI3OTYxOSwxMDA4MTU2MzUsMTAwNzkyNTY4QklO&skid=688f75d4-283b-4d74-a19b-956e00bc409d&g_st=aw",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJ7RXJlsNnXj4R3AQ6oThALOg&source=g.page.m.np._&laa=nmx-review-solicitation-promoted-recommendation-card",
     qrImage: "/Branches/Khalidiya/QR-Google-Map-Khaldiyah.png",
     feedbackQrImage: "/Branches/Khalidiya/QR-Khaldiyah-Review.png",
     outletImages: [
@@ -286,6 +288,7 @@ export const BRANCHES = [
     lng: 54.494,
     description: "Serving authentic flavors to the hard-working community of Musaffah.",
     locationUrl: "https://www.google.com/maps/place/KUMBAKONAM+CAFE+-+Musaffah+(Mazyad+Mall),+Mazyad+Mall+-+Food+Court+-+Level+2+-+28th+Street+-+Musaffah+-+Abu+Dhabi+-+United+Arab+Emirates/data=!4m2!3m1!1s0x3e5e470d406a6d57:0x7d1c43c1b72e082e!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjIwLjEYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsMTAwNzk2NDk4LDEwMDgxNTAzNCw5NDI4MDU3Niw5NDIwNzM5NCw5NDIwNzUwNiw5NDIwODUwNiw5NDIxODY1Myw5NDIyOTgzOSw5NDI3NTE2OCw5NDI3OTYxOSwxMDA4MTU2MzUsMTAwNzkyNTY4QklO&skid=3e3c3eb9-f085-4f55-bf7e-b39b15cffd0a&g_st=aw",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJV21qQA1HXj4RLggut8FDHH0&source=g.page.m.np._&laa=nmx-review-solicitation-promoted-recommendation-card",
     qrImage: "/Branches/Musaffa/QR-Musaffa-Location.png",
     feedbackQrImage: "/Branches/Musaffa/Qr-Musaffa-Review.png",
     outletImages: [
@@ -303,6 +306,7 @@ export const BRANCHES = [
     lng: 54.510,
     description: "Modern South Indian dining with a unique twist exclusively at Shabiya11.",
     locationUrl: "https://www.google.com/maps/place/KUMBAKONAM+CAFE+-+Shabiya+-+Musaffah+-+ME11+-+Abu+Dhabi+-+United+Arab+Emirates/data=!4m2!3m1!1s0x3e5e3931578bbd23:0xebfd581810b0f605!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjIwLjEYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsMTAwNzk2NDk4LDEwMDgxNTAzNCw5NDI4MDU3Niw5NDIwNzM5NCw5NDIwNzUwNiw5NDIwODUwNiw5NDIxODY1Myw5NDIyOTgzOSw5NDI3NTE2OCw5NDI3OTYxOSwxMDA4MTU2MzUsMTAwNzkyNTY4QklO&skid=2fba1f84-fe71-43eb-a6bf-b87b845cbcae&g_st=aw",
+    reviewUrl: "https://search.google.com/local/writereview?placeid=ChIJv72LFzE5Xj4RhfawEPVY_es&source=g.page.m.np._&laa=nmx-review-solicitation-promoted-recommendation-card",
     qrImage: "/Branches/Shabiya/QR - Shabiya Location.png",
     feedbackQrImage: "/Branches/Shabiya/QR-Shabiya-Review.png",
     coverImage: "/Branches/Shabiya/Shabiya-cover-img.JPG",

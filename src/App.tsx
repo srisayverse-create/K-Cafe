@@ -1686,7 +1686,7 @@ const BranchModal = ({ branch, isOpen, onClose, onPrev, onNext }: {
                         <img src={branch.feedbackQrImage || branch.qrImage} className="w-full h-full object-contain" alt="Feedback QR" />
                      </div>
                      <a 
-                       href={`https://search.google.com/local/writereview?placeid=${branch.locationUrl.split('place/')[1]?.split('/')[0] || ''}`}
+                       href={branch.reviewUrl || `https://search.google.com/local/writereview?placeid=${branch.locationUrl.split('place/')[1]?.split('/')[0] || ''}`}
                        target="_blank" 
                        rel="noopener noreferrer"
                        className="px-8 py-3 bg-[#fff628] text-black rounded-full font-bold uppercase tracking-widest text-[12px] hover:bg-black hover:text-white transition-all shadow-md flex items-center gap-2"
