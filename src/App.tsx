@@ -651,13 +651,16 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           {/* Left Column: Video Stack */}
           <div className="lg:col-span-6 space-y-10">
-            {/* Portrait Video */}
+            {/* Video 1: Portrait */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative aspect-[3.5/5] rounded-[3rem] overflow-hidden shadow-huge border border-white/10 group"
+              className="relative aspect-[3.5/5] rounded-[3rem] overflow-hidden shadow-huge border border-white/10 group bg-black/20"
             >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Play size={64} className="text-white/20 group-hover:text-[#1e9ab0] group-hover:scale-110 transition-all" />
+              </div>
               <video 
                 autoPlay 
                 muted 
@@ -674,13 +677,16 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
               </div>
             </motion.div>
 
-            {/* Landscape Video */}
+            {/* Video 2: Landscape */}
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-huge border border-white/10 group"
+              className="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-huge border border-white/10 group bg-black/20"
             >
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Play size={48} className="text-white/20 group-hover:text-[#1e9ab0] group-hover:scale-110 transition-all" />
+              </div>
               <video 
                 autoPlay 
                 muted 
@@ -693,6 +699,25 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
               </video>
               <div className="absolute top-6 left-6 z-30 pointer-events-none bg-black/40 px-3 py-1 rounded-full">
                 <span className="text-[9px] font-black uppercase tracking-widest text-white/80">Kitchen Chronicles</span>
+              </div>
+            </motion.div>
+
+            {/* Video 3: Additional Portrait Placeholder */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative aspect-[3.5/5] rounded-[3rem] overflow-hidden shadow-huge border border-white/10 group bg-black/20"
+            >
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1e9ab0]/20 to-black/40">
+                <div className="flex flex-col items-center gap-4">
+                  <Play size={64} className="text-white/20 group-hover:text-[#1e9ab0] group-hover:scale-110 transition-all" />
+                  <span className="text-white/40 font-black uppercase tracking-widest text-xs">More Stories Coming Soon</span>
+                </div>
+              </div>
+              <div className="absolute top-8 left-8 z-30 pointer-events-none">
+                <div className="px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-bold text-white/60 uppercase tracking-widest w-fit mb-2">Guest Story</div>
+                <h3 className="text-2xl font-display font-bold italic text-white/40 drop-shadow-md">"Taste of Tradition"</h3>
               </div>
             </motion.div>
           </div>
@@ -1213,8 +1238,8 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
               className="mb-8 lg:mb-12 hidden lg:block"
             >
               <img 
-                src="/brand/hero-branding.png" 
-                alt="Kumbakonam Cafe" 
+                src="/brand/experiencethegoodnessnobg.png" 
+                alt="Experience The Goodness" 
                 className="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] object-contain drop-shadow-2xl" 
               />
             </motion.div>
