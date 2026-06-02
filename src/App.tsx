@@ -1638,30 +1638,32 @@ const BranchModal = ({ branch, isOpen, onClose, onPrev, onNext }: {
                <div className="mt-auto flex flex-col sm:flex-row gap-8 lg:gap-12 items-center">
                   <div className="flex flex-col items-center gap-3">
                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">SCAN FOR LOCATION</span>
-                     <div className="w-32 h-32 lg:w-40 lg:h-40 rounded-xl border-4 border-[#1e9ab0] p-1.5 flex items-center justify-center relative overflow-hidden bg-[#1e9ab0] shadow-lg transition-transform hover:scale-105">
-                        <img src={branch.qrImage} className="w-full h-full object-contain filter invert bg-white rounded-sm p-1" alt="Location" />
+                     <div className="w-32 h-32 lg:w-40 lg:h-40 p-3 flex items-center justify-center bg-white rounded-2xl shadow-md transition-transform hover:scale-105 border border-black/5">
+                        <img src={branch.qrImage} className="w-full h-full object-contain" alt="Location QR" />
                      </div>
                      <a 
                        href={branch.locationUrl} 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       className="px-8 py-3 bg-[#1e9ab0] text-white rounded-full font-bold uppercase tracking-widest text-[12px] hover:bg-black transition-all shadow-md flex items-center gap-2 mt-2"
+                       className="px-8 py-3 bg-[#1e9ab0] text-white rounded-full font-bold uppercase tracking-widest text-[12px] hover:bg-black transition-all shadow-md flex items-center gap-2"
                      >
                        <MapPin size={16} /> Location
                      </a>
                   </div>
 
                   <div className="flex flex-col items-center gap-3 relative">
-                      <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">SCAN FOR FEEDBACK</span>
-                     <div className="absolute -inset-2 border-2 border-black border-t-0 border-r-0 w-6 h-6 rounded-bl-lg" />
-                     <div className="absolute -inset-2 border-2 border-black border-b-0 border-l-0 w-6 h-6 rounded-tr-lg right-[-8px] left-auto" />
-                     <div className="absolute -inset-2 border-2 border-black border-b-0 border-r-0 w-6 h-6 rounded-tl-lg" />
-                     <div className="absolute -inset-2 border-2 border-black border-t-0 border-l-0 w-6 h-6 rounded-br-lg bottom-[-8px] top-auto right-[-8px] left-auto" />
-
-                     <div className="w-32 h-32 lg:w-40 lg:h-40 p-3 flex items-center justify-center transition-transform hover:scale-105">
-                        <img src={branch.feedbackQrImage || branch.qrImage} className="w-full h-full object-contain opacity-80" alt="Feedback" />
+                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black/40">SCAN FOR FEEDBACK</span>
+                     <div className="w-32 h-32 lg:w-40 lg:h-40 p-3 flex items-center justify-center bg-white rounded-2xl shadow-md transition-transform hover:scale-105 border border-black/5">
+                        <img src={branch.feedbackQrImage || branch.qrImage} className="w-full h-full object-contain" alt="Feedback QR" />
                      </div>
-                     <span className="text-xl lg:text-2xl font-sans text-black font-medium">RATE US</span>
+                     <a 
+                       href={`https://search.google.com/local/writereview?placeid=${branch.locationUrl.split('place/')[1]?.split('/')[0] || ''}`}
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="px-8 py-3 bg-[#fff628] text-black rounded-full font-bold uppercase tracking-widest text-[12px] hover:bg-black hover:text-white transition-all shadow-md flex items-center gap-2"
+                     >
+                       <Star size={16} /> Rate Us
+                     </a>
                   </div>
                </div>
             </div>
@@ -1722,7 +1724,7 @@ const BranchesSection = ({ theme, onBranchSelect }: { theme: string, onBranchSel
              className="inline-flex items-center gap-3 py-2 px-6 rounded-full bg-white/5 border border-white/10 mb-6"
           >
             <MapPin size={14} className="text-brand" />
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Our Heritage Branches</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Visit your nearest branch</span>
           </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -1730,7 +1732,7 @@ const BranchesSection = ({ theme, onBranchSelect }: { theme: string, onBranchSel
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-8xl font-display font-medium italic leading-[1.1] mb-6"
           >
-            Visit us in <span className="text-brand">Abu Dhabi</span>
+            Branches in <span className="text-brand">Abu Dhabi</span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0 }}
