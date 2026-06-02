@@ -69,17 +69,15 @@ CREATE TABLE IF NOT EXISTS `branch_images` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ─── Contact Form Submissions ─────────────────────────────────
-CREATE TABLE IF NOT EXISTS `contact_submissions` (
-  `id`           INT          NOT NULL AUTO_INCREMENT,
-  `name`         VARCHAR(255) NOT NULL,
-  `phone`        VARCHAR(50)  NOT NULL,
-  `service_type` VARCHAR(100) NOT NULL DEFAULT 'General Enquiry',
-  `message`      TEXT         NOT NULL,
-  `email_sent`   TINYINT(1)   NOT NULL DEFAULT 0,
-  `ip_address`   VARCHAR(45)  DEFAULT NULL,
-  `created_at`   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE IF NOT EXISTS `contact_submissions` ( 
+  `id` INT AUTO_INCREMENT PRIMARY KEY, 
+  `name` VARCHAR(255) NOT NULL, 
+  `email` VARCHAR(255) NOT NULL, 
+  `phone` VARCHAR(50) DEFAULT NULL, 
+  `subject` VARCHAR(255) DEFAULT NULL, 
+  `message` TEXT NOT NULL, 
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4; 
 
 -- ============================================================
 -- SEED DATA
@@ -154,4 +152,4 @@ INSERT INTO `branches` (`name`, `address`, `phone`, `hours`, `latitude`, `longit
 ('Hamdan (Opposite to Hamdan Center)', 'Al Ghatfah St, Hamdan 5, Al Danah, Abu dhabi', '+971 50 168 0792', '6:30 am - 11:30 pm', 24.4890000, 54.3640000, 'Our flagship outlet offering the full heritage experience in the heart of the city.', '/Assets/QR - Shabiya Location.png', 1),
 ('Khalidiyah (Khaldiya Mall)', 'Khaldiyah Mall - Food Court, 2nd Floor, Mubarak bin Mohammed Street, Abu dhabi', '+971 50 411 8667', '8 am - 12 am', 24.4690000, 54.3440000, 'A cozy spot perfect for family dinners and quick traditional snacks.', '/Assets/QR - Shabiya Location.png', 2),
 ('Musaffah (Mazyad Mall)', 'Mazyad Mall - Food Court, Level 2, 28th Street, Musaffah - Abu Dhabi', '+971 50 411 7897', '7:30 am - 11:30 pm', 24.3690000, 54.4940000, 'Serving authentic flavors to the hard-working community of Musaffah.', '/Assets/QR - Shabiya Location.png', 3),
-('Shabiya (Shabiya Branch)', 'Musaffah Shabiya, Abu Dhabi, UAE', '+971 050 171 5991', '6:30 am - 11:30 pm', 24.3500000, 54.5100000, 'Modern South Indian dining with a unique twist exclusively at Shabiya.', '/Assets/QR - Shabiya Location.png', 4);
+('Shabiya (Shabiya Branch)', 'Musaffah Shabiya, Abu Dhabi, UAE', '+971504114379', '6:30 am - 11:30 pm', 24.3500000, 54.5100000, 'Modern South Indian dining with a unique twist exclusively at Shabiya.', '/Assets/QR - Shabiya Location.png', 4);

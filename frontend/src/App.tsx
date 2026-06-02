@@ -991,7 +991,7 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
             <div className="w-full flex flex-col items-center pt-8">
                <div className="flex items-center gap-4 mb-4">
                  <CafeLogo size="sm" className="text-[#1e9ab0]" />
-                 <h1 className="text-2xl font-brand font-bold text-black uppercase tracking-widest leading-none">Kumbakonam cafe</h1>
+                 <h1 className="text-2xl font-brand font-bold text-white uppercase tracking-widest leading-none bg-[#0090a8] px-4 py-2 rounded-lg">Kumbakonam cafe</h1>
                </div>
                <div className="w-full h-[1px] bg-gray-100" />
             </div>
@@ -1176,7 +1176,7 @@ const BulkOrderModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                     <div className="bg-white rounded-full p-1 shadow-sm">
                       <MessageSquare size={18} className="text-[#1e9ab0] fill-[#1e9ab0]" />
                     </div>
-                    <span>0501715991</span>
+                    <span>0504114379</span>
                   </div>
                 </motion.div>
               </div>
@@ -1927,7 +1927,7 @@ const BranchesSection = ({ theme }: { theme: string }) => {
 };
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', serviceType: 'General Enquiry', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -1935,12 +1935,34 @@ const ContactForm = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `*New Enquiry*%0A*Name:* ${formData.name}%0A*Phone:* ${formData.phone}%0A*Service:* ${formData.serviceType}%0A*Message:* ${formData.message}`;
-    window.open(`https://wa.me/971501715991?text=${text}`, '_blank');
-    setStatus('success');
-    setFormData({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
+    setStatus('loading');
+    setErrorMsg('');
+
+    try {
+      const response = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', serviceType: 'General Enquiry', message: '' });
+      } else {
+        setStatus('error');
+        setErrorMsg(data.message || 'Failed to send enquiry. Please try again.');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      setStatus('error');
+      setErrorMsg('Server unreachable. Please try calling us directly.');
+    }
   };
 
   const inputClass = "w-full bg-brand-lightest dark:bg-brand/10 border border-brand/20 dark:border-brand-lightest/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all placeholder:text-brand-dark/30 dark:placeholder:text-brand-lightest/30 text-brand-dark dark:text-brand-lightest";
@@ -1986,17 +2008,23 @@ const ContactForm = () => {
                 <input name="name" type="text" value={formData.name} onChange={handleChange} className={inputClass} placeholder="John Doe" required aria-label="Your Name" />
               </div>
               <div className="space-y-3">
+                <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Email Address</label>
+                <input name="email" type="email" value={formData.email} onChange={handleChange} className={inputClass} placeholder="john@example.com" required aria-label="Email Address" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
                 <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Phone Number</label>
                 <input name="phone" type="tel" value={formData.phone} onChange={handleChange} className={inputClass} placeholder="+971 ..." required aria-label="Phone Number" />
               </div>
-            </div>
-            <div className="space-y-3">
-              <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Service Type</label>
-              <select name="serviceType" value={formData.serviceType} onChange={handleChange} className={inputClass} aria-label="Service Type">
-                <option>General Enquiry</option>
-                <option>Bulk/Party Order</option>
-                <option>Experience Feedback</option>
-              </select>
+              <div className="space-y-3">
+                <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Service Type</label>
+                <select name="serviceType" value={formData.serviceType} onChange={handleChange} className={inputClass} aria-label="Service Type">
+                  <option>General Enquiry</option>
+                  <option>Bulk/Party Order</option>
+                  <option>Experience Feedback</option>
+                </select>
+              </div>
             </div>
             <div className="space-y-3">
               <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Message</label>
@@ -2044,7 +2072,7 @@ const ContactSection = ({ theme }: { theme: string }) => {
               <div className="w-16 h-16 bg-brand-lightest dark:bg-dark-surface shadow-xl rounded-[1.5rem] flex items-center justify-center text-brand shrink-0 group-hover:bg-brand group-hover:text-brand-lightest transition-all duration-500 border border-brand/10 dark:border-brand-lightest/10"><Phone size={28} /></div>
               <div>
                 <span className="block text-[10px] uppercase tracking-[0.4em] text-cafe-muted/40 dark:text-dark-muted/40 font-black mb-2">Enquiries &amp; Orders</span>
-                <span className="text-3xl font-display font-medium text-cafe-dark dark:text-dark-text italic">+971 501715991</span>
+                <span className="text-3xl font-display font-medium text-cafe-dark dark:text-dark-text italic">+971504114379</span>
               </div>
             </div>
             <div className="flex gap-8 items-start group">
@@ -2092,14 +2120,11 @@ const Footer = ({ theme }: { theme: string }) => {
             </div>
 
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-                <Instagram size={18} />
+              <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
+                <TikTokIcon size={18} />
               </a>
-              <a href="#" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-                <div className="font-bold text-[10px]">Tik</div>
-              </a>
-              <a href="#" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-                <MessageSquare size={18} />
+              <a href="https://wa.me/971504114379" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="WhatsApp">
+                <WhatsAppIcon size={18} />
               </a>
             </div>
           </div>
@@ -2165,8 +2190,7 @@ const Footer = ({ theme }: { theme: string }) => {
         {/* Bottom Bar */}
         <div className="border-t border-black/10 pt-10 pb-4">
           <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20 text-black/70 italic font-display text-lg">
-            <a href="mailto:kcafe.uae@gmail.com" className="hover:text-[#1e9ab0] transition-colors">kcafe.uae@gmail.com</a>
-            <a href="tel:+971502872787" className="hover:text-[#1e9ab0] transition-colors">+971 502872787</a>
+            <a href="https://wa.me/971504114379" className="hover:text-[#1e9ab0] transition-colors italic">WhatsApp: +971 504114379</a>
           </div>
         </div>
 

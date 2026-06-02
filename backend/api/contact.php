@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $raw = json_decode(file_get_contents('php://input'), true);
 
 $name        = trim(htmlspecialchars($raw['name']        ?? '', ENT_QUOTES, 'UTF-8'));
+$email       = trim(htmlspecialchars($raw['email']       ?? '', ENT_QUOTES, 'UTF-8'));
 $phone       = trim(htmlspecialchars($raw['phone']       ?? '', ENT_QUOTES, 'UTF-8'));
 $serviceType = trim(htmlspecialchars($raw['serviceType'] ?? 'General Enquiry', ENT_QUOTES, 'UTF-8'));
 $message     = trim(htmlspecialchars($raw['message']     ?? '', ENT_QUOTES, 'UTF-8'));
@@ -40,8 +41,12 @@ $message     = trim(htmlspecialchars($raw['message']     ?? '', ENT_QUOTES, 'UTF
 // ─── Validation ──────────────────────────────────────────────
 $errors = [];
 if (empty($name))    $errors[] = 'Name is required.';
+if (empty($email))   $errors[] = 'Email is required.';
 if (empty($phone))   $errors[] = 'Phone number is required.';
 if (empty($message)) $errors[] = 'Message is required.';
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'Invalid email address.';
+}
 if (!preg_match('/^[\d\s\+\-\(\)]{7,20}$/', $phone)) {
     $errors[] = 'Invalid phone number format.';
 }
@@ -66,16 +71,16 @@ try {
 
     $stmt = $pdo->prepare('
         INSERT INTO contact_submissions 
-          (name, phone, service_type, message, ip_address)
+          (name, email, phone, subject, message)
         VALUES 
-          (:name, :phone, :service_type, :message, :ip)
+          (:name, :email, :phone, :subject, :message)
     ');
     $stmt->execute([
-        ':name'         => $name,
-        ':phone'        => $phone,
-        ':service_type' => $serviceType,
-        ':message'      => $message,
-        ':ip'           => $_SERVER['REMOTE_ADDR'] ?? null,
+        ':name'    => $name,
+        ':email'   => $email,
+        ':phone'   => $phone,
+        ':subject' => $serviceType,
+        ':message' => $message,
     ]);
     $saved = true;
 } catch (Exception $e) {
@@ -137,7 +142,7 @@ if ($saved || $emailSent) {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'message' => 'Something went wrong. Please call us directly at 050 171 5991.',
+        'message' => 'Something went wrong. Please call us directly at 050 411 4379.',
     ]);
 }
 

@@ -1,4 +1,4 @@
-﻿export interface MenuItem {
+export interface MenuItem {
   name: string;
   price: string;
   description?: string;
@@ -206,22 +206,34 @@ export const MENU_DATA: MenuCategory[] = [
 
 export const TESTIMONIALS = [
   {
-    author: "MATHEW JOHN V J",
-    content: "Authentic South Indian Breakfast Spot with a Traditional Touch. Kumbakonam Café truly brings the flavors of Tamil Nadu to Abu Dhabi. I tried their podi thatte idly, medhu vada, and filter coffee- everything tasted authentic, rich in flavor, and full of that homemade touch. The idly was soft and generously coated with ghee and podi, and the vada was crispy yet fluffy inside. The filter coffee is strong and flavorful, just the way it should be. Definitely a place I'd recommend for a quick breakfast or evening tiffin.",
+    author: "Foodiefam Stories",
+    content: "We found the ultimate spot for authentic South Indian food right here in Abu Dhabi – Kumbakonam Café 😍 ✨ The podi dosa was perfectly crispy and so delicious (still dreaming about it 🤤) ✨ The podi thatte idly was soft, fluffy, and just amazing ✨ The variety rice combo was packed with flavor – our fave was the puliyogre sadham ✨ And the vada? Honestly on another level – the BEST we’ve ever had! If you’re heading to Abu Dhabi, this place is a must-visit 🙌 We’re already planning more trips back… and fingers crossed they open in Dubai soon 🤞",
     rating: 5,
-    tagline: "Authentic South Indian Spot"
+    tagline: "Ultimate Spot for Authentic Food"
   },
   {
-    author: "PRIYA RAMESH",
-    content: "The best filter kaapi I've had in the UAE. It reminds me of the coffee back home in Tamil Nadu. The Thatte Idly is a must-try - so soft and delicious with the three types of chutneys and sambar. The service is incredibly warm and makes you feel right at home.",
+    author: "mojojojo yaktu",
+    content: "Absolutely Delicious South Indian Food! One of the best places I’ve visited for authentic South Indian food! I’ve tried many items on the menu, but the dosa and vada are truly addictive. The flavors are rich, the ghee is generous, and the quality is outstanding. Every bite is full of authentic South Indian taste. The place is small but very clean, and the service is excellent. The staff are super friendly and make you feel right at home. If you love South Indian food — especially crispy, buttery dosa — this place is a must-visit. Highly recommended!",
     rating: 5,
-    tagline: "Taste of Home"
+    tagline: "Absolutely Delicious!"
   },
   {
-    author: "ABDUL RAHMAN",
-    content: "Great variety in the lunch menu. The different types of variety rice are all excellent. Very clean place with a live kitchen where you can see the dosas being made. Highly recommend for any vegetarian food lover in Abu Dhabi.",
+    author: "Anoop Whabi",
+    content: "I recently visited Kumbakonam café, and it was an absolute delight! It serves variety of classic South Indian favorites and is very inviting, with a warm, authentic touch that makes you feel right at home. The food was exceptional – every dish bursting with flavor and prepared to perfection. From the crispy dosas to the spicy sambhar, each bite was a taste of South India’s rich culinary heritage. The medhu wada is a must try and not to be missed, the best I ever had. The filter coffee was simply divine – rich, smooth, and perfectly brewed, it’s a must-try for any coffee lover. And the saffron tea was equally impressive, offering a fragrant, soothing experience with every sip. The subtle hint of saffron added a luxurious touch to the tea, making it a unique and memorable drink. Overall, this café is a hidden gem for anyone looking to enjoy authentic South Indian cuisine paired with excellent coffee and tea. I can't wait to return!",
     rating: 5,
-    tagline: "Clean & Authentic"
+    tagline: "Exceptional & Inviting"
+  },
+  {
+    author: "MM",
+    content: "This veg eatery is a hidden gem! 😊 The quality is top-notch, and it's definitely one of the best authentic options out there. I stumbled upon it while exploring the city, and I'm so glad I did. The service is warm and welcoming, with a self-service setup that's convenient and efficient. I tried the Ghee Podi Thatte Idly for breakfast, and it was TO DIE FOR 🍴. The idly was perfectly cooked, with a soft and fluffy texture that just melted in my mouth. The ghee podi added a rich, nutty flavor that complemented the dish perfectly. Paired it with a cup of Fresh Milk Saffron Tea, and I was in heaven ☕. The tea was creamy and aromatic, with just the right amount of saffron flavor. If you're looking for a delicious and authentic veg breakfast spot, look no further! Do try the Ghee Podi Thatte Idly and Fresh Milk Saffron Tea – you won't regret it 😊. Just be prepared for a slight wait during peak hours, but trust me, it's worth it. The food is made with love. Overall, a great experience, and I'd definitely come back for more!",
+    rating: 5,
+    tagline: "A Hidden Gem"
+  },
+  {
+    author: "Abdul Rahman Noor",
+    content: "Hands down the best Tamil food I've ever had outside India! This unassuming, low-key cafe serves to the needs of anyone looking for authentic, homely Tamil food as evidenced by the huge crowds outside. The classic Kumbakonam coffee is a must-try, also their unique take on favourites like the ghee dosa, thatta idly (lit. \"flattened idly\"), podi (lit. \"powder\") dosa and so on. What stands out is their good quality at single-digit prices making them super affordable for everyone. The best part I liked is their sign that for anyone who couldn't afford their already reasonable prices, the food was a gift, may Allah bless them and reward their efforts! Only minor gripe is that it's located in a very busy area so parking is difficult and tends to get crowded. All in all, absolute must-visit!",
+    rating: 5,
+    tagline: "Best Tamil Food"
   }
 ];
 
@@ -277,7 +289,7 @@ export const BRANCHES = [
   {
     name: "Shabiya (Shabiya Branch)",
     address: "Musaffah Shabiya, Abu Dhabi, UAE",
-    phone: "+971 050 171 5991",
+    phone: "+971504114379",
     hours: "6:30 am - 11:30 pm",
     lat: 24.350,
     lng: 54.510,

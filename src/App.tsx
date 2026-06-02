@@ -256,11 +256,11 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
                 <div className="relative z-10 flex flex-col lg:flex-row gap-12">
                   <div className="lg:w-2/3">
                     <div className="flex items-center gap-4 py-3 px-8 rounded-full bg-black/5 border border-black/10 w-fit mb-8 shadow-sm">
-                      <Sun size={28} className="text-black fill-black/30" />
-                      <span className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-[0.4em] text-black/60">OUR STORY</span>
+                      <Sun size={28} className="text-[#1e9ab0] fill-[#1e9ab0]/10" />
+                      <span className="text-xl md:text-3xl lg:text-4xl font-black uppercase tracking-[0.4em] text-[#1e9ab0] whitespace-nowrap">OUR STORY</span>
                     </div>
                     <div className="space-y-4 text-sm md:text-base lg:text-lg font-medium leading-relaxed italic text-black opacity-100">
-                      <p>Kumbakonam Café was founded in 2024 by three friends with a shared dream: to bring authentic, homely vegetarian food to Abu Dhabi in a way that feels both comforting and memorable.</p>
+                      <p>Kumbakonam café was founded in 2024 by three friends with a shared dream: to bring authentic, homely vegetarian food to abu dhabi in a way that feels both comforting and memorable.</p>
                       <p>From day one, our vision has been simple yet powerful, to create a place where customers always come first, employees are family, and society benefits from the values we uphold.</p>
                       <p>Our promise is to serve high-quality, homely vegetarian food at reasonable prices, stay true to our roots.</p>
                     </div>
@@ -298,11 +298,11 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
               whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-5%" }}
               transition={{ duration: 1.2, delay: 0.2 }}
-              className="space-y-4 bg-white dark:bg-dark-surface p-6 lg:p-8 rounded-[2rem] shadow-massive border border-[#1e9ab0]/10 dark:border-white/10"
+              className="space-y-6 bg-white dark:bg-dark-surface p-8 lg:p-10 rounded-[2.5rem] shadow-massive border border-black/10"
             >
-              <div className="flex items-center gap-4 py-2 px-6 rounded-full border border-[#1e9ab0]/20 dark:border-white/10 w-fit bg-[#1e9ab0]/5 dark:bg-[#1e9ab0]/20 shadow-sm transition-colors">
-                <Sun size={20} className="text-[#1e9ab0]" />
-                <span className="text-sm font-black uppercase tracking-widest text-black dark:text-white">VISION</span>
+              <div className="flex items-center gap-4 py-3 px-8 rounded-full bg-black/5 border border-black/10 w-fit mb-6 shadow-sm">
+                <Sun size={28} className="text-[#1e9ab0] fill-[#1e9ab0]/10" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-[0.4em] text-[#1e9ab0] whitespace-nowrap">VISION</span>
               </div>
               <p className="text-lg md:text-xl lg:text-2xl font-display italic text-[#1e9ab0] transition-colors font-bold">
                 To make our cafe a place that honors tradition and bridges generations through authentic flavors.
@@ -314,11 +314,11 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
               whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-5%" }}
               transition={{ duration: 1.2, delay: 0.4 }}
-              className="space-y-4 bg-white dark:bg-dark-surface p-6 lg:p-8 rounded-[2rem] shadow-massive border border-[#1e9ab0]/10 dark:border-white/10"
+              className="space-y-6 bg-white dark:bg-dark-surface p-8 lg:p-10 rounded-[2.5rem] shadow-massive border border-black/10"
             >
-              <div className="flex items-center gap-4 py-2 px-6 rounded-full border border-[#1e9ab0]/20 dark:border-white/10 w-fit bg-[#1e9ab0]/5 dark:bg-[#1e9ab0]/20 shadow-sm transition-colors">
-                <Sparkles size={20} className="text-[#1e9ab0]" />
-                <span className="text-sm font-black uppercase tracking-widest text-black dark:text-white">MISSION</span>
+              <div className="flex items-center gap-4 py-3 px-8 rounded-full bg-black/5 border border-black/10 w-fit mb-6 shadow-sm">
+                <Sparkles size={28} className="text-[#1e9ab0] fill-[#1e9ab0]/10" />
+                <span className="text-xl md:text-2xl lg:text-3xl font-black uppercase tracking-[0.4em] text-[#1e9ab0] whitespace-nowrap">MISSION</span>
               </div>
               <p className="text-lg md:text-xl lg:text-2xl font-display italic text-[#1e9ab0] transition-colors font-bold">
                 Ensuring every guest experiences the goodness of authentic vegetarian food in every single bite.
@@ -799,8 +799,9 @@ const Navbar = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
           <div className="flex items-center gap-2 z-50 shrink-0 ml-auto md:flex-1 justify-end">
             {/* DOWNLOAD MENU Button */}
             <a 
-              href="/Assets/Mazyad May-2-6.pdf" 
+              href="/Assets/Kumbakonam Cafe.pdf" 
               target="_blank" 
+              download="Kumbakonam Cafe Menu.pdf"
               className="hidden md:flex px-6 py-2.5 bg-[#fff628] text-black font-black text-[12px] uppercase tracking-[0.2em] rounded-full items-center justify-center gap-2 transition-all hover:bg-white active:scale-95 shadow-md border-none"
             >
               DOWNLOAD MENU <Download size={18} />
@@ -902,7 +903,7 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
             <div className="w-full flex flex-col items-center pt-8">
                <div className="flex items-center gap-4 mb-4">
                  <CafeLogo size="sm" className="text-[#1e9ab0]" />
-                 <h1 className="text-2xl font-brand font-bold text-black uppercase tracking-widest leading-none">Kumbakonam cafe</h1>
+                 <h1 className="text-2xl font-brand font-bold text-white uppercase tracking-widest leading-none bg-[#0090a8] px-4 py-2 rounded-lg">Kumbakonam cafe</h1>
                </div>
                <div className="w-full h-[1px] bg-gray-100" />
             </div>
@@ -913,8 +914,7 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                   <div className="space-y-6">
                     <p className="text-black/60 font-black text-xl lg:text-2xl">Let's order !</p>
                     <h2 className="text-4xl lg:text-5xl font-black text-black leading-[1.1] tracking-tight">
-                      Choose Delivery Location <br />
-                      to place an order.
+                      Choose Delivery Partner
                     </h2>
                   </div>
 
@@ -960,18 +960,21 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                <div className="flex justify-center items-center lg:justify-end">
                   <div className="relative w-full max-w-sm aspect-square">
                      {/* Simplified representation of the illustration in the image */}
-                     <div className="absolute inset-x-0 bottom-0 top-1/4 bg-black/90 rounded-[4rem] flex items-center justify-center p-12 overflow-hidden">
-                        <div className="absolute inset-0 noise-texture opacity-10" />
-                        <div className="relative z-10 w-full h-full flex items-center justify-center">
-                           <div className="relative">
-                             <div className="w-32 h-32 rounded-full bg-white/10 blur-xl absolute -inset-10" />
-                             <MapPin size={80} className="text-white drop-shadow-glow" />
-                           </div>
+                     <div className="absolute inset-0 bg-white/50 rounded-[4rem] p-8 overflow-hidden flex flex-col border border-[#1e9ab0]/10 shadow-inner">
+                        <h3 className="text-[#1e9ab0] font-brand font-bold text-xl mb-6 text-center uppercase tracking-[0.2em]">Signature Dishes</h3>
+                        <div className="grid grid-cols-2 gap-4 h-full overflow-y-auto pr-2 scrollbar-hide">
+                          {MENU_DATA.flatMap(cat => cat.items).filter(item => ["Ghee Podi Thatte Idly", "Kumbakonam Filter Kaapi", "K Special Dosa", "Ashoka Halwa", "Signature (Mini Tiffin)", "Medhu Vada"].includes(item.name)).map((item, idx) => (
+                            <div key={idx} className="bg-white rounded-[2rem] p-3 shadow-md border border-[#1e9ab0]/5 flex flex-col items-center text-center gap-2 group transition-all hover:scale-105 hover:shadow-lg">
+                              <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-50 flex-shrink-0">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                              </div>
+                              <span className="text-[11px] font-bold text-black/80 leading-tight uppercase tracking-wide">{item.name}</span>
+                            </div>
+                          ))}
                         </div>
-                        {/* Decorative floating elements */}
-                        <div className="absolute top-10 left-10 w-4 h-4 bg-white/20 rounded-full" />
-                        <div className="absolute top-20 right-20 w-2 h-2 bg-white/40 rounded-full" />
-                        <div className="absolute bottom-10 left-1/4 w-3 h-3 bg-white/20 rounded-full" />
+                        <div className="absolute top-4 right-8">
+                          <Sparkles size={20} className="text-[#1e9ab0] animate-pulse" />
+                        </div>
                      </div>
                   </div>
                </div>
@@ -984,7 +987,7 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                    <MapPin size={24} />
                  </div>
                  <div>
-                   <h4 className="font-bold text-black/80 text-xl">Set your location</h4>
+                   <h4 className="font-bold text-black/80 text-xl">Search your location</h4>
                    <p className="text-sm text-gray-400 italic">Tell us where you want to get your items delivered</p>
                  </div>
                </div>
@@ -1072,18 +1075,17 @@ const BulkOrderModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                   </p>
                 </motion.div>
 
-                {/* Footer Enquiry Bar */}
                 <div className="bg-[#fff628] px-8 py-5 rounded-2xl flex flex-col items-center justify-center gap-5 shadow-massive overflow-hidden">
-                  <span className="text-black font-display font-black text-lg md:text-xl uppercase tracking-widest relative z-10">
+                  <span className="text-black font-display font-medium text-lg md:text-xl relative z-10">
                     For enquiries and order
                   </span>
                   <div className="flex items-center gap-3 text-black text-xl font-black relative z-10">
-                    <WhatsAppIcon size={24} />
+                    <Phone size={24} />
                     <span>/</span>
-                    <div className="bg-white rounded-full p-1 shadow-sm">
-                      <WhatsAppIcon size={18} className="text-[#1e9ab0]" />
+                    <div className="bg-white rounded-full p-1 shadow-sm flex items-center justify-center">
+                      <WhatsAppIcon size={18} />
                     </div>
-                    <span>0501715991</span>
+                    <span>050 411 4379</span>
                   </div>
                 </div>
               </div>
@@ -1097,8 +1099,9 @@ const BulkOrderModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
               >
                 <div className="relative group">
                    <div className="absolute inset-0 bg-[#fff628] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                   <div className="bg-[#fff628] border-4 border-dashed border-white/30 text-black px-6 py-3 rounded-xl font-black text-lg md:text-2xl uppercase tracking-[0.2em] shadow-massive transform hover:scale-110 transition-transform">
+                   <div className="bg-[#fff628] border-4 border-dashed border-white/30 text-black px-6 py-3 rounded-xl font-black text-lg md:text-2xl uppercase tracking-[0.2em] shadow-massive transform hover:scale-110 transition-transform relative">
                       FREE DELIVERY
+                      <Truck size={24} className="absolute -bottom-2 -right-2 text-black drop-shadow-md" />
                    </div>
                 </div>
               </motion.div>
@@ -1238,8 +1241,9 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                   PARTY / BULK ORDER <Utensils size={20} />
                 </motion.button>
                 <motion.a 
-                  href="/Assets/Mazyad May-2-6.pdf"
+                  href="/Assets/Kumbakonam Cafe.pdf"
                   target="_blank"
+                  download="Kumbakonam Cafe Menu.pdf"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-10 py-5 bg-[#fff628] text-black font-black text-[13px] uppercase tracking-[0.3em] rounded-full flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 shadow-2xl border-none"
@@ -1441,7 +1445,7 @@ const MenuSection = ({ theme, onCategorySelect }: {
              className="inline-flex items-center gap-3 py-2 px-6 rounded-full bg-white/5 border border-white/10 mb-6"
           >
             <Sparkles size={14} className="text-[#1e9ab0]" />
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Our Craft Selection</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/60">Authentic Delicacies</span>
           </motion.div>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -1464,7 +1468,8 @@ const MenuSection = ({ theme, onCategorySelect }: {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 min-h-[500px]">
           {MENU_DATA.map((category, idx) => {
             const isActive = idx === activeCategoryIndex;
-            const coverImage = category.items.find(item => item.image)?.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop";
+            const coverImage = category.coverImage || category.items.find(item => item.image)?.image || "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?q=80&w=1000&auto=format&fit=crop";
+            const coverStyle = category.coverStyle || 'cover';
             
             return (
               <motion.div
@@ -1481,16 +1486,16 @@ const MenuSection = ({ theme, onCategorySelect }: {
                 className={`relative group h-[500px] rounded-[3.5rem] overflow-hidden cursor-pointer transition-all outline-none ${isActive ? 'border-2 border-[#1e9ab0] shadow-glow z-10' : 'border border-white/5 bg-white/5'}`}
               >
                 {/* Background Image with Overlay */}
-                <div className="absolute inset-0 z-0">
+                <div className={`absolute inset-0 z-0 ${coverStyle === 'contain' ? 'bg-[#1e9ab0]/5 p-12' : ''}`}>
                   <motion.img 
                     src={coverImage} 
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    className={`w-full h-full ${coverStyle === 'contain' ? 'object-contain' : 'object-cover'} transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0`}
                     alt={category.title} 
                     loading="lazy"
                     decoding="async"
                   />
                   {/* Default Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 z-10 opacity-80" />
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 z-10 ${coverStyle === 'contain' ? 'opacity-40' : 'opacity-80'}`} />
                 </div>
 
                 {/* Light Transparent Overlay on Hover */}
@@ -1829,7 +1834,7 @@ const BranchesSection = ({ theme, onBranchSelect }: { theme: string, onBranchSel
 };
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', serviceType: 'General Enquiry', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -1837,23 +1842,35 @@ const ContactForm = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    let destinationEmail = 'info@kumbakonam-cafe.com';
-    if (formData.serviceType === 'Bulk/Party Order') {
-      destinationEmail = 'support@kumbakonam-cafe.com';
-    } else if (formData.serviceType === 'Experience Feedback') {
-      // Complaints/Feedback go to both (handled by backend or CC)
-      destinationEmail = 'info@kumbakonam-cafe.com, support@kumbakonam-cafe.com';
-    }
+    setStatus('loading');
+    setErrorMsg('');
 
-    const subject = encodeURIComponent(`New ${formData.serviceType} from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nPhone: ${formData.phone}\nService: ${formData.serviceType}\n\nMessage:\n${formData.message}`);
-    
-    window.location.href = `mailto:${destinationEmail}?subject=${subject}&body=${body}`;
-    
-    setStatus('success');
-    setFormData({ name: '', phone: '', serviceType: 'General Enquiry', message: '' });
+    try {
+      const response = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', phone: '', serviceType: 'General Enquiry', message: '' });
+      } else {
+        setStatus('error');
+        setErrorMsg(data.message || 'Failed to send enquiry. Please try again.');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      // Fallback to mailto if API fails (optional, but let's try to be helpful)
+      setStatus('error');
+      setErrorMsg('Server unreachable. Please try calling us directly.');
+    }
   };
 
   const inputClass = "w-full bg-brand-lightest dark:bg-brand/10 border border-brand/20 dark:border-brand-lightest/10 rounded-2xl px-6 py-5 focus:border-brand outline-none transition-all placeholder:text-brand-dark/30 dark:placeholder:text-brand-lightest/30 text-brand-dark dark:text-brand-lightest";
@@ -1899,17 +1916,23 @@ const ContactForm = () => {
                 <input name="name" type="text" value={formData.name} onChange={handleChange} className={inputClass} placeholder="John Doe" required aria-label="Your Name" />
               </div>
               <div className="space-y-3">
+                <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Email Address</label>
+                <input name="email" type="email" value={formData.email} onChange={handleChange} className={inputClass} placeholder="john@example.com" required aria-label="Email Address" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
                 <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Phone Number</label>
                 <input name="phone" type="tel" value={formData.phone} onChange={handleChange} className={inputClass} placeholder="+971 ..." required aria-label="Phone Number" />
               </div>
-            </div>
-            <div className="space-y-3">
-              <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Service Type</label>
-              <select name="serviceType" value={formData.serviceType} onChange={handleChange} className={inputClass} aria-label="Service Type">
-                <option>General Enquiry</option>
-                <option>Bulk/Party Order</option>
-                <option>Experience Feedback</option>
-              </select>
+              <div className="space-y-3">
+                <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Service Type</label>
+                <select name="serviceType" value={formData.serviceType} onChange={handleChange} className={inputClass} aria-label="Service Type">
+                  <option>General Enquiry</option>
+                  <option>Bulk/Party Order</option>
+                  <option>Experience Feedback</option>
+                </select>
+              </div>
             </div>
             <div className="space-y-3">
               <label className="text-[10px] uppercase font-black tracking-[0.4em] text-cafe-dark/40 dark:text-dark-text/40">Message</label>
@@ -1961,8 +1984,8 @@ const ContactSection = ({ theme }: { theme: string }) => {
                   <Phone size={28} />
                 </div>
                 <div>
-                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Phone Number</span>
-                  <span className="text-3xl font-display font-medium text-black italic">+971 501715991</span>
+                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Customer Support</span>
+                  <span className="text-3xl font-display font-medium text-black italic">+971504114379</span>
                 </div>
               </div>
 
@@ -1978,10 +2001,20 @@ const ContactSection = ({ theme }: { theme: string }) => {
 
               <div className="flex gap-8 items-start group">
                 <div className="w-16 h-16 bg-[#1e9ab0]/5 rounded-[1.5rem] flex items-center justify-center text-[#1e9ab0] shrink-0 border border-[#1e9ab0]/10">
+                  <Phone size={28} />
+                </div>
+                <div>
+                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Enquiry</span>
+                  <span className="text-3xl font-display font-medium text-black italic">+971 502872787</span>
+                </div>
+              </div>
+
+              <div className="flex gap-8 items-start group">
+                <div className="w-16 h-16 bg-[#1e9ab0]/5 rounded-[1.5rem] flex items-center justify-center text-[#1e9ab0] shrink-0 border border-[#1e9ab0]/10">
                   <Mail size={28} />
                 </div>
                 <div>
-                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">General Email</span>
+                  <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Other Queries</span>
                   <span className="text-2xl font-display font-medium text-black italic">info@kumbakonam-cafe.com</span>
                 </div>
               </div>
@@ -2010,19 +2043,10 @@ const ContactSection = ({ theme }: { theme: string }) => {
            </div>
 
           <div className="flex gap-6">
-              <a href="tel:+9710502872787" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-                <Phone size={22} />
-              </a>
-              <a href="mailto:kcafe.uae@gmail.com" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-                <Mail size={22} />
-              </a>
-              <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-                <Instagram size={22} />
-              </a>
-            <a href="https://www.tiktok.com/@kumbakonam.cafe.uae" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
-              <TikTokIcon size={20} />
+            <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
+              <TikTokIcon size={22} />
             </a>
-            <a href="https://wa.me/971501715991" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm">
+            <a href="https://wa.me/971504114379" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="WhatsApp">
               <WhatsAppIcon size={22} />
             </a>
           </div>
@@ -2061,13 +2085,10 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
             </div>
 
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Instagram">
-                <Instagram size={18} />
+              <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
+                <TikTokIcon size={18} />
               </a>
-              <a href="https://www.tiktok.com/in/about" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
-                <TikTokIcon size={16} />
-              </a>
-              <a href="https://wa.me/971501715991" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="WhatsApp">
+              <a href="https://wa.me/971504114379" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="WhatsApp">
                 <WhatsAppIcon size={18} />
               </a>
             </div>
@@ -2076,7 +2097,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
           {/* Menu Column */}
           <div className="text-center md:text-left">
             <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Menu</h4>
-            <a href="/Assets/Mazyad May-2-6.pdf" download="Kumbakonam Cafe Menu.pdf" className="px-10 py-3.5 bg-[#2c8496] text-white font-display font-bold uppercase tracking-widest text-[13px] rounded-md mb-12 inline-flex items-center justify-center hover:bg-black transition-colors shadow-md">
+            <a href="/Assets/Kumbakonam Cafe.pdf" download="Kumbakonam Cafe Menu.pdf" className="px-10 py-3.5 bg-[#2c8496] text-white font-display font-bold uppercase tracking-widest text-[13px] rounded-md mb-12 inline-flex items-center justify-center hover:bg-black transition-colors shadow-md">
                DOWNLOAD MENU
             </a>
             <h4 className="text-2xl font-display font-medium text-[#1e9ab0] mb-8">Branches</h4>
