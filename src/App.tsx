@@ -1239,61 +1239,8 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent overflow-hidden flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 py-10 lg:py-20 min-h-screen">
         
-        {/* LEFT COLUMN: Slideshow of signature items (Desktop) or Center (Mobile) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center order-2 lg:order-1">
-          <div className="w-full max-w-xl">
-             <AnimatePresence mode="wait">
-               <motion.div
-                 key={slideIndex}
-                 style={{ y: mousePosition.y * 1.5, x: mousePosition.x * 1.5 }}
-                 initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                 exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                 className="w-full glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
-               >
-                  <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8">
-                     <img 
-                       src={currentSlideItem?.image || 'https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop'} 
-                       alt={currentSlideItem?.name} 
-                       loading="eager"
-                       decoding="sync"
-                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                     />
-                     <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
-                  </div>
-                  <div className="flex flex-col gap-4">
-                     <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-white leading-none">
-                       Signatures
-                     </h4>
-                     <h3 className="text-4xl font-display font-medium text-white italic transition-colors">
-                       {currentSlideItem?.name}
-                     </h3>
-                     <div className="flex items-center justify-end mt-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-px bg-white/20" />
-                          <ArrowRight size={20} className="text-white group-hover:translate-x-2 transition-transform" />
-                        </div>
-                      </div>
-                  </div>
-                  
-                  <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#fff628] text-black rounded-full flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
-                     <span className="text-[9px] font-black uppercase tracking-widest mb-1">Authentic</span>
-                     <Heart size={24} fill="currentColor" />
-                  </div>
-               </motion.div>
-             </AnimatePresence>
-          </div>
-
-          <div className="mt-12 flex items-center gap-4">
-             {allItems.slice(0, Math.min(allItems.length, 6)).map((_, i) => (
-               <div key={i} className={`h-1.5 rounded-full transition-all duration-700 ${i === slideIndex % 6 ? 'w-16 bg-brand' : 'w-2 bg-brand/20'}`} />
-             ))}
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Top (Mobile) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2">
+        {/* LEFT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Top (Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-1">
             {/* Logo from SS */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -1368,6 +1315,59 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                 </div>
               </div>
             </motion.div>
+        </div>
+
+        {/* RIGHT COLUMN: Slideshow of signature items (Desktop) or Below (Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center order-2 lg:order-2">
+          <div className="w-full max-w-xl">
+             <AnimatePresence mode="wait">
+               <motion.div
+                 key={slideIndex}
+                 style={{ y: mousePosition.y * 1.5, x: mousePosition.x * 1.5 }}
+                 initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                 exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                 className="w-full glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
+               >
+                  <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8">
+                     <img 
+                       src={currentSlideItem?.image || 'https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop'} 
+                       alt={currentSlideItem?.name} 
+                       loading="eager"
+                       decoding="sync"
+                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                     />
+                     <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                     <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-white leading-none">
+                       Signatures
+                     </h4>
+                     <h3 className="text-4xl font-display font-medium text-white italic transition-colors">
+                       {currentSlideItem?.name}
+                     </h3>
+                     <div className="flex items-center justify-end mt-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-px bg-white/20" />
+                          <ArrowRight size={20} className="text-white group-hover:translate-x-2 transition-transform" />
+                        </div>
+                      </div>
+                  </div>
+                  
+                  <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#fff628] text-black rounded-full flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
+                     <span className="text-[9px] font-black uppercase tracking-widest mb-1">Authentic</span>
+                     <Heart size={24} fill="currentColor" />
+                  </div>
+               </motion.div>
+             </AnimatePresence>
+          </div>
+
+          <div className="mt-12 flex items-center gap-4">
+             {allItems.slice(0, Math.min(allItems.length, 6)).map((_, i) => (
+               <div key={i} className={`h-1.5 rounded-full transition-all duration-700 ${i === slideIndex % 6 ? 'w-16 bg-brand' : 'w-2 bg-brand/20'}`} />
+             ))}
+          </div>
         </div>
       </div>
 
