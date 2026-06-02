@@ -1236,80 +1236,99 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
           </motion.h2>
         </div>
       </div>
-      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent rounded-[4rem] overflow-hidden flex flex-col items-center py-10 lg:py-16">
-        
-        {/* 1. Welcome Badge at the Top */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="flex items-center gap-3 py-2.5 px-8 rounded-full border-2 border-[#1e9ab0]/30 w-fit mb-10 shadow-sm z-40"
-        >
-            <div className="flex items-center gap-3">
-              <Heart size={16} className="text-black fill-black" />
-              <span className="text-[11px] font-brand font-black uppercase tracking-[0.5em] text-[#1e9ab0] bg-white px-3 py-2 rounded-full">WELCOME TO KUMBAKONAM CAFE</span>
-            </div>
-        </motion.div>
 
-        {/* 2. Slideshow below Welcome Badge */}
-        <div className="w-full max-w-5xl flex justify-center mb-12">
-           <AnimatePresence mode="wait">
-             <motion.div
-               key={slideIndex}
-               style={{ y: mousePosition.y * 1.5, x: mousePosition.x * 1.5 }}
-               initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
-               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-               exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-               className="w-full max-w-[500px] glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
-             >
-                <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8">
-                   <img 
-                     src={currentSlideItem?.image || 'https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop'} 
-                     alt={currentSlideItem?.name} 
-                     loading="eager"
-                     decoding="sync"
-                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                   />
-                   <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
-                </div>
-                <div className="flex flex-col gap-4">
-                   <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-white leading-none">
-                     Signatures
-                   </h4>
-                   <h3 className="text-4xl font-display font-medium text-white italic transition-colors">
-                     {currentSlideItem?.name}
-                   </h3>
-                   <div className="flex items-center justify-end mt-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-px bg-white/20" />
-                        <ArrowRight size={20} className="text-white group-hover:translate-x-2 transition-transform" />
+      <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent overflow-hidden flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 py-10 lg:py-20 min-h-screen">
+        
+        {/* LEFT COLUMN: Slideshow of signature items (Desktop) or Center (Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center order-2 lg:order-1">
+          <div className="w-full max-w-xl">
+             <AnimatePresence mode="wait">
+               <motion.div
+                 key={slideIndex}
+                 style={{ y: mousePosition.y * 1.5, x: mousePosition.x * 1.5 }}
+                 initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+                 animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                 exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                 className="w-full glass-card rounded-[3.5rem] p-8 shadow-huge hover:shadow-glow transition-all duration-700 group cursor-pointer relative"
+               >
+                  <div className="relative aspect-[4/5] rounded-[2.8rem] overflow-hidden mb-8">
+                     <img 
+                       src={currentSlideItem?.image || 'https://images.unsplash.com/photo-1626777552726-4a6b54c97eb4?q=80&w=1000&auto=format&fit=crop'} 
+                       alt={currentSlideItem?.name} 
+                       loading="eager"
+                       decoding="sync"
+                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                     />
+                     <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                     <h4 className="text-[11px] font-black uppercase tracking-[0.6em] text-white leading-none">
+                       Signatures
+                     </h4>
+                     <h3 className="text-4xl font-display font-medium text-white italic transition-colors">
+                       {currentSlideItem?.name}
+                     </h3>
+                     <div className="flex items-center justify-end mt-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-px bg-white/20" />
+                          <ArrowRight size={20} className="text-white group-hover:translate-x-2 transition-transform" />
+                        </div>
                       </div>
-                    </div>
-                </div>
-                
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#fff628] text-black rounded-full flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
-                   <span className="text-[9px] font-black uppercase tracking-widest mb-1">Authentic</span>
-                   <Heart size={24} fill="currentColor" />
-                </div>
-             </motion.div>
-           </AnimatePresence>
+                  </div>
+                  
+                  <div className="absolute -top-6 -right-6 w-24 h-24 bg-[#fff628] text-black rounded-full flex items-center justify-center shadow-2xl rotate-12 group-hover:rotate-0 transition-transform">
+                     <span className="text-[9px] font-black uppercase tracking-widest mb-1">Authentic</span>
+                     <Heart size={24} fill="currentColor" />
+                  </div>
+               </motion.div>
+             </AnimatePresence>
+          </div>
+
+          <div className="mt-12 flex items-center gap-4">
+             {allItems.slice(0, Math.min(allItems.length, 6)).map((_, i) => (
+               <div key={i} className={`h-1.5 rounded-full transition-all duration-700 ${i === slideIndex % 6 ? 'w-16 bg-brand' : 'w-2 bg-brand/20'}`} />
+             ))}
+          </div>
         </div>
 
-        {/* 3. CTAs and Description below Slideshow */}
-        <div className="flex flex-col items-center max-w-3xl text-center z-10">
+        {/* RIGHT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Top (Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-2">
+            {/* Logo from SS */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              className="mb-8 lg:mb-12"
+            >
+              <img 
+                src="/brand/LOGO.png" 
+                alt="Kumbakonam Cafe Logo" 
+                className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 object-contain drop-shadow-2xl" 
+              />
+            </motion.div>
+
+            {/* Experience The Goodness from SS */}
+            <ExperienceGoodness className="text-white mb-8 lg:mb-12 !justify-center lg:!justify-start" />
+
+            {/* Description and CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
+              className="max-w-xl"
             >
-              {/* Main Action CTAs */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-6 mb-10">
+              <p className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] font-medium leading-[1.6] text-white drop-shadow-md italic mb-12">
+                 Enjoy a unique dining experience with live kitchens, authentic vegetarian flavors, and warm service that keeps you coming back.
+              </p>
+
+              {/* Main Action CTAs (Same place as current website relative to content) */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-6 mb-16">
                 <motion.button 
                   onClick={onBulkOrderClick}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-5 bg-[#fff628] text-black font-black text-[14px] uppercase tracking-[0.3em] rounded-full shadow-2xl flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 border-none"
+                  className="px-10 py-5 bg-[#fff628] text-black font-black text-[13px] uppercase tracking-[0.3em] rounded-full shadow-2xl flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 border-none"
                 >
                   PARTY / BULK ORDER <Utensils size={20} />
                 </motion.button>
@@ -1318,44 +1337,34 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                   target="_blank"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-12 py-5 bg-[#fff628] text-black font-black text-[14px] uppercase tracking-[0.3em] rounded-full flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 shadow-2xl border-none"
+                  className="px-10 py-5 bg-[#fff628] text-black font-black text-[13px] uppercase tracking-[0.3em] rounded-full flex items-center justify-center gap-3 transition-all hover:bg-white active:scale-95 shadow-2xl border-none"
                 >
                   DOWNLOAD MENU <Download size={20} />
                 </motion.a>
               </div>
 
-              <div className="mb-16">
-                <p className="text-[20px] md:text-[24px] font-medium leading-[1.6] text-white drop-shadow-md italic">
-                   Enjoy a unique dining experience with live kitchens, authentic vegetarian flavors, and warm service that keeps you coming back.
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 1 }}
-              className="flex flex-col md:flex-row items-center gap-12"
-            >
-              <div className="flex -space-x-4 items-center">
-                {[
-                  '/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png',
-                  '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg',
-                  '/Assets/Lunch Varieties/Combo-1-4-variety-sadham-.png'
-                ].map((imgSrc, i) => (
-                  <div key={i} className="w-16 h-16 rounded-full border-4 border-white/20 overflow-hidden bg-white/10 shadow-huge hover:scale-110 transition-transform group">
-                    <img 
-                      src={imgSrc} 
-                      alt="Our Food" 
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-all" 
-                    />
+              {/* Visitors Stats */}
+              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-12">
+                <div className="flex -space-x-4 items-center">
+                  {[
+                    '/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png',
+                    '/Assets/Hot Beverages/Kumbakonam-filter-coffee-2-scaled.jpg',
+                    '/Assets/Lunch Varieties/Combo-1-4-variety-sadham-.png'
+                  ].map((imgSrc, i) => (
+                    <div key={i} className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 border-white/20 overflow-hidden bg-white/10 shadow-huge hover:scale-110 transition-transform group">
+                      <img 
+                        src={imgSrc} 
+                        alt="Our Food" 
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-all" 
+                      />
+                    </div>
+                  ))}
+                  <div className="pl-6 flex flex-col items-start">
+                    <span className="text-[16px] font-black tracking-widest text-white">5,000+</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black bg-[#fff628] px-2 py-0.5 rounded">Happy Visitors</span>
                   </div>
-                ))}
-                <div className="pl-6 flex flex-col items-start">
-                  <span className="text-[16px] font-black tracking-widest text-white">5,000+</span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-black bg-[#fff628] px-2 py-0.5 rounded">Happy Visitors</span>
                 </div>
               </div>
             </motion.div>
@@ -1366,12 +1375,6 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
       <div className="absolute -bottom-32 -left-32 w-1/2 aspect-square rounded-full bg-brand/5 blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-16 -left-16 w-80 h-80 border border-brand-lightest/5 rounded-full glass opacity-20 pointer-events-none" />
       <div className="absolute bottom-10 left-[20%] w-24 h-24 bg-brand/10 border border-brand/20 rounded-full blur-xl animate-pulse" />
-      
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-4">
-         {allItems.slice(0, Math.min(allItems.length, 6)).map((_, i) => (
-           <div key={i} className={`h-1.5 rounded-full transition-all duration-700 ${i === slideIndex % 6 ? 'w-16 bg-brand' : 'w-2 bg-brand/20'}`} />
-         ))}
-      </div>
     </section>
   );
 };
