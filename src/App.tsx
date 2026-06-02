@@ -1201,14 +1201,14 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent overflow-hidden flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 py-10 lg:py-20 min-h-screen">
         
-        {/* LEFT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Top (Mobile) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-1 lg:order-1">
-            {/* Logo and Slogan from SS */}
+        {/* LEFT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Bottom (Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
+            {/* Logo and Slogan from SS - Hidden on Mobile */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="mb-8 lg:mb-12"
+              className="mb-8 lg:mb-12 hidden lg:block"
             >
               <img 
                 src="/brand/hero-branding.png" 
@@ -1224,7 +1224,7 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
               transition={{ duration: 1, delay: 0.2 }}
               className="max-w-xl"
             >
-              <p className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] font-medium leading-[1.6] text-white drop-shadow-md italic mb-12">
+              <p className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] font-medium leading-[1.6] text-white drop-shadow-md italic mb-12 hidden lg:block">
                  Enjoy a unique dining experience with live kitchens, authentic vegetarian flavors, and warm service that keeps you coming back.
               </p>
 
@@ -1276,8 +1276,8 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
             </motion.div>
         </div>
 
-        {/* RIGHT COLUMN: Slideshow of signature items (Desktop) or Below (Mobile) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center order-2 lg:order-2">
+        {/* RIGHT COLUMN: Slideshow of signature items (Desktop) or Top (Mobile) */}
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center order-1 lg:order-2">
           <div className="w-full max-w-xl">
              <AnimatePresence mode="wait">
                <motion.div
