@@ -471,7 +471,7 @@ const CategoryModal = ({
                       animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
                       exit={{ scale: 0.9, opacity: 0, filter: 'blur(5px)' }}
                       transition={{ duration: 0.5 }}
-                      className="w-full h-full object-contain p-4"
+                      className={`w-full h-full object-contain p-4 ${currentItem.name === 'Badam Milk' ? 'rotate-270' : ''}`}
                       alt={currentItem.name}
                       loading="lazy"
                       decoding="async"
@@ -502,11 +502,13 @@ const CategoryModal = ({
                     {category.title}
                   </span>
                 </div>
-                <h3 className="text-4xl font-display font-medium text-cafe-dark dark:text-dark-text italic leading-tight mb-4">
-                  {currentItem?.name}
+                <h3 className="text-2xl lg:text-3xl font-display font-medium text-cafe-dark dark:text-dark-text italic leading-tight mb-4 capitalize">
+                  {currentItem?.name.toLowerCase()}
                 </h3>
                 <p className="text-cafe-muted dark:text-dark-muted font-light leading-relaxed mb-6 italic">
-                  {currentItem?.description || "Our signature dish made with authentic South Indian recipes and pure ingredients."}
+                  {currentItem?.description || (category.id === "sweets" 
+                    ? "All our sweets - savouries contain NO ADDED preservatives & artificial food colors" 
+                    : "Our signature dish made with authentic South Indian recipes and pure ingredients.")}
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-t border-brand/5 dark:border-brand-lightest/5">
@@ -988,7 +990,7 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                      <div className="absolute inset-0 bg-white/50 rounded-[4rem] p-8 overflow-hidden flex flex-col border border-[#1e9ab0]/10 shadow-inner">
                         <h3 className="text-[#1e9ab0] font-brand font-bold text-xl mb-6 text-center uppercase tracking-[0.2em]">Signature Dishes</h3>
                         <div className="grid grid-cols-2 gap-4 h-full overflow-y-auto pr-2 scrollbar-hide">
-                          {MENU_DATA.flatMap(cat => cat.items).filter(item => ["Ghee Podi Thatte Idly", "Kumbakonam Filter Kaapi", "K Special Dosa", "Ashoka Halwa", "Signature (Mini Tiffin)", "Medhu Vada"].includes(item.name)).map((item, idx) => (
+                          {MENU_DATA.flatMap(cat => cat.items).filter(item => ["Ghee Podi Thatte Idly", "Kumbakonam Filter Coffee", "K Special Dosa", "Medhu Vada"].includes(item.name)).map((item, idx) => (
                             <div key={idx} className="bg-white rounded-[2rem] p-3 shadow-md border border-[#1e9ab0]/5 flex flex-col items-center text-center gap-2 group transition-all hover:scale-105 hover:shadow-lg">
                               <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-50 flex-shrink-0">
                                 <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
@@ -1151,15 +1153,10 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const signatureDishes = [
-    "Madras Mixture",
-    "Kumbakonam Filter Kaapi",
-    "Ghee Podi Thatte Idly",
+    "Kumbakonam Filter Coffee",
     "Medhu Vada",
-    "K Special Dosa",
-    "Ghee Garlic Podi Dosa",
-    "Signature (Mini Tiffin)",
-    "Ashoka Halwa",
-    "Sweet Bun"
+    "Ghee Podi Thatte Idly",
+    "K Special Dosa"
   ];
 
   const allItems = useMemo(() => {
