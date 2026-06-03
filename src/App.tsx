@@ -651,77 +651,35 @@ const TestimonialsSection = ({ theme }: { theme: string }) => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-          {/* Left Column: Video Stack */}
+          {/* Left Column: Instagram Reels Stack */}
           <div className="lg:col-span-6 space-y-10">
-            {/* Video 1: Portrait */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative aspect-[3.5/5] rounded-[3rem] overflow-hidden shadow-huge border border-white/10 group bg-black/20"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Play size={64} className="text-white/20 group-hover:text-[#1e9ab0] group-hover:scale-110 transition-all" />
-              </div>
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-                controls
-                className="w-full h-full object-cover"
+            {[
+              { id: 'DY6Ozo5sRvs', tag: 'Exclusive Review', title: 'A Spiced Masterpiece' },
+              { id: 'DVsiw-sDacq', tag: 'Kitchen Chronicles', title: 'The Art of Coffee' },
+              { id: 'DUkqadXkayq', tag: 'Guest Story', title: 'Taste of Tradition' }
+            ].map((reel, idx) => (
+              <motion.div 
+                key={reel.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="relative aspect-[9/16] max-w-[400px] mx-auto rounded-[3rem] overflow-hidden shadow-huge border border-white/10 bg-black/20 group"
               >
-                <source src="/Testimonials/review-potrait.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute top-8 left-8 z-30 pointer-events-none">
-                <div className="px-4 py-1.5 rounded-full bg-brand/80 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white uppercase tracking-widest w-fit mb-2">Exclusive Review</div>
-                <h3 className="text-2xl font-display font-bold italic text-white drop-shadow-md">"A Spiced Masterpiece"</h3>
-              </div>
-            </motion.div>
-
-            {/* Video 2: Landscape */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative aspect-[21/9] rounded-[2.5rem] overflow-hidden shadow-huge border border-white/10 group bg-black/20"
-            >
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Play size={48} className="text-white/20 group-hover:text-[#1e9ab0] group-hover:scale-110 transition-all" />
-              </div>
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-                controls
-                className="w-full h-full object-cover"
-              >
-                <source src="/Testimonials/review-landscape.mp4" type="video/mp4" />
-              </video>
-              <div className="absolute top-6 left-6 z-30 pointer-events-none bg-black/40 px-3 py-1 rounded-full">
-                <span className="text-[9px] font-black uppercase tracking-widest text-white/80">Kitchen Chronicles</span>
-              </div>
-            </motion.div>
-
-            {/* Video 3: Additional Portrait Placeholder */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative aspect-[3.5/5] rounded-[3rem] overflow-hidden shadow-huge border border-white/10 group bg-black/20"
-            >
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1e9ab0]/20 to-black/40">
-                <div className="flex flex-col items-center gap-4">
-                  <Play size={64} className="text-white/20 group-hover:text-[#1e9ab0] group-hover:scale-110 transition-all" />
-                  <span className="text-white/40 font-black uppercase tracking-widest text-xs">More Stories Coming Soon</span>
+                <iframe
+                  src={`https://www.instagram.com/reel/${reel.id}/embed`}
+                  className="w-full h-full border-none"
+                  allowTransparency
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                ></iframe>
+                <div className="absolute top-8 left-8 z-30 pointer-events-none group-hover:opacity-0 transition-opacity duration-500">
+                  <div className="px-4 py-1.5 rounded-full bg-brand/80 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white uppercase tracking-widest w-fit mb-2">
+                    {reel.tag}
+                  </div>
+                  <h3 className="text-2xl font-display font-bold italic text-white drop-shadow-md">"{reel.title}"</h3>
                 </div>
-              </div>
-              <div className="absolute top-8 left-8 z-30 pointer-events-none">
-                <div className="px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-[10px] font-bold text-white/60 uppercase tracking-widest w-fit mb-2">Guest Story</div>
-                <h3 className="text-2xl font-display font-bold italic text-white/40 drop-shadow-md">"Taste of Tradition"</h3>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
 
           {/* Right Column: Reviews List */}
