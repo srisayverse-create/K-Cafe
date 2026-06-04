@@ -1183,34 +1183,45 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
 
       <div className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 bg-transparent overflow-hidden flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24 py-10 lg:py-20 min-h-screen">
         
-        {/* LEFT COLUMN: Branding, Slogan, Description and CTAs (Desktop) or Bottom (Mobile) */}
+        {/* LEFT COLUMN: Branding, Slogan, and CTAs (Desktop Only) */}
         <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
-            {/* Logo and Slogan from SS - Hidden on Mobile */}
+            {/* Logo and Slogan - Visible only on Desktop */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1 }}
               className="mb-8 lg:mb-12 hidden lg:block"
             >
               <img 
                 src="/brand/experiencethegoodnessnobg.png" 
                 alt="Experience The Goodness" 
-                className="w-full max-w-[300px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] object-contain drop-shadow-2xl" 
+                className="w-full max-w-[500px] lg:max-w-[700px] object-contain drop-shadow-2xl" 
               />
             </motion.div>
 
-            {/* Description and CTAs */}
+            {/* Description and CTAs (Mobile & Desktop) */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.2 }}
               className="max-w-xl"
             >
-              <p className="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[26px] font-medium leading-[1.6] text-white drop-shadow-md italic mb-12 hidden lg:block">
+              {/* Slogan for Mobile (only if needed, but keeping current mobile structure) */}
+              <div className="lg:hidden mb-12">
+                <h1 className="text-4xl sm:text-6xl font-display font-medium text-white italic leading-[1.1] mb-6 tracking-tight drop-shadow-2xl">
+                  Taste the <span className="text-white">Tradition</span>
+                </h1>
+                <p className="text-[18px] sm:text-[20px] font-medium leading-[1.6] text-white drop-shadow-md italic">
+                  Experience authentic South Indian flavors with a modern twist.
+                </p>
+              </div>
+
+              {/* Desktop Slogan/Description (below branding image) */}
+              <p className="text-[20px] lg:text-[24px] font-medium leading-[1.6] text-white/90 drop-shadow-md italic mb-12 hidden lg:block">
                  Enjoy a unique dining experience with live kitchens, authentic vegetarian flavors, and warm service that keeps you coming back.
               </p>
 
-              {/* Main Action CTAs (Same place as current website relative to content) */}
+              {/* Main Action CTAs (Left aligned on desktop, center on mobile) */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-6 mb-16">
                 <motion.button 
                   onClick={onBulkOrderClick}
@@ -1259,7 +1270,7 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
             </motion.div>
         </div>
 
-        {/* RIGHT COLUMN: Slideshow of signature items (Desktop) or Top (Mobile) */}
+        {/* RIGHT COLUMN: Slideshow of signature items (Desktop Only) */}
         <div className="w-full lg:w-1/2 flex flex-col items-center justify-center order-1 lg:order-2">
           <div className="w-full max-w-xl">
              <AnimatePresence mode="wait">

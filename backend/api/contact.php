@@ -5,7 +5,7 @@
 // ============================================================
 
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/../../vendor/autoload.php'; // PHPMailer via Composer
+require_once __DIR__ . '/../vendor/autoload.php'; // PHPMailer via Composer (placed in public_html/vendor)
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
