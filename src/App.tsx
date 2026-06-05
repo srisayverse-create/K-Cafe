@@ -2034,6 +2034,12 @@ const ContactSection = ({ theme }: { theme: string }) => {
            </div>
 
           <div className="flex gap-6">
+            <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Instagram">
+              <Instagram size={22} />
+            </a>
+            <a href="https://www.facebook.com/kcafe.uae" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Facebook">
+              <Facebook size={22} />
+            </a>
             <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
               <TikTokIcon size={22} />
             </a>
@@ -2077,10 +2083,10 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
 
             <div className="flex gap-4">
               <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Instagram">
-                <Instagram size={18} />
+                <InstagramIcon size={18} />
               </a>
               <a href="https://www.facebook.com/kcafe.uae" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Facebook">
-                <Facebook size={18} />
+                <FacebookIcon size={18} />
               </a>
               <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
                 <TikTokIcon size={18} />
