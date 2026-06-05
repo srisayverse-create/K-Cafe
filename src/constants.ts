@@ -70,6 +70,8 @@ export const MENU_DATA: MenuCategory[] = [
       { name: "Kuzhi Paniyaram (From 3pm)", image: "/Assets/K Cafe Specials/Kuzhi Paniyaram.JPG" },
       { name: "Veg Meals", description: "Exclusively at Shabiya11 branch", image: "/Assets/Lunch Varieties/Veg Meals.jpeg" },
       { name: "Pazhaya soru (Seasonal)", description: "Authentic fermented rice served with traditional accompaniments", image: "/Assets/K Cafe Specials/Pazhaya soru (Seasonal).jpeg" },
+      { name: "NallaEnnai Dosa", image: "/Assets/K Cafe Specials/NallaEnnai Dosa.jpeg" },
+      { name: "NallaEnnai Idly", image: "/Assets/K Cafe Specials/NallaEnnai Idly.jpeg" },
     ],
   },
   {
