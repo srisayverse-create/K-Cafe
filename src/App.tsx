@@ -1976,7 +1976,7 @@ const ContactSection = ({ theme }: { theme: string }) => {
                 </div>
                 <div>
                   <span className="block text-[10px] uppercase tracking-[0.4em] text-gray-400 font-black mb-2">Customer Support</span>
-                  <span className="text-3xl font-display font-medium text-black italic">+971504114379</span>
+                  <span className="text-3xl font-display font-medium text-black italic">+971 504114379</span>
                 </div>
               </div>
 
