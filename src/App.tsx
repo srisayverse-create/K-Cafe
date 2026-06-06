@@ -260,7 +260,7 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
                       <span className="text-xl md:text-3xl lg:text-4xl font-black uppercase tracking-[0.4em] text-[#1e9ab0] whitespace-nowrap">OUR STORY</span>
                     </div>
                     <div className="space-y-4 text-sm md:text-base lg:text-lg font-medium leading-relaxed italic text-black opacity-100">
-                      <p>Kumbakonam café was founded in 2024 by three friends with a shared dream: to bring authentic, homely vegetarian food to abu dhabi in a way that feels both comforting and memorable.</p>
+                      <p>Kumbakonam cafe was founded in 2024 by three friends with a shared dream: to bring authentic, homely vegetarian food to Abu Dhabi in a way that feels both comforting and memorable.</p>
                       <p>From day one, our vision has been simple yet powerful, to create a place where customers always come first, employees are family, and society benefits from the values we uphold.</p>
                       <p>Our promise is to serve high-quality, homely vegetarian food at reasonable prices, stay true to our roots.</p>
                     </div>
@@ -1057,9 +1057,9 @@ const BulkOrderModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                 <motion.div 
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-[#fff628] px-8 py-4 rounded-2xl mb-8 shadow-lg transform -rotate-1"
+                  className="bg-[#fff628] px-8 py-4 rounded-2xl mb-8 shadow-lg"
                 >
-                  <h3 className="text-black font-display font-black text-lg md:text-2xl leading-tight">
+                  <h3 className="text-black font-display font-black text-lg md:text-2xl leading-tight text-center">
                     Customised no Onion & Garlic bulk orders are undertaken
                   </h3>
                 </motion.div>
@@ -2065,7 +2065,7 @@ const ContactSection = ({ theme }: { theme: string }) => {
             <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Instagram">
               <Instagram size={22} />
             </a>
-            <a href="https://www.facebook.com/kcafe.uae" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Facebook">
+            <a href="https://www.facebook.com/people/Kumbakonam-Cafe/61561196202681/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Facebook">
               <Facebook size={22} />
             </a>
             <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-12 h-12 border border-[#1e9ab0]/20 text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
@@ -2113,7 +2113,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
               <a href="https://www.instagram.com/kcafe.uae/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Instagram">
                 <InstagramIcon size={18} />
               </a>
-              <a href="https://www.facebook.com/kcafe.uae" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Facebook">
+              <a href="https://www.facebook.com/people/Kumbakonam-Cafe/61561196202681/?mibextid=rS40aB7S9Ucbxw6v" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="Facebook">
                 <FacebookIcon size={18} />
               </a>
               <a href="https://www.tiktok.com/@kcafe.uae?fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn3gzRYsZFBoSjk6Le8ubpGDdpgmyOBD4PjaiY_f8rYyesiz9aGIHx7BRhcoE_aem_YWdncwDa-mWIH4LkZX2iWJs4XJMu&brid=YWdncwEqvucZjAACMAhEdLbmyViI" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-[#1e9ab0] text-[#1e9ab0] rounded-full flex items-center justify-center hover:bg-[#1e9ab0] hover:text-white transition-all shadow-sm" aria-label="TikTok">
