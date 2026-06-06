@@ -2,6 +2,8 @@ export interface MenuItem {
   name: string;
   description?: string;
   image?: string;
+  rotation?: number;
+  scale?: number;
 }
 
 export interface MenuCategory {
@@ -21,7 +23,7 @@ export const MENU_DATA: MenuCategory[] = [
     coverStyle: "contain",
     items: [
       { name: "Signature (Mini Tiffin)", image: "/Assets/Thatte Idly and Dosa/Signature(Mini Tiffin).JPG" },
-      { name: "K Special Dosa", description: "Ghee garlic podi masala served with butter", image: "/Assets/K Cafe Specials/K Special dosa.JPG.jpeg" },
+      { name: "K Special Dosa", description: "Ghee garlic podi masala served with butter", image: "/Assets/K Cafe Specials/K Special dosa.JPG.jpeg", rotation: 270 },
       { name: "Ghee Podi Masala Dosa", image: "/Assets/Thatte Idly and Dosa/ghee-podi-masal-dosa.png" },
       { name: "Ghee Garlic Masala Dosa", image: "/Assets/Thatte Idly and Dosa/ghee-garlic-masal-dosa.png" },
       { name: "Ghee Garlic Podi Dosa", image: "/Assets/Thatte Idly and Dosa/Ghee Garlic podi dosa (2).JPG" },
@@ -114,7 +116,7 @@ export const MENU_DATA: MenuCategory[] = [
       { name: "Sambar Vada", image: "/Assets/Snacks/sambar-vada.png" },
       { name: "Curd Vada", image: "/Assets/Snacks/curd-vada.png" },
       { name: "Rasam Vada (Sat/Sun)", image: "/Assets/Snacks/Rasam-Vada-mini-rasam-Vada(Sat or Sun).png" },
-      { name: "Medhu Vada", image: "/Assets/Snacks/Medhu-Vada.png" },
+      { name: "Medhu Vada", image: "/Assets/Snacks/Medhu-Vada.png", scale: 0.8 },
       { name: "Dal Vada", image: "/Assets/Snacks/Dal-Vada.png" },
       { name: "Bajji (2 pc)", image: "/Assets/Snacks/Bajji.png" },
       { name: "Pakoda", image: "/Assets/Snacks/pakoda.png" },
@@ -159,7 +161,7 @@ export const MENU_DATA: MenuCategory[] = [
       { name: "Nannari Sarbath", image: "/Assets/Cold Beverages/nannari-sarbath.bak.png" },
       { name: "Masala Buttermilk", image: "/Assets/Cold Beverages/Masala-Buttermilk.jpg" },
       { name: "Rose Milk", image: "/Assets/Cold Beverages/rose-milk.bak.png" },
-      { name: "Badam Milk", description: "Rich and creamy milk flavored with almonds and saffron", image: "/Assets/Cold Beverages/Badam Milk.jpeg" },
+      { name: "Badam Milk", description: "Rich and creamy milk flavored with almonds and saffron", image: "/Assets/Cold Beverages/Badam Milk.jpeg", rotation: 270 },
       { name: "Panakam", image: "/Assets/Cold Beverages/Panakam.jpg" },
       { name: "Water Bottle", image: "/Assets/Cold Beverages/water-bottle-1.bak.png" },
     ],

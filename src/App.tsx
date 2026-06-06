@@ -471,7 +471,13 @@ const CategoryModal = ({
                       animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
                       exit={{ scale: 0.9, opacity: 0, filter: 'blur(5px)' }}
                       transition={{ duration: 0.5 }}
-                      className={`w-full h-full object-contain p-4 ${['Badam Milk', 'K Special Dosa'].includes(currentItem.name) ? 'rotate-270' : ''}`}
+                      className="w-full h-full object-contain p-4"
+                      style={{ 
+                        transform: `
+                          ${currentItem.rotation ? `rotate(${currentItem.rotation}deg)` : ''} 
+                          scale(${currentItem.scale || (currentItem.rotation ? 1.1 : 1)})
+                        `
+                      }}
                       alt={currentItem.name}
                       loading="lazy"
                       decoding="async"
@@ -954,7 +960,13 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                                 <img 
                                   src={item.image} 
                                   alt={item.name} 
-                                  className={`w-full h-full object-cover transition-transform group-hover:scale-110 ${item.name === 'K Special Dosa' ? 'rotate-270 scale-150' : ''}`} 
+                                  className="w-full h-full object-cover transition-transform group-hover:scale-110" 
+                                  style={{ 
+                                    transform: `
+                                      ${item.rotation ? `rotate(${item.rotation}deg)` : ''} 
+                                      scale(${item.scale ? item.scale * 1.5 : (item.rotation ? 1.5 : 1)})
+                                    `
+                                  }}
                                 />
                               </div>
                               <span className="text-[11px] font-bold text-black/80 leading-tight uppercase tracking-wide">{item.name}</span>
@@ -1293,7 +1305,13 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                        alt={currentSlideItem?.name} 
                        loading="eager"
                        decoding="sync"
-                       className={`w-full h-full object-cover transition-all duration-1000 ${currentSlideItem?.name === 'K Special Dosa' ? 'rotate-270 scale-150' : ''}`}
+                       className="w-full h-full object-contain transition-all duration-1000 p-4"
+                       style={{ 
+                         transform: `
+                           ${currentSlideItem?.rotation ? `rotate(${currentSlideItem.rotation}deg)` : ''} 
+                           scale(${currentSlideItem?.scale || (currentSlideItem?.rotation ? 1.2 : 1)})
+                         `
+                       }}
                      />
                      <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
                   </div>
@@ -1369,6 +1387,12 @@ const MenuCard = ({ item, onQuickView, index = 0 }: { item: MenuItem, onQuickVie
           loading="lazy"
           decoding="async"
           className={`w-full h-full object-cover transition-all duration-1000 ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'} group-hover:scale-110`}
+          style={{ 
+            transform: `
+              ${item.rotation ? `rotate(${item.rotation}deg)` : ''} 
+              scale(${item.scale ? item.scale * 1.5 : (item.rotation ? 1.5 : 1)})
+            `
+          }}
         />
         <div className="absolute inset-0 bg-brand/5 dark:bg-brand-lightest/5 group-hover:bg-transparent transition-colors duration-500" />
         <button 
