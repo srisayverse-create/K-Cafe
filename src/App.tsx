@@ -471,7 +471,7 @@ const CategoryModal = ({
                       animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
                       exit={{ scale: 0.9, opacity: 0, filter: 'blur(5px)' }}
                       transition={{ duration: 0.5 }}
-                      className={`w-full h-full object-contain p-4 ${currentItem.name === 'Badam Milk' ? 'rotate-270' : ''}`}
+                      className={`w-full h-full object-contain p-4 ${['Badam Milk', 'K Special Dosa'].includes(currentItem.name) ? 'rotate-270' : ''}`}
                       alt={currentItem.name}
                       loading="lazy"
                       decoding="async"
@@ -951,7 +951,11 @@ const DeliveryPartnersModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
                           {MENU_DATA.flatMap(cat => cat.items).filter(item => ["Ghee Podi Thatte Idly", "Kumbakonam Filter Coffee", "K Special Dosa", "Medhu Vada"].includes(item.name)).map((item, idx) => (
                             <div key={idx} className="bg-white rounded-[2rem] p-3 shadow-md border border-[#1e9ab0]/5 flex flex-col items-center text-center gap-2 group transition-all hover:scale-105 hover:shadow-lg">
                               <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-50 flex-shrink-0">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                                <img 
+                                  src={item.image} 
+                                  alt={item.name} 
+                                  className={`w-full h-full object-cover transition-transform group-hover:scale-110 ${item.name === 'K Special Dosa' ? 'rotate-270 scale-150' : ''}`} 
+                                />
                               </div>
                               <span className="text-[11px] font-bold text-black/80 leading-tight uppercase tracking-wide">{item.name}</span>
                             </div>
@@ -1289,7 +1293,7 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                        alt={currentSlideItem?.name} 
                        loading="eager"
                        decoding="sync"
-                       className="w-full h-full object-contain transition-all duration-1000 p-4"
+                       className={`w-full h-full object-cover transition-all duration-1000 ${currentSlideItem?.name === 'K Special Dosa' ? 'rotate-270 scale-150' : ''}`}
                      />
                      <div className="absolute inset-0 bg-brand/5 group-hover:opacity-0 transition-opacity" />
                   </div>
