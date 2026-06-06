@@ -216,19 +216,19 @@ export const MENU_DATA: MenuCategory[] = [
 export const TESTIMONIALS = [
   {
     author: "Foodiefam Stories",
-    content: "We found the ultimate spot for authentic South Indian food right here in Abu Dhabi – Kumbakonam Café 😍 ✨ The podi dosa was perfectly crispy and so delicious (still dreaming about it 🤤) ✨ The podi thatte idly was soft, fluffy, and just amazing ✨ The variety rice combo was packed with flavor – our fave was the puliyogre sadham ✨ And the vada? Honestly on another level – the BEST we’ve ever had! If you’re heading to Abu Dhabi, this place is a must-visit 🙌 We’re already planning more trips back… and fingers crossed they open in Dubai soon 🤞",
+    content: "We found the ultimate spot for authentic vegetarian food right here in Abu Dhabi – Kumbakonam Café 😍 ✨ The podi dosa was perfectly crispy and so delicious (still dreaming about it 🤤) ✨ The podi thatte idly was soft, fluffy, and just amazing ✨ The variety rice combo was packed with flavor – our fave was the puliyogre sadham ✨ And the vada? Honestly on another level – the BEST we’ve ever had! If you’re heading to Abu Dhabi, this place is a must-visit 🙌 We’re already planning more trips back… and fingers crossed they open in Dubai soon 🤞",
     rating: 5,
     tagline: "Ultimate Spot for Authentic Food"
   },
   {
     author: "mojojojo yaktu",
-    content: "Absolutely Delicious South Indian Food! One of the best places I’ve visited for authentic South Indian food! I’ve tried many items on the menu, but the dosa and vada are truly addictive. The flavors are rich, the ghee is generous, and the quality is outstanding. Every bite is full of authentic South Indian taste. The place is small but very clean, and the service is excellent. The staff are super friendly and make you feel right at home. If you love South Indian food — especially crispy, buttery dosa — this place is a must-visit. Highly recommended!",
+    content: "Absolutely Delicious authentic vegetarian Food! One of the best places I’ve visited for authentic vegetarian food! I’ve tried many items on the menu, but the dosa and vada are truly addictive. The flavors are rich, the ghee is generous, and the quality is outstanding. Every bite is full of authentic vegetarian taste. The place is small but very clean, and the service is excellent. The staff are super friendly and make you feel right at home. If you love authentic vegetarian food — especially crispy, buttery dosa — this place is a must-visit. Highly recommended!",
     rating: 5,
     tagline: "Absolutely Delicious!"
   },
   {
     author: "Anoop Whabi",
-    content: "I recently visited Kumbakonam café, and it was an absolute delight! It serves variety of classic South Indian favorites and is very inviting, with a warm, authentic touch that makes you feel right at home. The food was exceptional – every dish bursting with flavor and prepared to perfection. From the crispy dosas to the spicy sambhar, each bite was a taste of South India’s rich culinary heritage. The medhu wada is a must try and not to be missed, the best I ever had. The filter coffee was simply divine – rich, smooth, and perfectly brewed, it’s a must-try for any coffee lover. And the saffron tea was equally impressive, offering a fragrant, soothing experience with every sip. The subtle hint of saffron added a luxurious touch to the tea, making it a unique and memorable drink. Overall, this café is a hidden gem for anyone looking to enjoy authentic South Indian cuisine paired with excellent coffee and tea. I can't wait to return!",
+    content: "I recently visited Kumbakonam cafe, and it was an absolute delight! It serves variety of classic authentic vegetarian favorites and is very inviting, with a warm, authentic touch that makes you feel right at home. The food was exceptional – every dish bursting with flavor and prepared to perfection. From the crispy dosas to the spicy sambhar, each bite was a taste of authentic vegetarian rich culinary heritage. The medhu wada is a must try and not to be missed, the best I ever had. The filter coffee was simply divine – rich, smooth, and perfectly brewed, it’s a must-try for any coffee lover. And the saffron tea was equally impressive, offering a fragrant, soothing experience with every sip. The subtle hint of saffron added a luxurious touch to the tea, making it a unique and memorable drink. Overall, this cafe is a hidden gem for anyone looking to enjoy authentic vegetarian cuisine paired with excellent coffee and tea. I can't wait to return!",
     rating: 5,
     tagline: "Exceptional & Inviting"
   },
@@ -308,7 +308,7 @@ export const BRANCHES = [
     hours: "6:30 am - 11:30 pm",
     lat: 24.350,
     lng: 54.510,
-    description: "Modern South Indian dining with a unique twist exclusively at Shabiya11.",
+    description: "Modern authentic vegetarian dining with a unique twist exclusively at Shabiya11.",
     locationUrl: "https://www.google.com/maps/place/KUMBAKONAM+CAFE+-+Shabiya+-+Musaffah+-+ME11+-+Abu+Dhabi+-+United+Arab+Emirates/data=!4m2!3m1!1s0x3e5e3931578bbd23:0xebfd581810b0f605!18m1!1e1?utm_source=mstt_1&entry=gps&coh=192189&g_ep=CAESBzI2LjIwLjEYACCenQoqnwEsOTQyNjc3MjcsOTQyOTIxOTUsOTQyOTk1MzIsMTAwNzk2NDk4LDEwMDc5Nzc2MSwxMDA3OTY1MzUsMTAwNzk2NDk4LDEwMDgxNTAzNCw5NDI4MDU3Niw5NDIwNzM5NCw5NDIwNzUwNiw5NDIwODUwNiw5NDIxODY1Myw5NDIyOTgzOSw5NDI3NTE2OCw5NDI3OTYxOSwxMDA4MTU2MzUsMTAwNzkyNTY4QklO&skid=2fba1f84-fe71-43eb-a6bf-b87b845cbcae&g_st=aw",
     reviewUrl: "https://g.page/r/CQX2sBAYWP3rEBM/review",
     qrImage: "/Branches/Shabiya/QR - Shabiya Location.png",

@@ -203,15 +203,15 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
     },
     { 
       url: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=2670&auto=format&fit=crop", 
-      alt: "A vibrant assortment of South Indian vegetarian dishes including Masala Dosa, Sambar, and Chutneys" 
+      alt: "A vibrant assortment of authentic vegetarian dishes including Masala Dosa, Sambar, and Chutneys" 
     },
     { 
       url: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=2674&auto=format&fit=crop", 
-      alt: "Artisan chef preparing traditional South Indian meals with fresh, locally sourced ingredients" 
+      alt: "Artisan chef preparing traditional authentic vegetarian meals with fresh, locally sourced ingredients" 
     },
     { 
       url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2670&auto=format&fit=crop", 
-      alt: "Close-up of a beautifully plated South Indian feast served on a traditional banana leaf" 
+      alt: "Close-up of a beautifully plated authentic vegetarian feast served on a traditional banana leaf" 
     }
   ];
 
@@ -1575,7 +1575,7 @@ const MenuSection = ({ theme, searchQuery, setSearchQuery, onCategorySelect }: {
             transition={{ delay: 0.2 }}
             className="text-lg lg:text-xl font-light italic text-white/40 max-w-2xl mx-auto"
           >
-            Discover our authentic South Indian culinary creations. Click any category to explore the full range of fresh, hand-crafted dishes.
+            Discover our authentic vegetarian culinary creations. Click any category to explore the full range of fresh, hand-crafted dishes.
           </motion.p>
         </div>
 
@@ -1845,7 +1845,7 @@ const BranchesSection = ({ theme }: { theme: string }) => {
             transition={{ delay: 0.2 }}
             className="text-lg lg:text-xl font-light italic text-white/40 max-w-2xl mx-auto"
           >
-            Experience authentic South Indian flavors across our three custom-designed locations, each reflecting a unique blend of tradition and modernity.
+            Experience authentic vegetarian flavors across our three custom-designed locations, each reflecting a unique blend of tradition and modernity.
           </motion.p>
         </div>
 

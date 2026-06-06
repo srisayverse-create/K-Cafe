@@ -165,15 +165,15 @@ const AboutTimeline = ({ theme }: { theme: string }) => {
     },
     { 
       url: "/about/img02.jpg", 
-      alt: "A vibrant assortment of South Indian vegetarian dishes including Masala Dosa, Sambar, and Chutneys" 
+      alt: "A vibrant assortment of authentic vegetarian dishes including Masala Dosa, Sambar, and Chutneys" 
     },
     { 
       url: "/about/img03.jpg", 
-      alt: "Artisan chef preparing traditional South Indian meals with fresh, locally sourced ingredients" 
+      alt: "Artisan chef preparing traditional authentic vegetarian meals with fresh, locally sourced ingredients" 
     },
     { 
       url: "/about/img04.jpg", 
-      alt: "Close-up of a beautifully plated South Indian feast served on a traditional banana leaf" 
+      alt: "Close-up of a beautifully plated authentic vegetarian feast served on a traditional banana leaf" 
     }
   ];
 
@@ -514,7 +514,7 @@ const CategoryModal = ({
                 <p className="text-cafe-muted dark:text-dark-muted font-light leading-relaxed mb-6 italic">
                   {currentItem?.description || (category.id === "sweets" 
                     ? "All our sweets - savouries contain NO ADDED preservatives & artificial food colors" 
-                    : "Our signature dish made with authentic South Indian recipes and pure ingredients.")}
+                    : "Our signature dish made with authentic vegetarian recipes and pure ingredients.")}
                 </p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-t border-brand/5 dark:border-brand-lightest/5">
@@ -1228,7 +1228,7 @@ const Hero = ({ onBulkOrderClick, onDeliveryPartnersClick, theme }: {
                   Taste the <span className="text-white">Tradition</span>
                 </h1>
                 <p className="text-[18px] sm:text-[20px] font-medium leading-[1.6] text-white drop-shadow-md italic">
-                  Experience authentic South Indian flavors with a modern twist.
+                  Experience authentic vegetarian flavors with a modern twist.
                 </p>
               </div>
 
@@ -1763,7 +1763,7 @@ const BranchesSection = ({ theme, onBranchSelect }: { theme: string, onBranchSel
             transition={{ delay: 0.2 }}
             className="text-lg lg:text-xl font-light italic text-white/40 max-w-2xl mx-auto"
           >
-            Experience authentic South Indian flavors across our three custom-designed locations, each reflecting a unique blend of tradition and modernity.
+            Experience authentic vegetarian flavors across our three custom-designed locations, each reflecting a unique blend of tradition and modernity.
           </motion.p>
         </div>
 
