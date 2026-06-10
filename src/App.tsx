@@ -2197,6 +2197,7 @@ const Footer = ({ theme, onBranchSelect }: { theme: string, onBranchSelect: (bra
         <div className="border-t border-black/10 pt-10 pb-4">
           <div className="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20 text-black/70 italic font-display text-lg">
             <a href="mailto:kcafe.uae@gmail.com" className="hover:text-[#1e9ab0] transition-colors">kcafe.uae@gmail.com</a>
+            <a href="mailto:support@kumbakonam-cafe.com" className="hover:text-[#1e9ab0] transition-colors">support@kumbakonam-cafe.com</a>
             <a href="tel:+971502872787" className="hover:text-[#1e9ab0] transition-colors">+971 502872787</a>
           </div>
         </div>

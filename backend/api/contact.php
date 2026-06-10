@@ -107,8 +107,22 @@ try {
     $mail->setFrom(MAIL_FROM_EMAIL, MAIL_FROM_NAME);
 
     // Recipients
-    foreach (NOTIFY_EMAILS as $notifyEmail) {
-        $mail->addAddress($notifyEmail);
+    $targetEmails = [];
+    switch ($serviceType) {
+        case 'Bulk/Party Order':
+            $targetEmails = ['support@kumbakonam-cafe.com'];
+            break;
+        case 'Experiences/Feedback':
+            $targetEmails = ['kcafe.uae@gmail.com', 'support@kumbakonam-cafe.com'];
+            break;
+        case 'General Enquiry':
+        default:
+            $targetEmails = ['info@kumbakonam-cafe.com'];
+            break;
+    }
+
+    foreach ($targetEmails as $targetEmail) {
+        $mail->addAddress($targetEmail);
     }
 
     // Email content

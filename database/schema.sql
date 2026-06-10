@@ -1,13 +1,6 @@
--- ============================================================
--- Kumbakonam Cafe — MySQL Database Schema
--- Import this file via: Hostinger cPanel → phpMyAdmin → Import
--- ============================================================
-
-CREATE DATABASE IF NOT EXISTS `kumbakonam_cafe` 
-  CHARACTER SET utf8mb4 
-  COLLATE utf8mb4_unicode_ci;
-
-USE `kumbakonam_cafe`;
+-- ------------------------------------------------------------
+-- 1. Table: contact_submissions
+-- ------------------------------------------------------------
 
 -- ─── Menu Categories ─────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS `menu_categories` (
